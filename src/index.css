@@ -33,7 +33,7 @@ body {
   color: #fff;
   border: none;
   padding: 10px 20px;
-  margin: 5px;
+  margin: auto;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
@@ -110,3 +110,4 @@ footer {
   margin-top: 30px;
   text-align: center;
 }
+

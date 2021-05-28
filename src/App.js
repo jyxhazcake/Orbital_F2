@@ -1,15 +1,16 @@
-import { useState } from 'react'
-import Header from './components/Header'
-import Login from './components/Login'
+import PagePosting from './pages/PagePosting'
+import PageAuth from './pages/PageAuth'
+import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
 
-function App() {
-  const [showLogin, setShowLogin] = useState(false)
+export default function App() {
   return (
     <div className="App">
-      <Header onLogin={() => setShowLogin(!showLogin)} />
-      {showLogin && <Login />}
+    <IfFirebaseAuthed>
+      <PagePosting />
+    </IfFirebaseAuthed>
+    <IfFirebaseUnAuthed>
+      <PageAuth />
+    </IfFirebaseUnAuthed>
     </div>
   );
 }
-
-export default App;
