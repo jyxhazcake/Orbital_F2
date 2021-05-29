@@ -1,6 +1,6 @@
 //import Login from '../components/Login'
 import { FirebaseAuthConsumer } from '@react-firebase/auth'
-import Button from '../components/Button'
+import { Button } from '@material-ui/core'
 
 function PageAuth() {
     const handleSignIn = (firebase) => {
@@ -10,14 +10,15 @@ function PageAuth() {
 
     return (
         <div>
-            <p>Not logged in!</p>
+            <h1>Not logged in!</h1>
             <FirebaseAuthConsumer>
                 {({ firebase }) => (
                     <Button 
-                        color='blue' 
-                        text='Log in with Google xd' 
+                        color='primary' 
+                        variant='contained'
                         onClick= {() => handleSignIn(firebase)}
-                        > 
+                        >
+                        Sign in with Google
                     </Button>
                 )}
             </FirebaseAuthConsumer>
