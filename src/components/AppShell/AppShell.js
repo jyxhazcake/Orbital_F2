@@ -1,28 +1,22 @@
-import React from 'react'
-import { Button, AppBar, Toolbar, Typography } from "@material-ui/core"
-import { IfFirebaseAuthed } from '@react-firebase/auth'
+import React from "react";
+import TopRight from "../TopRight";
+import { AppBar, Toolbar } from "@material-ui/core";
+import BootstrapButton from "../BootstrapButton";
 
 function AppShell() {
-    const handleLogout = (firebase) => {
-        firebase.auth().signOut();
-    };
+  return (
+    <>
+      <TopRight />
+      <AppBar position="static" style={{ background: "#EDEDED" }}>
+        <Toolbar>
+          <BootstrapButton color="default">Home</BootstrapButton>
+          <BootstrapButton color="default">Opportunities</BootstrapButton>
+          <BootstrapButton color="default">Organisations</BootstrapButton>
+          <BootstrapButton color="default">About</BootstrapButton>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+}
 
-    return (
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" style={{ flexGrow: 1, textAlign: "left" }}>
-              Volunteer Board
-            </Typography>
-            <IfFirebaseAuthed>
-              {({ user, firebase }) => (
-                <Button color="inherit" onClick={() => handleLogout(firebase)}>
-                  Logout
-                </Button>
-              )}
-            </IfFirebaseAuthed>
-          </Toolbar>
-        </AppBar>
-      );
-    };
-
-export default AppShell
+export default AppShell;
