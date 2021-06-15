@@ -9,6 +9,7 @@ import BootstrapButton from "./BootstrapButton";
 import LoginButton from "./LoginButton";
 import RecruiterButton from "./RecruiterButton";
 import { Box } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const TopRight = () => {
   const handleLogIn = (firebase) => {
@@ -32,14 +33,12 @@ const TopRight = () => {
           )}
         </IfFirebaseAuthed>
         <IfFirebaseUnAuthed>
-          {({ user, firebase }) => (
-            <div class="flex justify-baseline">
-              <LoginButton onClick={() => handleLogIn(firebase)}>
-                Student Login
-              </LoginButton>
-              <RecruiterButton>Recruiters</RecruiterButton>
-            </div>
-          )}
+          <div class="flex justify-baseline">
+            <Link to="/studentlogin">
+              <LoginButton>Student Login</LoginButton>
+            </Link>
+            <RecruiterButton>Recruiters</RecruiterButton>
+          </div>
         </IfFirebaseUnAuthed>
       </FirebaseAuthConsumer>
     </div>

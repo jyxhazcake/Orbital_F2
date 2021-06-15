@@ -1,19 +1,23 @@
 import PagePosting from "./pages/PagePosting";
 import PageHome from "./pages/PageHome";
-import { IfFirebaseAuthed, IfFirebaseUnAuthed } from "@react-firebase/auth";
-import AppShell from "./components/AppShell";
+import PageAbout from "./pages/PageAbout";
+import PageOrg from "./pages/PageOrg";
+import PageStuLogin from "./pages/PageStuLogin";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App() {
   return (
     <>
-      <AppShell />
       <div className="App">
-        <IfFirebaseAuthed>
-          <PagePosting />
-        </IfFirebaseAuthed>
-        <IfFirebaseUnAuthed>
-          <PageHome />
-        </IfFirebaseUnAuthed>
+        <Router>
+          <Switch>
+            <Route path="/" exact component={PageHome} />
+            <Route path="/about" component={PageAbout} />
+            <Route path="/opportunities" component={PagePosting} />
+            <Route path="/organisations" component={PageOrg} />
+            <Route path="/studentlogin" component={PageStuLogin} />{" "}
+          </Switch>
+        </Router>
       </div>
     </>
   );

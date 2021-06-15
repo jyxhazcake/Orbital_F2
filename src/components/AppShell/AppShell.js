@@ -2,6 +2,7 @@ import React from "react";
 import TopRight from "../TopRight";
 import { AppBar, Toolbar } from "@material-ui/core";
 import BootstrapButton from "../BootstrapButton";
+import { Link } from "react-router-dom";
 
 function AppShell() {
   return (
@@ -9,10 +10,18 @@ function AppShell() {
       <TopRight />
       <AppBar position="static" style={{ background: "#EDEDED" }}>
         <Toolbar>
-          <BootstrapButton color="default">Home</BootstrapButton>
-          <BootstrapButton color="default">Opportunities</BootstrapButton>
-          <BootstrapButton color="default">Organisations</BootstrapButton>
-          <BootstrapButton color="default">About</BootstrapButton>
+          <Link to="/">
+            <BootstrapButton color="default">Home</BootstrapButton>
+          </Link>
+          <Link to="/opportunities">
+            <BootstrapButton color="default">Opportunities</BootstrapButton>
+          </Link>
+          <Link to="/organisations">
+            <BootstrapButton color="default">Organisations</BootstrapButton>
+          </Link>
+          <Link to="/about">
+            <BootstrapButton color="default">About</BootstrapButton>
+          </Link>
         </Toolbar>
       </AppBar>
     </>
