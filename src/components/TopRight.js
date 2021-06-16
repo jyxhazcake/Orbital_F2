@@ -8,14 +8,14 @@ import logo from "./img/NUSlogo.png";
 import BootstrapButton from "./BootstrapButton";
 import LoginButton from "./LoginButton";
 import RecruiterButton from "./RecruiterButton";
+import { Link } from 'react-router-dom';
 import { Box } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 const TopRight = () => {
-  const handleLogIn = (firebase) => {
+  /*const handleLogIn = (firebase) => {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleAuthProvider);
-  };
+  };*/
 
   const handleLogout = (firebase) => {
     firebase.auth().signOut();
@@ -23,7 +23,9 @@ const TopRight = () => {
 
   return (
     <div class="flex justify-between">
-      <img src={logo} class="w-17 md:w-32 lg:w-48" alt="NUSlogo" />
+    <Link to='/'>
+    <img src={logo} class="w-17 md:w-32 lg:w-48" alt="NUSlogo" />
+    </Link>
       <FirebaseAuthConsumer>
         <IfFirebaseAuthed>
           {({ user, firebase }) => (
@@ -37,7 +39,9 @@ const TopRight = () => {
             <Link to="/studentlogin">
               <LoginButton>Student Login</LoginButton>
             </Link>
-            <RecruiterButton>Recruiters</RecruiterButton>
+            <Link to="/recruiterlogin">
+              <RecruiterButton>Recruiters</RecruiterButton>
+            </Link>
           </div>
         </IfFirebaseUnAuthed>
       </FirebaseAuthConsumer>

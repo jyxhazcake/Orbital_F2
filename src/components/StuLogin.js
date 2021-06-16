@@ -28,7 +28,7 @@ const StuLogin = () => {
           )}
         </IfFirebaseUnAuthed>
         <IfFirebaseAuthed>
-          <Redirect to="/" />
+          <Redirect to="/opportunities" />
         </IfFirebaseAuthed>
       </FirebaseAuthConsumer>
     </div>
