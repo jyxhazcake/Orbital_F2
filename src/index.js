@@ -8,17 +8,17 @@ import { FirebaseAuthProvider } from "@react-firebase/auth";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-
-import { config } from "./config/firebase";
+import { AuthProvider } from "./contexts/Authcontext"
 
 import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline />
-      <FirebaseAuthProvider {...config} firebase={firebase}>
+      <AuthProvider>
         <App />
-      </FirebaseAuthProvider>
+      </AuthProvider>
+
   </React.StrictMode>,
   
   document.getElementById('root')
@@ -28,3 +28,5 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+//<FirebaseAuthProvider {...config} firebase={firebase}>

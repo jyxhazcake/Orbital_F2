@@ -29,9 +29,11 @@ const TopRight = () => {
       <FirebaseAuthConsumer>
         <IfFirebaseAuthed>
           {({ user, firebase }) => (
+            <Link to="/">
             <BootstrapButton onClick={() => handleLogout(firebase)}>
               Logout
             </BootstrapButton>
+            </Link>
           )}
         </IfFirebaseAuthed>
         <IfFirebaseUnAuthed>

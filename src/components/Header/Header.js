@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <>
       <header className={styles.header}>
-        <h1>Welcome! Please choose your role.</h1>
+        <p class = "text-lg font-bold">Welcome! Please choose your role.</p>
       </header>
       <p className={styles.header}>
         <div className="buttondiv">

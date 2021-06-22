@@ -4,6 +4,8 @@ import PageAbout from "./pages/PageAbout";
 import PageOrg from "./pages/PageOrg";
 import PageStuLogin from "./pages/PageStuLogin";
 import RecruiterLogin from "./pages/RecruiterLogin";
+import RecruiterSignup from "./pages/RecruiterSignup";
+import ForgotPassword from "./pages/ForgotPassword";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App() {
@@ -17,7 +19,9 @@ export default function App() {
             <Route path="/opportunities" component={PagePosting} />
             <Route path="/organisations" component={PageOrg} />
             <Route path="/recruiterlogin" component={RecruiterLogin} />
-            <Route path="/studentlogin" component={PageStuLogin} />{" "}
+            <Route path="/recruitersignup" component={RecruiterSignup} />
+            <Route path="/studentlogin" component={PageStuLogin} />
+            <Route path="/forgotpassword" component={ForgotPassword} />{" "}
           </Switch>
         </Router>
       </div>
