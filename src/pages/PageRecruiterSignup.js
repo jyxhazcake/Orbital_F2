@@ -79,8 +79,7 @@ const RecruiterLogin = () => {
     }
     
     return (
-        <AuthProvider>
-            <Grid style={background} overflow='scroll'>
+            <Grid style={background}>
                 <Paper  elevation={20} style={paperStyle}>
                     <Grid align='center'>
                         <RouterLink to='/'>
@@ -94,19 +93,19 @@ const RecruiterLogin = () => {
                     label='Organisation Name'
                     placeholder='Organisation Name'
                     fullWidth required
-                    ref={organisationNameRef}
+                    inputRef={organisationNameRef}
                     />
                     <TextField
                     label='Daytime Contact number'
                     placeholder='Daytime Contact number'
                     fullWidth required
-                    ref={contactRef}
+                    inputRef={contactRef}
                     />
                     <TextField
                         label='Email'
                         placeholder='Enter Email Address'
                         fullWidth required
-                        ref={emailRef}
+                        inputRef={emailRef}
                     />
                     <TextField
                         id="standard-password-input"
@@ -115,7 +114,7 @@ const RecruiterLogin = () => {
                         type="password"
                         autoComplete="current-password"
                         fullWidth required
-                        ref={passwordRef}
+                        inputRef={passwordRef}
                     />
                     <TextField
                         id="standard-password-input"
@@ -124,7 +123,7 @@ const RecruiterLogin = () => {
                         type="password"
                         autoComplete="current-password"
                         fullWidth required
-                        ref={passwordConfirmRef}
+                        inputRef={passwordConfirmRef}
                     />
                     <Button
                         type='submit'
@@ -149,8 +148,6 @@ const RecruiterLogin = () => {
                     </p>
                     </Paper>
             </Grid>
-            
-        </AuthProvider>
     )
 }
 
