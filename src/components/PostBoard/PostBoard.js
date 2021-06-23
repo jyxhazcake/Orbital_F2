@@ -30,7 +30,7 @@ function PostBoard(props) {
       ...tasks,
       {
         description: description,
-      }
+      },
     ];
     setTasks(newTasks);
   }
@@ -76,22 +76,6 @@ function PostBoard(props) {
 
 function TaskList(props) {
   const { tasks, setTasks } = props;
-
-  function handleTaskCompletionToggled(toToggleTask, toToggleTaskIndex) {
-    const newTasks = [
-      // Once again, this is the spread operator
-      ...tasks.slice(0, toToggleTaskIndex),
-      {
-        description: toToggleTask.description,
-      },
-      ...tasks.slice(toToggleTaskIndex + 1)
-    ];
-    // We set new tasks in such a complex way so that we maintain immutability
-    // Read this article to find out more:
-    // https://blog.logrocket.com/immutability-in-react-ebe55253a1cc/
-
-    setTasks(newTasks);
-  }
 
   return (
     <table style={{ margin: "0 auto", width: "100%" }}>

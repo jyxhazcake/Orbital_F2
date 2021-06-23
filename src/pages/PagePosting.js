@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { firebase } from "@firebase/app";
 
-import Header from "../components/Header/";
 import PostBoard from "../components/PostBoard";
 import AppShell from "../components/AppShell";
+import PostContent from "../components/PostContent";
 
 function PagePosting() {
   // Task state has to be lifted to be at the App level
@@ -33,7 +33,7 @@ function PagePosting() {
   return (
     <>
       <AppShell />
-      <Header />
+      <PostContent />
       <PostBoard tasks={tasks} setTasks={setTasks} />
     </>
   );
