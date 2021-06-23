@@ -7,7 +7,8 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox'
 import { Link as RouterLink } from 'react-router-dom'
 import logo from "../components/img/NVJBlogo.png"
 import kids from "../components/img/kids.png"
-import { AuthProvider, useAuth } from '../contexts/Authcontext'
+import { useAuth } from '../contexts/Authcontext'
+import FirebaseAuthException from 'firebase'
 
 const paperStyle = {
     padding: '20px',
@@ -50,7 +51,7 @@ const bottomStyle = {
 
 
 
-const RecruiterLogin = () => {
+export default function PageRecruiterSignup() {
     const organisationNameRef = useRef()
     const emailRef = useRef()
     const contactRef = useRef()
@@ -68,87 +69,83 @@ const RecruiterLogin = () => {
         }
 
         try {
-            setError('')
+            setError("")
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
         } catch {
             setError('Failed to create an account')
-        }
+        };
 
         setLoading(false)
     }
     
     return (
-            <Grid style={background}>
-                <Paper  elevation={20} style={paperStyle}>
-                    <Grid align='center'>
-                        <RouterLink to='/'>
-                            <img src={ logo } alt='NVJBlogo' style={logoStyle}></img>
-                        </RouterLink>
-                        <p class="text-xl font-bold">Sign up</p>
-                        {error && <Alert severity="error">{error}</Alert>}
-                    </Grid>
-                    <FormGroup>
-                    <TextField
-                    label='Organisation Name'
-                    placeholder='Organisation Name'
+        <Grid style={background}>
+            <Paper  elevation={20} style={paperStyle}>
+                <Grid align='center'>
+                    <RouterLink to='/'>
+                        <img src={ logo } alt='NVJBlogo' style={logoStyle}></img>
+                    </RouterLink>
+                    <p className="text-xl font-bold">Sign up</p>
+                    {error && <Alert severity="error">{error}</Alert>}
+                </Grid>
+            <FormGroup>
+                <TextField
+                label='Organisation Name'
+                placeholder='Organisation Name'
+                fullWidth required
+                inputRef={organisationNameRef}
+                />
+                <TextField
+                label='Daytime Contact number'
+                placeholder='Daytime Contact number'
+                fullWidth required
+                inputRef={contactRef}
+                />
+                <TextField
+                    label='Email'
+                    placeholder='Enter Email Address'
                     fullWidth required
-                    inputRef={organisationNameRef}
-                    />
-                    <TextField
-                    label='Daytime Contact number'
-                    placeholder='Daytime Contact number'
+                    inputRef={emailRef}
+                />
+                <TextField
+                    id="standard-password-input"
+                    label="Password"
+                    placeholder="Enter password"
+                    type="password"
                     fullWidth required
-                    inputRef={contactRef}
-                    />
-                    <TextField
-                        label='Email'
-                        placeholder='Enter Email Address'
-                        fullWidth required
-                        inputRef={emailRef}
-                    />
-                    <TextField
-                        id="standard-password-input"
-                        label="Password"
-                        placeholder="Enter password"
-                        type="password"
-                        autoComplete="current-password"
-                        fullWidth required
-                        inputRef={passwordRef}
-                    />
-                    <TextField
-                        id="standard-password-input"
-                        label="Confirm Password"
-                        placeholder="Confirm Password"
-                        type="password"
-                        autoComplete="current-password"
-                        fullWidth required
-                        inputRef={passwordConfirmRef}
-                    />
-                    <Button
-                        type='submit'
-                        color='primary'
-                        variant='contained'
-                        fullWidth
-                        style={buttonStyle}
-                        disabled={loading}
-                        onClick={handleSubmit}
-                    >
-                    Sign up
-                    </Button>
-                    </FormGroup>
-                    <p>
-                    By continuing, you acknowledge that you accept our
-                    <Link component={RouterLink} to="/termsOfUse"> Terms & Conditions </Link>
-                    </p>
-                    </Paper>
-                    <Paper style={bottomStyle}>
-                    <p class="text-center"> Already have an account?
-                        <Link component={RouterLink} to="/recruiterlogin"> Sign In.</Link>
-                    </p>
-                    </Paper>
-            </Grid>
+                    inputRef={passwordRef}
+                />
+                <TextField
+                    id="confirm-password-input"
+                    label="Confirm Password"
+                    placeholder="Confirm Password"
+                    type="password"
+                    fullWidth required
+                    inputRef={passwordConfirmRef}
+                />
+                <Button
+                    type='submit'
+                    color='primary'
+                    variant='contained'
+                    fullWidth
+                    style={buttonStyle}
+                    disabled={loading}
+                    onClick={handleSubmit}
+                >
+                Sign up
+                </Button>
+                </FormGroup>
+                <p>
+                By continuing, you acknowledge that you accept our
+                <Link component={RouterLink} to="/termsOfUse"> Terms & Conditions </Link>
+                </p>
+                </Paper>
+                <Paper style={bottomStyle}>
+                <p className="text-center"> Already have an account?
+                    <Link component={RouterLink} to="/recruiterlogin"> Sign In.</Link>
+                </p>
+                </Paper>
+        </Grid>
     )
 }
-
-export default RecruiterLogin
