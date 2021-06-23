@@ -1,27 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 import { FirebaseAuthProvider } from "@react-firebase/auth";
 
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import { AuthProvider } from "./contexts/Authcontext"
+import { AuthProvider } from "./contexts/Authcontext";
 
-import App from './App';
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline />
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-
+    <App />
   </React.StrictMode>,
-  
-  document.getElementById('root')
+
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
