@@ -7,6 +7,7 @@ import {
   Link,
   FormGroup,
   Checkbox,
+  FormControl,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
@@ -61,6 +62,9 @@ export default function PageRecruiterSignup() {
   const emailRef = useRef();
   const contactRef = useRef();
   const passwordRef = useRef();
+  const idRef = useRef();
+  const contactNameRef = useRef();
+  const mobileRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
@@ -99,20 +103,41 @@ export default function PageRecruiterSignup() {
         <FormGroup>
           <TextField
             label="Organisation Name"
-            placeholder="Organisation Name"
+            placeholder="Enter Organisation Name"
             fullWidth
             required
             inputRef={organisationNameRef}
           />
           <TextField
-            label="Daytime Contact number"
-            placeholder="Daytime Contact number"
+            label="UEM/ Society Registration Number"
+            placeholder="Enter ID here"
+            fullWidth
+            required
+            inputRef={idRef}
+          />
+          <TextField
+            label="Name of Contact Person"
+            placeholder="Enter Name of contact"
+            fullWidth
+            required
+            inputRef={contactNameRef}
+          />
+          <TextField
+            label="Organisation Contact number"
+            placeholder="Organisation Contact number"
             fullWidth
             required
             inputRef={contactRef}
           />
           <TextField
-            label="Email"
+            label="Contact Person Mobile Number"
+            placeholder="Enter mobile number"
+            fullWidth
+            required
+            inputRef={mobileRef}
+          />
+          <TextField
+            label="Organisation Email"
             placeholder="Enter Email Address"
             fullWidth
             required

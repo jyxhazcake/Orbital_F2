@@ -16,7 +16,7 @@ export default function SignOut() {
 
     try {
       await logout();
-      history.push("/studentlogin");
+      history.push("/");
     } catch {
       setError("Failed to log out");
     }

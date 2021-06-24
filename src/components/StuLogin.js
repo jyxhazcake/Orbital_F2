@@ -59,8 +59,8 @@ const StuLogin = () => {
           {error && <Alert severity="error">{error}</Alert>}
         </Grid>
         <TextField
-          label="Email"
-          placeholder="Enter Email Address"
+          label="NUS Email"
+          placeholder="Enter NUS Email Address"
           fullWidth
           required
           inputRef={emailRef}
@@ -101,7 +101,7 @@ const StuLogin = () => {
         <p class="text-center mt-6">
           {" "}
           Do not have an account?
-          <Link component={RouterLink} to="/recruitersignup">
+          <Link component={RouterLink} to="/studentsignup">
             {" "}
             Sign Up.
           </Link>

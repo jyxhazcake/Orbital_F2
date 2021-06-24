@@ -3,6 +3,7 @@ import PageHome from "./pages/PageHome";
 import PageAbout from "./pages/PageAbout";
 import PageOrg from "./pages/PageOrg";
 import PageStuLogin from "./pages/PageStuLogin";
+import PageStuSignUp from "./pages/PageStuSignup";
 import PageRecruiterLogin from "./pages/PageRecruiterLogin";
 import PageRecruiterSignup from "./pages/PageRecruiterSignup";
 import TermsOfUse from "./pages/TermsOfUse";
@@ -26,6 +27,7 @@ export default function App() {
               <Route path="/recruitersignup" component={PageRecruiterSignup} />
               <Route path="/termsofuse" component={TermsOfUse} />
               <Route path="/studentlogin" component={PageStuLogin} />
+              <Route path="/studentsignup" component={PageStuSignUp} />
               <Route path="/forgotpassword" component={ForgotPassword} />{" "}
             </Switch>
           </Router>
