@@ -21,19 +21,20 @@ import FirebaseAuthException from "firebase";
 
 const paperStyle = {
   padding: "20px",
-  width: 300,
+  width: 310,
   margin: "30px auto",
 };
 
 const background = {
   backgroundImage: `url(${kids})`,
-  position: "fixed",
+  position:'fixed',
   top: 0,
   left: 0,
   minWidth: "100%",
   minHeight: "100%",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
+  overflowY:'scroll'
 };
 
 const logoStyle = {
@@ -48,7 +49,7 @@ const buttonStyle = {
 
 const bottomStyle = {
   margin: "30px auto",
-  width: 300,
+  width: 310,
 };
 
 /*const useStyles = makeStyles({
@@ -91,7 +92,7 @@ export default function PageRecruiterSignup() {
   }
 
   return (
-    <Grid style={background}>
+    <Grid>
       <Paper elevation={20} style={paperStyle}>
         <Grid align="center">
           <RouterLink to="/">

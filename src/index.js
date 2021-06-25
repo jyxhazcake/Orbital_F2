@@ -8,14 +8,14 @@ import { FirebaseAuthProvider } from "@react-firebase/auth";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import { AuthProvider } from "./contexts/Authcontext";
 
 import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline />
-    <App />
+        <App />
+
   </React.StrictMode>,
 
   document.getElementById("root")

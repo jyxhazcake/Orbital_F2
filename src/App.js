@@ -14,10 +14,11 @@ import PrivateRoute from "./components/PrivateRoute";
 
 export default function App() {
   return (
-    <>
+      
+    <> 
       <div className="App">
-        <AuthProvider>
-          <Router>
+        <Router>
+          <AuthProvider>
             <Switch>
               <Route path="/" exact component={PageHome} />
               <Route path="/about" component={PageAbout} />
@@ -30,8 +31,8 @@ export default function App() {
               <Route path="/studentsignup" component={PageStuSignUp} />
               <Route path="/forgotpassword" component={ForgotPassword} />{" "}
             </Switch>
-          </Router>
-        </AuthProvider>
+          </AuthProvider>
+        </Router>
       </div>
     </>
   );

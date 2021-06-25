@@ -5,6 +5,13 @@ import PostBoard from "../components/PostBoard";
 import AppShell from "../components/AppShell";
 import PostContent from "../components/PostContent";
 
+
+/*    db.collection('posts').get().then((snapshot => {
+      snapshot.docs.forEach(doc => {
+        console.log(doc.data())
+      })
+    })) */
+
 function PagePosting() {
   // Task state has to be lifted to be at the App level
   // because Header also needs to know the task state to display

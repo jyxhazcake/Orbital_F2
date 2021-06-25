@@ -1,6 +1,5 @@
 import StuLogin from "../components/StuLogin";
 import utown from "../components/img/utown.png";
-import { Link } from 'react-router-dom';
 
 const background = {
   backgroundImage: `url(${utown})`,
@@ -12,6 +11,7 @@ const background = {
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover'
 };
+
 
 
 const PageStuLogin = () => {
