@@ -4,8 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
 
-const auth = firebase.auth();
-
 export default function SignOut() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();

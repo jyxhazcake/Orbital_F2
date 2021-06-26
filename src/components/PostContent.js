@@ -17,7 +17,7 @@ function PostContent(props) {
     <>
       <div className="flex bg-white shadow-md m-4 p-6 rounded">
         <div>
-          <img src={photoURL} alt="nuslogo" />
+          <img src={logo} alt="nuslogo" />
         </div>
         <div className="flex flex-col justify-between ml-4">
           <h3 className="font-bold text-blue-900"> {name} </h3>
