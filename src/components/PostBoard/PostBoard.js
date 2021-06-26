@@ -6,6 +6,12 @@ import Box from "../Box";
 
 import styles from "./PostBoard.module.css";
 
+/*const db = firebase.firestore();
+
+db.collection('RecruiterPosts').get().then((snapshot) => {
+  console.log(snapshot.docs);
+})*/
+
 function PostBoard(props) {
   // Our tasks and setTasks is now passed down from App
   const { tasks, setTasks } = props;

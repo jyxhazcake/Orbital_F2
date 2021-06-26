@@ -15,11 +15,11 @@ function AppShell() {
     <>
       <div className="flex justify-between">
         <Link to="/">
-          <img src={logo} class="w-17 md:w-32 lg:w-48" alt="NUSlogo" />
+          <img src={logo} className="w-17 md:w-32 lg:w-48" alt="NUSlogo" />
         </Link>
         {user ? <SignOut /> : <TopRight />}
       </div>
-      <AppBar position="static" style={{ background: "#EDEDED" }}>
+      <AppBar elevation={0} position="static" style={{ background: "#EDEDED" }}>
         <Toolbar>
           <Link to="/">
             <BootstrapButton color="default">Home</BootstrapButton>

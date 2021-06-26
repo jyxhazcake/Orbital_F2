@@ -6,7 +6,7 @@ function PageHome() {
     <div>
       <AppShell />
       <div className="flex justify-center">
-        <img src={handhold} alt="handholing" />{" "}
+      <img src={handhold} className="object-contain" alt="handhold" />
       </div>
     </div>
   );

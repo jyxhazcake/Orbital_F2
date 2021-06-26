@@ -14,7 +14,6 @@ import PrivateRoute from "./components/PrivateRoute";
 
 export default function App() {
   return (
-      
     <> 
       <div className="App">
         <Router>
@@ -22,7 +21,7 @@ export default function App() {
             <Switch>
               <Route path="/" exact component={PageHome} />
               <Route path="/about" component={PageAbout} />
-              <Route path="/opportunities" component={PagePosting} />
+              <PrivateRoute path="/opportunities" component={PagePosting} />
               <Route path="/organisations" component={PageOrg} />
               <Route path="/recruiterlogin" component={PageRecruiterLogin} />
               <Route path="/recruitersignup" component={PageRecruiterSignup} />

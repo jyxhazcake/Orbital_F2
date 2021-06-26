@@ -51,7 +51,7 @@ const StuLogin = () => {
 
   return (
     <Grid>
-      <Paper elevation={10} style={paperStyle}>
+      <Paper style={paperStyle}>
         <Grid align="center">
           <RouterLink to="/">
             <img src={logo} alt="NVJBlogo" style={logoStyle}></img>

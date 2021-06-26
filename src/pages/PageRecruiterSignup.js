@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   TextField,
   Grid,
@@ -6,18 +6,12 @@ import {
   Button,
   Link,
   FormGroup,
-  Checkbox,
-  FormControl,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-import { makeStyles } from "@material-ui/core/styles";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import logo from "../components/img/NVJBlogo.png";
 import kids from "../components/img/kids.png";
 import { useAuth } from "../contexts/Authcontext";
-import FirebaseAuthException from "firebase";
 
 const paperStyle = {
   padding: "20px",
@@ -56,7 +50,19 @@ const bottomStyle = {
     label: {
       fontSize: '14px',
     },
-});*/
+});
+
+useEffect(() => {
+    const uid = firebase.auth().currentUser?.uid;
+    const db = firebase.firestore();
+    db.collection('Users').doc(uid).set({
+      Organisation: organisationNameRef.current.value,
+      UEM_SRN: idRef.current.value,
+      Contact: contactNameRef.current.value,
+      OrganisationMobile: contactRef.current.value,
+      ContactMobile: mobileRef.current.value,
+    });
+  });*/
 
 export default function PageRecruiterSignup() {
   const organisationNameRef = useRef();
@@ -67,7 +73,7 @@ export default function PageRecruiterSignup() {
   const contactNameRef = useRef();
   const mobileRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
+  const { recruiterSignup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -82,11 +88,19 @@ export default function PageRecruiterSignup() {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await recruiterSignup(emailRef.current.value,
+        passwordRef.current.value,
+        organisationNameRef.current.value,
+        idRef.current.value,
+        contactNameRef.current.value,
+        contactRef.current.value,
+        mobileRef.current.value,
+      );
       history.push("/");
     } catch {
       setError("Failed to create an account");
     }
+    
 
     setLoading(false);
   }

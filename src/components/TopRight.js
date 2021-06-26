@@ -6,19 +6,19 @@ import RecruiterButton from "./RecruiterButton";
 import { Link } from "react-router-dom";
 import { Box } from "@material-ui/core";
 
+const buttonStyle = {
+  margin: "20px 20px",
+};
+
 const TopRight = () => {
-  /*const handleLogIn = (firebase) => {
-    const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(googleAuthProvider);
-  };*/
 
   return (
     <div class="flex justify-baseline">
       <Link to="/studentlogin">
-        <LoginButton>Student Login</LoginButton>
+        <LoginButton style={buttonStyle}>Student Login</LoginButton>
       </Link>
       <Link to="/recruiterlogin">
-        <RecruiterButton>Recruiters</RecruiterButton>
+        <RecruiterButton style={buttonStyle}>Recruiters</RecruiterButton>
       </Link>
     </div>
   );
