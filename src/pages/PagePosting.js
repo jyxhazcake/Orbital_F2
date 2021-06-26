@@ -2,8 +2,6 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import CreatePost from "../components/CreatePost";
-
-import PostBoard from "../components/PostBoard";
 import AppShell from "../components/AppShell";
 import PostContent from "../components/PostContent";
 

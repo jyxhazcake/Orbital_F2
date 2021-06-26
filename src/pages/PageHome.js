@@ -5,7 +5,9 @@ function PageHome() {
   return (
     <div>
       <AppShell />
-      <img src={handhold} class="object-contain" alt="handhold" />
+      <div className="flex justify-center">
+        <img src={handhold} alt="handholing" />{" "}
+      </div>
     </div>
   );
 }
