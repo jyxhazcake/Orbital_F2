@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
 import { Button } from "@material-ui/core";
+import { Alert } from "react-native";
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
 
@@ -21,6 +22,7 @@ function PostContent(props) {
   } = props.post;
 
   const postID = props.post.id;
+  const [error, setError] = useState("");
 
   const deletePost = async (e) => {
     e.preventDefault();
@@ -30,7 +32,11 @@ function PostContent(props) {
 
   return (
     <>
-      <div className="flex bg-white shadow-md mx-10 my-2 p-6 rounded items-center">
+      <div
+        className={
+          "flex bg-white shadow-md my-4 mx-60 p-6 rounded items-center"
+        }
+      >
         <div>
           <img src={logo} alt="nuslogo" />
         </div>
@@ -63,3 +69,5 @@ function PostContent(props) {
 }
 
 export default PostContent;
+
+//postsRef.doc(postID).delete()
