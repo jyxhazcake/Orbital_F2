@@ -1,11 +1,12 @@
 import React from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
-import DelButton from "./DelButton";
 import { Button } from "@material-ui/core";
 import firebase from "firebase/app";
+import { useAuth } from "../contexts/Authcontext";
 
 function PostContent(props) {
+  const { currentUser } = useAuth();
   const firestore = firebase.firestore();
   const postsRef = firestore.collection("posts");
   const {
@@ -48,10 +49,14 @@ function PostContent(props) {
             {skills}{" "}
           </span>{" "}
         </div>{" "}
-        <Button variant="contained" onClick={deletePost}>
-          {" "}
-          Delete Post
-        </Button>
+        {currentUser.email === "admin@admin.sg" ? (
+          <Button variant="contained" onClick={deletePost}>
+            {" "}
+            Delete Post
+          </Button>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
