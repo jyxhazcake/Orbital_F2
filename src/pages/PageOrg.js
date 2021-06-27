@@ -4,7 +4,7 @@ const PageOrg = () => {
   return (
     <div>
       <AppShell />
-      <h1> This is the Organisations page!</h1>
+      <h1> ⚠️This is the Organisations page!⚠️</h1>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "firebase/app";
 import SignOut from "../SignOut";
 import logo from "../img/NUSlogo.png";
+import logo2 from "../img/NVJBlogo.png";
 
 function AppShell() {
   const [user] = useAuthState(firebase.auth());
@@ -15,7 +16,11 @@ function AppShell() {
     <>
       <div className="flex justify-between">
         <Link to="/">
-          <img src={logo} className="w-17 md:w-32 lg:w-48" alt="NUSlogo" />
+          <img
+            src={logo2}
+            className="w-20 md:w-24 lg:w-28 ml-5"
+            alt="NUSlogo"
+          />
         </Link>
         {user ? <SignOut /> : <TopRight />}
       </div>

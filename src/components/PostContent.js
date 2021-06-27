@@ -18,7 +18,7 @@ function PostContent(props) {
     skills,
     uid,
     target,
-    photoURL,
+    imageURL,
   } = props.post;
 
   const postID = props.post.id;
@@ -34,11 +34,16 @@ function PostContent(props) {
     <>
       <div
         className={
-          "flex bg-white shadow-md my-4 mx-60 p-6 rounded items-center"
+          "flex bg-white shadow-md my-4 mx-20 p-6 rounded items-center"
         }
       >
         <div>
-          <img src={logo} alt="nuslogo" />
+          <img
+            src={imageURL ? imageURL : logo}
+            width="150"
+            height="50"
+            alt="logo"
+          />
         </div>
         <div className="flex flex-col justify-between ml-4">
           <h3 className="font-bold text-blue-900"> {name} </h3>
@@ -55,11 +60,15 @@ function PostContent(props) {
             {skills}{" "}
           </span>{" "}
         </div>{" "}
-        {currentUser.email === "admin@admin.sg" ? (
-          <Button variant="contained" onClick={deletePost}>
-            {" "}
-            Delete Post
-          </Button>
+        {currentUser ? (
+          currentUser.email === "admin@admin.sg" ? (
+            <Button variant="contained" onClick={deletePost}>
+              {" "}
+              Delete Post
+            </Button>
+          ) : (
+            <></>
+          )
         ) : (
           <></>
         )}

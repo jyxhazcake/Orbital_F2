@@ -11,35 +11,44 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-  
-  function signup(email, password) {
+
+  function signup(email, password, name, contactMobile) {
     const db = firebase.firestore();
-    return (
-      auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        db.collection('Users').doc(cred.user.uid).set({
-          Class: "student"
-        })
-      })
-    );
+    return auth.createUserWithEmailAndPassword(email, password).then((cred) => {
+      db.collection("Users").doc(cred.user.uid).set({
+        Class: "student",
+        Name: name,
+        ContactMobile: contactMobile,
+      });
+      cred.user.updateProfile({
+        displayName: name,
+      });
+    });
   }
 
-  function recruiterSignup(email, password, organisationName, id, contactName, organisationMobile, contactMobile) {
+  function recruiterSignup(
+    email,
+    password,
+    organisationName,
+    id,
+    contactName,
+    organisationMobile,
+    contactMobile
+  ) {
     const db = firebase.firestore();
-    return (
-      auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        db.collection('Users').doc(cred.user.uid).set({
-          Organisation: organisationName,
-          UEM_SRN: id,
-          Contact: contactName,
-          OrganisationMobile: organisationMobile,
-          ContactMobile: contactMobile,
-          Class: "recruiter"
-        })
-        cred.user.updateProfile({
-          displayName: organisationName
-        })
-      })
-    );
+    return auth.createUserWithEmailAndPassword(email, password).then((cred) => {
+      db.collection("Users").doc(cred.user.uid).set({
+        Organisation: organisationName,
+        UEM_SRN: id,
+        Contact: contactName,
+        OrganisationMobile: organisationMobile,
+        ContactMobile: contactMobile,
+        Class: "recruiter",
+      });
+      cred.user.updateProfile({
+        displayName: organisationName,
+      });
+    });
   }
 
   function login(email, password) {
@@ -49,7 +58,6 @@ export function AuthProvider({ children }) {
   function logout() {
     return auth.signOut();
   }
-
 
   function resetPassword(email) {
     return auth.sendPasswordResetEmail(email);

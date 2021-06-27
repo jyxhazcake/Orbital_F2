@@ -14,10 +14,15 @@ function PageHome() {
   return (
     <div>
       <AppShell />
-      <div className="flex grid gap-10 m-10">
+      <div className="bg-yellow-500">
         <img src={handhold} className="object-contain" alt="handhold" />
-        <div className="font-bold text-xl"> Latest Post</div>
-        {posts && posts.map((pst) => <PostContent key={pst.id} post={pst} />)}
+        <div className="flex grid gap-5 m-5">
+          <span className="font-bold text-xl justify-center"> Latest Post</span>
+          <div className="pb-20">
+            {posts &&
+              posts.map((pst) => <PostContent key={pst.id} post={pst} />)}
+          </div>
+        </div>
       </div>
     </div>
   );

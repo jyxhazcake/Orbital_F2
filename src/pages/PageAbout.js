@@ -4,7 +4,7 @@ function PageAbout() {
   return (
     <>
       <AppShell />
-      <div> This is the About page!!</div>;
+      <div>⚠️This is the About page!!⚠️</div>
     </>
   );
 }

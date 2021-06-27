@@ -17,7 +17,7 @@ export default function PostAdmin(props) {
     skills,
     uid,
     target,
-    photoURL,
+    imageURL,
   } = props.post;
 
   const approvePost = async (e) => {
@@ -32,6 +32,7 @@ export default function PostAdmin(props) {
         durationend: durationend,
         skills: skills,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        imageURL: imageURL,
         uid: uid,
       });
       adminRef.doc(postID).delete();
@@ -50,7 +51,12 @@ export default function PostAdmin(props) {
     <>
       <div className="flex bg-green-400 shadow-md my-2 mx-10 p-6 rounded items-center">
         <div>
-          <img src={logo} alt="nuslogo" />
+          <img
+            src={imageURL ? imageURL : logo}
+            width="200"
+            height="100"
+            alt="logo"
+          />
         </div>
         <div className="flex flex-col justify-between ml-4">
           <h3 className="font-bold text-blue-900"> {name} </h3>

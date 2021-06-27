@@ -9,7 +9,6 @@ import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import logo from "../components/img/NVJBlogo.png";
 
-
 const paperStyle = {
   padding: 20,
   minHeight: "70px",
@@ -105,6 +104,14 @@ const StuLogin = () => {
           <Link component={RouterLink} to="/studentsignup">
             {" "}
             Sign Up.
+          </Link>
+        </p>
+        <p class="text-center mt-2">
+          {" "}
+          Not a student?
+          <Link component={RouterLink} to="/recruiterlogin">
+            {" "}
+            Organisation Sign In here.
           </Link>
         </p>
       </Paper>

@@ -20,21 +20,6 @@ const LoginButton = withStyles({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(","),
-    "&:hover": {
-      backgroundColor: "#C4C4C4",
-      borderColor: "#C4C4C4",
-      boxShadow: "none",
-    },
-    "&:active": {
-      boxShadow: "none",
-      backgroundColor: "#C4C4C4",
-      borderColor: "#C4C4C4",
-    },
-    "&:focus": {
-      boxShadow: "none",
-      backgroundColor: "#C4C4C4",
-      borderColor: "#C4C4C4",
-    },
   },
 })(Button);
 

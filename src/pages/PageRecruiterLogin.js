@@ -118,6 +118,14 @@ const RecruiterLogin = () => {
             Sign Up.
           </Link>
         </p>
+        <p class="text-center mt-2">
+          {" "}
+          Not an Organisation?
+          <Link component={RouterLink} to="/studentlogin">
+            {" "}
+            Student Sign In here.
+          </Link>
+        </p>
       </Paper>
     </Grid>
   );

@@ -58,6 +58,8 @@ const bottomStyle = {
 
 export default function PageStuSignUp() {
   const emailRef = useRef();
+  const nameRef = useRef();
+  const mobileRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
@@ -75,7 +77,12 @@ export default function PageStuSignUp() {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(
+        emailRef.current.value,
+        passwordRef.current.value,
+        nameRef.current.value,
+        mobileRef.current.value
+      );
       history.push("/");
     } catch {
       setError("Failed to create an account");
@@ -101,6 +108,20 @@ export default function PageStuSignUp() {
             fullWidth
             required
             inputRef={emailRef}
+          />
+          <TextField
+            label="Name"
+            placeholder="Name"
+            fullWidth
+            required
+            inputRef={nameRef}
+          />
+          <TextField
+            label="Mobile Number"
+            placeholder="Enter mobile number"
+            fullWidth
+            required
+            inputRef={mobileRef}
           />
           <TextField
             id="standard-password-input"
