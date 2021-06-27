@@ -8,14 +8,14 @@ import PageRecruiterLogin from "./pages/PageRecruiterLogin";
 import PageRecruiterSignup from "./pages/PageRecruiterSignup";
 import TermsOfUse from "./pages/TermsOfUse";
 import ForgotPassword from "./pages/ForgotPassword";
+import PageProfile from "./pages/PageProfile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/Authcontext";
 import PrivateRoute from "./components/PrivateRoute";
 
-
 export default function App() {
   return (
-    <> 
+    <>
       <div className="App">
         <Router>
           <AuthProvider>
@@ -29,7 +29,8 @@ export default function App() {
               <Route path="/termsofuse" component={TermsOfUse} />
               <Route path="/studentlogin" component={PageStuLogin} />
               <Route path="/studentsignup" component={PageStuSignUp} />
-              <Route path="/forgotpassword" component={ForgotPassword} />{" "}
+              <Route path="/forgotpassword" component={ForgotPassword} />
+              <Route path="/profile" component={PageProfile} />{" "}
             </Switch>
           </AuthProvider>
         </Router>

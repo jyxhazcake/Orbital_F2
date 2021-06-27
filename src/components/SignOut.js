@@ -43,14 +43,25 @@ export default function SignOut() {
 
   return (
     <div>
-      <Avatar
-        className={colors.blue + " m-5"}
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        {currentUser?.displayName?.charAt(0)}
-      </Avatar>
+      {currentUser?.photoURL ? (
+        <Avatar
+          className={colors.blue + " m-5"}
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+          alt="profilePic"
+          src={currentUser.photoURL}
+        />
+      ) : (
+        <Avatar
+          className={colors.blue + " m-5"}
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          {currentUser?.displayName?.charAt(0)}
+        </Avatar>
+      )}
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -59,7 +70,9 @@ export default function SignOut() {
         onClose={handleClose}
       >
         <MenuItem> Signed in as {currentUser?.displayName}</MenuItem>
-        <MenuItem onClick={handleClose}>Profile (WIP ⚠️)</MenuItem>
+        <Link to="/profile">
+          <MenuItem>Edit Avatar</MenuItem>{" "}
+        </Link>
         <MenuItem onClick={handleClose}>My account (WIP ⚠️)</MenuItem>
         <Link to="/">
           <MenuItem onClick={handleLogout}>Logout</MenuItem>

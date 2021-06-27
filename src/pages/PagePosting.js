@@ -30,7 +30,7 @@ function PagePosting() {
   return (
     <>
       <AppShell />
-      <div className="bg-gray-300 grid gap-1">
+      <div className="bg-red-100 grid gap-1">
         {currentUser.email === "admin@admin.sg" &&
           admin &&
           admin.map((adm) => <PostAdmin key={adm.id} post={adm} />)}

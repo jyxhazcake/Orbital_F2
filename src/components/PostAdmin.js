@@ -51,12 +51,7 @@ export default function PostAdmin(props) {
     <>
       <div className="flex bg-green-400 shadow-md my-2 mx-10 p-6 rounded items-center">
         <div>
-          <img
-            src={imageURL ? imageURL : logo}
-            width="200"
-            height="100"
-            alt="logo"
-          />
+          <img src={imageURL} width="100" height="100" alt="logo" />
         </div>
         <div className="flex flex-col justify-between ml-4">
           <h3 className="font-bold text-blue-900"> {name} </h3>

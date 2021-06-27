@@ -14,7 +14,7 @@ function PageHome() {
   return (
     <div>
       <AppShell />
-      <div className="bg-yellow-500">
+      <div className="bg-red-100">
         <img src={handhold} className="object-contain" alt="handhold" />
         <div className="flex grid gap-5 m-5">
           <span className="font-bold text-xl justify-center"> Latest Post</span>
