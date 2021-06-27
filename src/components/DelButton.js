@@ -10,10 +10,10 @@ export default function DelButton(props) {
   const [error, setError] = useState("");
 
   const deletePost = async (e) => {
-    setError("");
     e.preventDefault();
 
     try {
+      setError("");
       await postsRef.doc(props).delete();
     } catch {
       setError("Unable to delete post");

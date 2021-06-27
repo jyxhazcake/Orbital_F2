@@ -11,7 +11,7 @@ const firestore = firebase.firestore();
 
 function PagePosting() {
   const postsRef = firestore.collection("posts");
-  const postquery = postsRef.orderBy("createdAt").limit(25);
+  const query = postsRef.orderBy("createdAt", "desc").limit(25);
 
   const adminRef = firestore.collection("AdminApproval");
   const adminquery = adminRef.orderBy("createdAt").limit(25);

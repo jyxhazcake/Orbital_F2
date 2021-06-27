@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
 import DelButton from "./DelButton";
 import { Button } from "@material-ui/core";
+import { Alert } from 'react-native';
 import firebase from "firebase/app";
+import { useAuth } from "../contexts/Authcontext";
 
 function PostContent(props) {
   const firestore = firebase.firestore();
@@ -20,16 +22,13 @@ function PostContent(props) {
   } = props.post;
 
   const postID = props.post.id;
+  const { currentUser } = useAuth();
+  const [error, setError] = useState("");
 
-  const deletePost = async (e) => {
-    e.preventDefault();
-
-    await postsRef.doc(postID).delete();
-  };
 
   return (
     <>
-      <div className="flex bg-white shadow-md mx-10 my-2 p-6 rounded items-center">
+      <div className={"flex bg-white shadow-md my-4 mx-60 p-6 rounded items-center"}>
         <div>
           <img src={logo} alt="nuslogo" />
         </div>
@@ -48,13 +47,17 @@ function PostContent(props) {
             {skills}{" "}
           </span>{" "}
         </div>{" "}
-        <Button variant="contained" onClick={deletePost}>
-          {" "}
-          Delete Post
-        </Button>
+        {currentUser.uid === uid ?
+          <Button variant="contained" onClick={() => postsRef.doc(postID).delete()}>
+            {" "}
+            Delete Post
+          </Button>
+          : null}
       </div>
     </>
   );
 }
 
 export default PostContent;
+
+//postsRef.doc(postID).delete()
