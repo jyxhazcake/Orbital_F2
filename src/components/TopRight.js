@@ -11,9 +11,8 @@ const buttonStyle = {
 };
 
 const TopRight = () => {
-
   return (
-    <div class="flex justify-baseline">
+    <div className="flex justify-baseline">
       <Link to="/studentlogin">
         <LoginButton style={buttonStyle}>Student Login</LoginButton>
       </Link>

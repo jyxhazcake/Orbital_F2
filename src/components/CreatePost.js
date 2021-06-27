@@ -39,7 +39,7 @@ export default function CreatePost() {
 
   return (
     <div className="flex bg-white shadow-md m-10 py-8 px-6 rounded-lg sm:px-10">
-      <form onSubmit={createPost} className="mb-0 space-y-4">
+      <form onSubmit={createPost} className="mb-0 space-y-4 p-2 space-x-2">
         <label className="block text-sm font-medium text-gray-700">
           {" "}
           Create a Volunteer Opportunity{" "}

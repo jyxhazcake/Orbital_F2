@@ -35,8 +35,9 @@ function PagePosting() {
           admin &&
           admin.map((adm) => <PostAdmin key={adm.id} post={adm} />)}
         {user?.Class === "recruiter" && <CreatePost />}
-        {posts &&
-          posts.map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
+        <div className="">
+          {posts && posts.map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
+        </div>
       </div>
     </>
   );
