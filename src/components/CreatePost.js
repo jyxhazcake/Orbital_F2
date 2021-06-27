@@ -6,7 +6,7 @@ import { TextField, Button } from "@material-ui/core";
 export default function CreatePost() {
   const firestore = firebase.firestore();
   const auth = firebase.auth();
-  const postsRef = firestore.collection("posts");
+  const adminRef = firestore.collection("AdminApproval");
   const [error, setError] = useState("");
   const [nameValue, setNameValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
@@ -21,7 +21,7 @@ export default function CreatePost() {
     setError("");
 
     try {
-      await postsRef.add({
+      await adminRef.add({
         name: nameValue,
         title: titleValue,
         durationstart: durstartValue,
@@ -31,14 +31,12 @@ export default function CreatePost() {
         uid,
       });
     } catch {
-      setError("Failed to create post! Please contact admin");
+      setError("Failed to submit post! Please contact admin");
     }
-
-    setNameValue("");
   };
 
   return (
-    <div className="flex bg-white shadow-md py-8 px-6 rounded-lg sm:px-10">
+    <div className="flex bg-white shadow-md m-10 py-8 px-6 rounded-lg sm:px-10">
       <form onSubmit={createPost} className="mb-0 space-y-4">
         <label className="block text-sm font-medium text-gray-700">
           {" "}
