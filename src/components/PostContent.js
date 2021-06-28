@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
 import { Button, Checkbox } from "@material-ui/core";
@@ -17,7 +17,7 @@ function PostContent(props) {
   const { currentUser } = useAuth();
   const firestore = firebase.firestore();
   const postsRef = firestore.collection("posts");
-  const interestsRef = firestore.collection("interest");
+  const interestsRef = firestore.collection("interests");
   const {
     name,
     title,
@@ -77,24 +77,29 @@ function PostContent(props) {
     const docRef = interestsRef.doc(postID);
     const uid = currentUser.uid
 
-    //check if the currentUser has liked particular post
-    const studentInterested = interestsRef.where('students', 'array-contains', { uid }).get();
+    docRef.update({
+      students: firebase.firestore.FieldValue.arrayUnion(uid)
+    })
+
+    try {
+      setInterest(true)
+      console.log(students)
+    } catch {
+      setError("Could not retrieve interested students")
+      console.log(error)
+    }
+  }
+
+  // everytime the page refreshes the interest and number of students interested in a post is set
+  useEffect(() => {
+    const docRef = interestsRef.doc(postID);
 
     docRef.get().then((doc) => {
       if (doc.exists) {
         setStudents(doc.data().students);
       }
     })
-
-    try {
-      setInterest(true)
-      console.log(students)
-      console.log(studentInterested)
-    } catch {
-      setError("Could not retrieve interested students")
-      console.log(error)
-    }
-  }
+   })
 
   return (
     <>
