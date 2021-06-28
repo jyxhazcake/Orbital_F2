@@ -8,6 +8,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import CommentIcon from '@material-ui/icons/Comment';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CheckIcon from '@material-ui/icons/Check';
+import { useDocumentData } from "react-firebase-hooks/firestore"
 
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
@@ -31,6 +32,9 @@ function PostContent(props) {
     target,
     imageURL,
   } = props.post;
+
+  const userRef = UsersRef.doc(currentUser?.uid)
+  const [user] = useDocumentData(userRef);
 
   const postID = props.post.id;
   const [error, setError] = useState("");
@@ -157,6 +161,8 @@ function PostContent(props) {
         ) : (
           <></>
         )}
+        {user?.Class === "student" &&
+          <div>
         <IconButton
             color="primary"
             aria-label="Comment"
@@ -179,8 +185,10 @@ function PostContent(props) {
           onClick={indicateInterest}
           >
             <AddCircleIcon />
-          </IconButton> }
-        {interestedStudents} student{interestedStudents === 1 ? "" : "s"}  
+            </IconButton>}
+            </div>
+        }
+        {interestedStudents} student{interestedStudents === 1 ? "" : "s"}
       </div>
       <div className="ml-20 mb-20">
           <p className="font-bold text-l">Interested Students: </p>
