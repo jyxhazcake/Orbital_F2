@@ -30,13 +30,15 @@ function PagePosting() {
   return (
     <>
       <AppShell />
-      <div className="bg-red-100 grid gap-1">
+      <div className="bg-red-100 p-5">
         {currentUser.email === "admin@admin.sg" &&
           admin &&
           admin.map((adm) => <PostAdmin key={adm.id} post={adm} />)}
         {user?.Class === "recruiter" && <CreatePost />}
-        <div className="">
-          {posts && posts.map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
+        <div className="block text-sm font-medium text-gray-700 bg-red-300 shadow-md my-4 mx-20 p-6 rounded grid gap-1">
+          Opportunities Available
+          {posts &&
+            posts.map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
         </div>
       </div>
     </>
