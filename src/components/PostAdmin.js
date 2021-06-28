@@ -8,7 +8,7 @@ import logo from "./img/NUSlogo.png";
 export default function PostAdmin(props) {
   const firestore = firebase.firestore();
   const postsRef = firestore.collection("posts");
-  const interestRef = firestore.collection("interest");
+  const interestRef = firestore.collection("interests");
   const adminRef = firestore.collection("AdminApproval");
   const [error, setError] = useState("");
   const postID = props.post.id;

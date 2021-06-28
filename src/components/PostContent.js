@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
-import { Button, Checkbox } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -12,10 +12,13 @@ import CheckIcon from '@material-ui/icons/Check';
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
 
+import DisplayStudents from "./DisplayStudents"
+
 
 function PostContent(props) {
   const { currentUser } = useAuth();
   const firestore = firebase.firestore();
+  const UsersRef = firestore.collection("Users");
   const postsRef = firestore.collection("posts");
   const interestsRef = firestore.collection("interests");
   const {
@@ -35,6 +38,7 @@ function PostContent(props) {
   const [students, setStudents] = useState([]);
 
   const interestedStudents = students.length;
+
 
   //delete a post
   const deletePost = async (e) => {
@@ -75,10 +79,14 @@ function PostContent(props) {
     setError("");
 
     const docRef = interestsRef.doc(postID);
-    const uid = currentUser.uid
+    const userUID = currentUser.uid
+    
+    UsersRef.doc(userUID).update({
+      interestedPosts: firebase.firestore.FieldValue.arrayUnion(postID)
+    })
 
     docRef.update({
-      students: firebase.firestore.FieldValue.arrayUnion(uid)
+      students: firebase.firestore.FieldValue.arrayUnion(userUID)
     })
 
     try {
@@ -90,7 +98,9 @@ function PostContent(props) {
     }
   }
 
-  // everytime the page refreshes the interest and number of students interested in a post is set
+
+
+  // everytime the page renders the interest and number of students interested in a post is set
   useEffect(() => {
     const docRef = interestsRef.doc(postID);
 
@@ -154,7 +164,7 @@ function PostContent(props) {
         >
           <CommentIcon />
         </IconButton>
-        {interest ? 
+        {(students.some(item => currentUser?.uid === item)) ?
           <IconButton
             color="primary"
             aria-label="Like"
@@ -170,9 +180,12 @@ function PostContent(props) {
           >
             <AddCircleIcon />
           </IconButton> }
-        {interestedStudents} student{interestedStudents === 1 ? "" : "s"}
+        {interestedStudents} student{interestedStudents === 1 ? "" : "s"}  
       </div>
-      
+      <div className="ml-20 mb-20">
+          <p className="font-bold text-l">Interested Students: </p>
+        {students && students.map((stdent) => <DisplayStudents key={stdent.id} student={stdent} />)}
+      </div>
     </>
   );
 }
