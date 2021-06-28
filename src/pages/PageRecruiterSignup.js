@@ -85,6 +85,11 @@ export default function PageRecruiterSignup() {
       return setError("Passwords do not match");
     }
 
+    if (passwordRef.current.value.length < 8) {
+      return setError("Passwords have to be greater than 8 characters!");
+    }
+
+
     try {
       setError("");
       setLoading(true);
@@ -113,7 +118,9 @@ export default function PageRecruiterSignup() {
             <img src={logo} alt="NVJBlogo" style={logoStyle}></img>
           </RouterLink>
           <p className="text-xl font-bold">Sign up</p>
-          {error && <Alert severity="error">{error}</Alert>}
+          <div>
+           {error && <Alert severity="error">{error}</Alert>}
+          </div>
         </Grid>
         <FormGroup>
           <TextField
@@ -160,7 +167,7 @@ export default function PageRecruiterSignup() {
           />
           <TextField
             id="standard-password-input"
-            label="Password"
+            label="Password (Min. 8 Characters)"
             placeholder="Enter password"
             type="password"
             fullWidth

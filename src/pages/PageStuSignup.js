@@ -74,6 +74,14 @@ export default function PageStuSignUp() {
       return setError("Passwords do not match");
     }
 
+    if (passwordRef.current.value.length < 8) {
+      return setError("Passwords have to be greater than 8 characters!");
+    }
+
+    if (!emailRef.current.value.includes('@nus.edu.sg')) {
+      return setError("Email has to be an NUS email!");
+    }
+
     try {
       setError("");
       setLoading(true);
@@ -99,7 +107,9 @@ export default function PageStuSignUp() {
             <img src={logo} alt="NVJBlogo" style={logoStyle}></img>
           </RouterLink>
           <p className="text-xl font-bold">Sign up</p>
-          {error && <Alert severity="error">{error}</Alert>}
+          <div>
+            {error && <Alert severity="error">{error}</Alert>}
+          </div>
         </Grid>
         <FormGroup>
           <TextField
@@ -125,7 +135,7 @@ export default function PageStuSignUp() {
           />
           <TextField
             id="standard-password-input"
-            label="Password"
+            label="Password (Min. 8 Characters)"
             placeholder="Enter password"
             type="password"
             fullWidth
