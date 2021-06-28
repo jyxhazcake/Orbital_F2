@@ -188,7 +188,10 @@ function PostContent(props) {
             </IconButton>}
             </div>
         }
+        <div className="ml-3">
         {interestedStudents} student{interestedStudents === 1 ? "" : "s"}
+        </div>
+        
       </div>
       <div className="ml-20 mb-20">
           <p className="font-bold text-l">Interested Students: </p>
