@@ -64,7 +64,11 @@ export default function CreatePost() {
           placeholder="Skills required"
           onChange={(e) => setSkillsValue(e.target.value)}
         />{" "}
-        <Button type="submit" variant="outlined">
+        <Button
+          type="submit"
+          variant="outlined"
+          color="primary"
+          className={"focus:outline-none"}>
           Submit
         </Button>
       </form>

@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/Authcontext";
 import { Button } from "@material-ui/core";
 import ImageUploading from "react-images-uploading";
 import firebase from "firebase/app";
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 export default function PageProfile() {
   const [images, setImages] = React.useState([]);
@@ -35,7 +36,7 @@ export default function PageProfile() {
         <span className="font-bold text-l">Current Photo:</span>
         <img
           src={currentUser.photoURL}
-          alt="no image"
+          alt="no display"
           width="200"
           height="100"
           className="p-2"
@@ -76,7 +77,7 @@ export default function PageProfile() {
                       className=""
                       onClick={() => onImageUpdate(index)}
                     >
-                      Update
+                      Change
                     </Button>
                     &nbsp; &nbsp; &nbsp; &nbsp;
                     <Button
@@ -94,18 +95,11 @@ export default function PageProfile() {
                   variant="outlined"
                   color="primary"
                   style={isDragging ? { color: "red" } : null}
+                  startIcon = {<CloudUploadIcon />}
                   onClick={onImageUpload}
                   {...dragProps}
                 >
                   Click or Drop here
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={onImageRemoveAll}
-                >
-                  Remove all images
                 </Button>
               </div>
             </div>

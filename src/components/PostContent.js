@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
-import { Button } from "@material-ui/core";
-import { Alert } from "react-native";
+import { Button, Checkbox } from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import CommentIcon from '@material-ui/icons/Comment';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import CheckIcon from '@material-ui/icons/Check';
+
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
+
 
 function PostContent(props) {
   const { currentUser } = useAuth();
   const firestore = firebase.firestore();
   const postsRef = firestore.collection("posts");
+  const interestsRef = firestore.collection("interest");
   const {
     name,
     title,
@@ -23,12 +31,70 @@ function PostContent(props) {
 
   const postID = props.post.id;
   const [error, setError] = useState("");
+  const [interest, setInterest] = useState(false);
+  const [students, setStudents] = useState([]);
 
+  const interestedStudents = students.length;
+
+  //delete a post
   const deletePost = async (e) => {
     e.preventDefault();
+    setError("");
 
-    await postsRef.doc(postID).delete();
+    try {
+      await postsRef.doc(postID).delete();
+      await interestsRef.doc(postID).delete();
+    } catch {
+      setError("Failed to delete post.")
+    }
   };
+
+  /*handle interest button toggle
+  function handleInterestToggled(toToggleStudent, toToggleStudentIndex) {
+    const newStudents = [
+      // Once again, this is the spread operator
+      ...students.slice(0, toToggleStudentIndex),
+      {
+        uid: toToggleStudent.uid,
+        isInterested: !toToggleStudent.isInterested
+      },
+      ...students.slice(toToggleStudentIndex + 1)
+    ];
+    // We set new tasks in such a complex way so that we maintain immutability
+    // Read this article to find out more:
+    // https://blog.logrocket.com/immutability-in-react-ebe55253a1cc/
+
+    setStudents(newStudents);
+  }*/
+
+  //update the students interested in a post
+  async function indicateInterest(e) {
+    e.preventDefault();
+    //handleInterestToggled()
+
+    setError("");
+
+    const docRef = interestsRef.doc(postID);
+    const uid = currentUser.uid
+
+    //check if the currentUser has liked particular post
+    const studentInterested = interestsRef.where('students', 'array-contains', { uid }).get();
+
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        setStudents(doc.data().students);
+      }
+    })
+
+    try {
+      setInterest(true)
+      console.log(students)
+      console.log(studentInterested)
+    } catch {
+      setError("Could not retrieve interested students")
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -61,10 +127,14 @@ function PostContent(props) {
           </span>{" "}
         </div>{" "}
         {currentUser ? (
-          currentUser.email === "admin@admin.sg" ? (
-            <Button variant="contained" onClick={deletePost}>
+          (currentUser.email === "admin@admin.sg" || currentUser === uid) ? (
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<DeleteIcon />}
+              onClick={deletePost}>
               {" "}
-              Delete Post
+              Delete
             </Button>
           ) : (
             <></>
@@ -72,11 +142,47 @@ function PostContent(props) {
         ) : (
           <></>
         )}
+        <IconButton
+            color="primary"
+            aria-label="Comment"
+            className={"focus:outline-none"}
+        >
+          <CommentIcon />
+        </IconButton>
+        {interest ? 
+          <IconButton
+            color="primary"
+            aria-label="Like"
+            className={"focus:outline-none"}
+          >
+            <CheckIcon />
+          </IconButton> :
+          <IconButton
+          color="primary"
+          aria-label="Like"
+          className={"focus:outline-none"}
+          onClick={indicateInterest}
+          >
+            <AddCircleIcon />
+          </IconButton> }
+        {interestedStudents} student{interestedStudents === 1 ? "" : "s"}
       </div>
+      
     </>
   );
 }
 
 export default PostContent;
 
-//postsRef.doc(postID).delete()
+/* 
+temporarily removes liked function
+<IconButton
+  color="secondary"
+  aria-label="Like"
+  className={"focus:outline-none"}
+  onClick={updateLikes}
+>
+  <FavoriteBorderIcon />
+</IconButton>
+<p className="text-sm"> 3 Likes </p> */
+

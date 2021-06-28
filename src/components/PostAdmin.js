@@ -1,10 +1,14 @@
 import { useState, React } from "react";
 import { Button } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import firebase from "firebase/app";
 import logo from "./img/NUSlogo.png";
+
+
 export default function PostAdmin(props) {
   const firestore = firebase.firestore();
   const postsRef = firestore.collection("posts");
+  const interestRef = firestore.collection("interest");
   const adminRef = firestore.collection("AdminApproval");
   const [error, setError] = useState("");
   const postID = props.post.id;
@@ -24,8 +28,9 @@ export default function PostAdmin(props) {
     e.preventDefault();
 
     setError("");
+    //handling of post creation:
     try {
-      await postsRef.add({
+      await postsRef.doc(postID).set({
         name: name,
         title: title,
         durationstart: durationstart,
@@ -39,6 +44,15 @@ export default function PostAdmin(props) {
     } catch {
       setError("Failed to create post!");
     }
+
+    //handling of interest creation
+    try {
+      await interestRef.doc(postID).set({
+        students: []
+      })
+    } catch {
+      setError("Interest could not be created!");
+    }
   };
 
   const deletePost = async (e) => {
@@ -49,6 +63,7 @@ export default function PostAdmin(props) {
 
   return (
     <>
+      {error && <Alert severity="error">{error}</Alert>}
       <div className="flex bg-green-400 shadow-md my-2 mx-10 p-6 rounded items-center">
         <div>
           <img src={imageURL} width="100" height="100" alt="logo" />

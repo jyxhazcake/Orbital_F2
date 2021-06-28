@@ -18,7 +18,7 @@ function AppShell() {
         <Link to="/">
           <img
             src={logo2}
-            className="w-20 md:w-24 lg:w-28 ml-5"
+            className="w-18 md:w-20 lg:w-22 ml-10"
             alt="NUSlogo"
           />
         </Link>
