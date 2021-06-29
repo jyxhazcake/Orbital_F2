@@ -78,7 +78,7 @@ export default function PageStuSignUp() {
       return setError("Passwords have to be greater than 8 characters!");
     }
 
-    if (!emailRef.current.value.includes('@u.nus.edu')) {
+    if (!emailRef.current.value.includes("@u.nus.edu")) {
       return setError("Email has to be an NUS email!");
     }
 
@@ -107,9 +107,7 @@ export default function PageStuSignUp() {
             <img src={logo} alt="NVJBlogo" style={logoStyle}></img>
           </RouterLink>
           <p className="text-xl font-bold">Sign up</p>
-          <div>
-            {error && <Alert severity="error">{error}</Alert>}
-          </div>
+          <div>{error && <Alert severity="error">{error}</Alert>}</div>
         </Grid>
         <FormGroup>
           <TextField

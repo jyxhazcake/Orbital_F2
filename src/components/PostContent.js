@@ -55,28 +55,9 @@ function PostContent(props) {
     }
   };
 
-  /*handle interest button toggle
-  function handleInterestToggled(toToggleStudent, toToggleStudentIndex) {
-    const newStudents = [
-      // Once again, this is the spread operator
-      ...students.slice(0, toToggleStudentIndex),
-      {
-        uid: toToggleStudent.uid,
-        isInterested: !toToggleStudent.isInterested
-      },
-      ...students.slice(toToggleStudentIndex + 1)
-    ];
-    // We set new tasks in such a complex way so that we maintain immutability
-    // Read this article to find out more:
-    // https://blog.logrocket.com/immutability-in-react-ebe55253a1cc/
-
-    setStudents(newStudents);
-  }*/
-
   //update the students interested in a post
   async function indicateInterest(e) {
     e.preventDefault();
-    //handleInterestToggled()
 
     setError("");
 
