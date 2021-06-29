@@ -45,7 +45,7 @@ export default function SignOut() {
     <div>
       {currentUser?.photoURL ? (
         <Avatar
-          className={colors.blue + " m-5"}
+          className={colors.blue + " m-5 cursor-pointer"}
           aria-controls="simple-menu"
           aria-haspopup="true"
           onClick={handleClick}
@@ -54,7 +54,7 @@ export default function SignOut() {
         />
       ) : (
         <Avatar
-          className={colors.blue + " m-5"}
+          className={colors.blue + " m-5 cursor-pointer"}
           aria-controls="simple-menu"
           aria-haspopup="true"
           onClick={handleClick}

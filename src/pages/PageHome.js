@@ -1,4 +1,5 @@
 import handhold from "../components/img/handhold.png";
+import sneaky from "../components/img/sneaky.png";
 import AppShell from "../components/AppShell";
 import firebase from "firebase/app";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -16,7 +17,7 @@ function PageHome() {
   return (
     <div>
       <AppShell />
-      <div className="bg-red-100">
+      <div className="bg-gray-200">
         <img src={handhold} className="w-screen w-full flex" alt="handhold" />
         {currentUser ?
           <div className="flex grid gap-5 m-5">
@@ -25,7 +26,13 @@ function PageHome() {
               {posts &&
                 posts.map((pst) => <PostContent key={pst.id} post={pst} />)}
             </div>
-          </div> : <></>}
+          </div> :
+          <div className="flex justify-center mx-auto py-24">
+            <img className="w-10" src={sneaky} alt="sneaky" /> &nbsp; &nbsp;
+            <p className="text-xl font-bold">
+            Login to see our latest posts
+            </p>
+          </div>}
       </div>
     </div>
   );

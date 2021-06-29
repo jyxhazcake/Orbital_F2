@@ -27,9 +27,9 @@ export default function PageProfile() {
         {
           photoURL: url,
         },
-        window.location.reload()
       );
     });
+    window.location.reload()
   };
 
   return (
