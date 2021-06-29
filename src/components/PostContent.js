@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
 import { Button } from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import CommentIcon from '@material-ui/icons/Comment';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import CheckIcon from '@material-ui/icons/Check';
-import { useDocumentData } from "react-firebase-hooks/firestore"
+import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import CommentIcon from "@material-ui/icons/Comment";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import CheckIcon from "@material-ui/icons/Check";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
 
-import DisplayStudents from "./DisplayStudents"
-
+import DisplayStudents from "./DisplayStudents";
 
 function PostContent(props) {
   const { currentUser } = useAuth();
@@ -33,7 +32,7 @@ function PostContent(props) {
     imageURL,
   } = props.post;
 
-  const userRef = UsersRef.doc(currentUser?.uid)
+  const userRef = UsersRef.doc(currentUser?.uid);
   const [user] = useDocumentData(userRef);
 
   const postID = props.post.id;
@@ -42,7 +41,6 @@ function PostContent(props) {
   const [students, setStudents] = useState([]);
 
   const interestedStudents = students.length;
-
 
   //delete a post
   const deletePost = async (e) => {
@@ -53,7 +51,7 @@ function PostContent(props) {
       await postsRef.doc(postID).delete();
       await interestsRef.doc(postID).delete();
     } catch {
-      setError("Failed to delete post.")
+      setError("Failed to delete post.");
     }
   };
 
@@ -83,26 +81,24 @@ function PostContent(props) {
     setError("");
 
     const docRef = interestsRef.doc(postID);
-    const userUID = currentUser.uid
-    
+    const userUID = currentUser.uid;
+
     UsersRef.doc(userUID).update({
-      interestedPosts: firebase.firestore.FieldValue.arrayUnion(postID)
-    })
+      interestedPosts: firebase.firestore.FieldValue.arrayUnion(postID),
+    });
 
     docRef.update({
-      students: firebase.firestore.FieldValue.arrayUnion(userUID)
-    })
+      students: firebase.firestore.FieldValue.arrayUnion(userUID),
+    });
 
     try {
-      setInterest(true)
-      console.log(students)
+      setInterest(true);
+      console.log(students);
     } catch {
-      setError("Could not retrieve interested students")
-      console.log(error)
+      setError("Could not retrieve interested students");
+      console.log(error);
     }
   }
-
-
 
   // everytime the page renders the interest and number of students interested in a post is set
   useEffect(() => {
@@ -112,8 +108,8 @@ function PostContent(props) {
       if (doc.exists) {
         setStudents(doc.data().students);
       }
-    })
-   })
+    });
+  });
 
   return (
     <>
@@ -146,12 +142,13 @@ function PostContent(props) {
           </span>{" "}
         </div>{" "}
         {currentUser ? (
-          (currentUser.email === "admin@admin.sg" || currentUser === uid) ? (
+          currentUser.email === "admin@admin.sg" || currentUser === uid ? (
             <Button
               variant="contained"
               color="secondary"
               startIcon={<DeleteIcon />}
-              onClick={deletePost}>
+              onClick={deletePost}
+            >
               {" "}
               Delete
             </Button>
@@ -161,38 +158,43 @@ function PostContent(props) {
         ) : (
           <></>
         )}
-        {user?.Class === "student" &&
+        {user?.Class === "student" && (
           <div>
-        <IconButton
-            color="primary"
-            aria-label="Comment"
-            className={"focus:outline-none"}
-        >
-          <CommentIcon />
-        </IconButton>
-        {(students.some(item => currentUser?.uid === item)) ?
-          <IconButton
-            color="primary"
-            aria-label="Like"
-            className={"focus:outline-none"}
-          >
-            <CheckIcon />
-          </IconButton> :
-          <IconButton
-          color="primary"
-          aria-label="Like"
-          className={"focus:outline-none"}
-          onClick={indicateInterest}
-          >
-            <AddCircleIcon />
-            </IconButton>}
-            </div>
-        }
+            <IconButton
+              color="primary"
+              aria-label="Comment"
+              className={"focus:outline-none"}
+            >
+              <CommentIcon />
+            </IconButton>
+            {students.some((item) => currentUser?.uid === item) ? (
+              <IconButton
+                color="primary"
+                aria-label="Like"
+                className={"focus:outline-none"}
+              >
+                <CheckIcon />
+              </IconButton>
+            ) : (
+              <IconButton
+                color="primary"
+                aria-label="Like"
+                className={"focus:outline-none"}
+                onClick={indicateInterest}
+              >
+                <AddCircleIcon />
+              </IconButton>
+            )}
+          </div>
+        )}
         {interestedStudents} student{interestedStudents === 1 ? "" : "s"}
       </div>
       <div className="ml-20 mb-20">
-          <p className="font-bold text-l">Interested Students: </p>
-        {students && students.map((stdent) => <DisplayStudents key={stdent.id} student={stdent} />)}
+        <p className="font-bold text-l">Interested Students: </p>
+        {students &&
+          students.map((stdent) => (
+            <DisplayStudents key={stdent.id} student={stdent} />
+          ))}
       </div>
     </>
   );
@@ -211,4 +213,3 @@ temporarily removes liked function
   <FavoriteBorderIcon />
 </IconButton>
 <p className="text-sm"> 3 Likes </p> */
-

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppShell from "../components/AppShell";
 import { useAuth } from "../contexts/Authcontext";
 import { Button } from "@material-ui/core";
 import ImageUploading from "react-images-uploading";
 import firebase from "firebase/app";
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 export default function PageProfile() {
   const [images, setImages] = React.useState([]);
@@ -20,15 +20,18 @@ export default function PageProfile() {
     .storage()
     .ref("images/" + currentUser.uid + "/avatar.jpg");
 
-  const updatePhoto = () => {
-    imageRef.putString(images[0].data_url, "data_url");
+  const updatePhoto = async (e) => {
+    await imageRef.putString(images[0].data_url, "data_url");
     imageRef.getDownloadURL().then((url) => {
-      currentUser.updateProfile({
-        photoURL: url,
-      });
+      currentUser.updateProfile(
+        {
+          photoURL: url,
+        },
+        window.location.reload()
+      );
     });
-    console.log(currentUser.photoURL);
   };
+
   return (
     <div>
       <AppShell />
@@ -95,7 +98,7 @@ export default function PageProfile() {
                   variant="outlined"
                   color="primary"
                   style={isDragging ? { color: "red" } : null}
-                  startIcon = {<CloudUploadIcon />}
+                  startIcon={<CloudUploadIcon />}
                   onClick={onImageUpload}
                   {...dragProps}
                 >
