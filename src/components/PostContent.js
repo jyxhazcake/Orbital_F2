@@ -160,34 +160,35 @@ function PostContent(props) {
         )}
         {user?.Class === "student" && (
           <div>
-            <IconButton
-              color="primary"
-              aria-label="Comment"
-              className={"focus:outline-none"}
-            >
-              <CommentIcon />
-            </IconButton>
-            {students.some((item) => currentUser?.uid === item) ? (
-              <IconButton
-                color="primary"
-                aria-label="Like"
-                className={"focus:outline-none"}
-              >
-                <CheckIcon />
-              </IconButton>
-            ) : (
-              <IconButton
-                color="primary"
-                aria-label="Like"
-                className={"focus:outline-none"}
-                onClick={indicateInterest}
-              >
-                <AddCircleIcon />
-              </IconButton>
-            )}
-          </div>
-        )}
+        <IconButton
+            color="primary"
+            aria-label="Comment"
+            className={"focus:outline-none"}
+        >
+          <CommentIcon />
+        </IconButton>
+        {(students.some(item => currentUser?.uid === item)) ?
+          <IconButton
+            color="primary"
+            aria-label="Like"
+            className={"focus:outline-none"}
+          >
+            <CheckIcon />
+          </IconButton> :
+          <IconButton
+          color="primary"
+          aria-label="Like"
+          className={"focus:outline-none"}
+          onClick={indicateInterest}
+          >
+            <AddCircleIcon />
+            </IconButton>}
+            </div>
+        }
+        <div className="ml-3">
         {interestedStudents} student{interestedStudents === 1 ? "" : "s"}
+        </div>
+        
       </div>
       <div className="ml-20 mb-20">
         <p className="font-bold text-l">Interested Students: </p>
