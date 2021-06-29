@@ -78,7 +78,7 @@ export default function PageStuSignUp() {
       return setError("Passwords have to be greater than 8 characters!");
     }
 
-    if (!emailRef.current.value.includes('@nus.edu.sg')) {
+    if (!emailRef.current.value.includes('@u.nus.edu')) {
       return setError("Email has to be an NUS email!");
     }
 

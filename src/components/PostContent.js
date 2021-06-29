@@ -8,7 +8,8 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import CheckIcon from "@material-ui/icons/Check";
-import { useDocumentData } from "react-firebase-hooks/firestore";
+import { useDocumentData, useCollectionData } from "react-firebase-hooks/firestore";
+
 
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
@@ -37,10 +38,9 @@ function PostContent(props) {
 
   const postID = props.post.id;
   const [error, setError] = useState("");
-  const [interest, setInterest] = useState(false);
-  const [students, setStudents] = useState([]);
+  //const [students, setStudents] = useState([]);
 
-  const interestedStudents = students.length;
+  //const interestedStudents = students.length;
 
   //delete a post
   const deletePost = async (e) => {
@@ -92,8 +92,7 @@ function PostContent(props) {
     });
 
     try {
-      setInterest(true);
-      console.log(students);
+      console.log(interestedStudents)
     } catch {
       setError("Could not retrieve interested students");
       console.log(error);
@@ -101,15 +100,16 @@ function PostContent(props) {
   }
 
   // everytime the page renders the interest and number of students interested in a post is set
-  useEffect(() => {
-    const docRef = interestsRef.doc(postID);
 
-    docRef.get().then((doc) => {
-      if (doc.exists) {
-        setStudents(doc.data().students);
-      }
-    });
-  });
+  /*const postsRef = firestore.collection("posts");
+
+  const query = postsRef.orderBy("createdAt", "desc").limit(1);
+  const [posts] = useCollectionData(query, { idField: "id" });*/
+
+  const [interestedStudents] = useDocumentData(interestsRef.doc(postID));
+  console.log(interestedStudents?.students)
+  
+
 
   return (
     <>
@@ -142,7 +142,7 @@ function PostContent(props) {
           </span>{" "}
         </div>{" "}
         {currentUser ? (
-          currentUser.email === "admin@admin.sg" || currentUser === uid ? (
+          (currentUser.email === "admin@admin.sg" || currentUser === uid) ? (
             <Button
               variant="contained"
               color="secondary"
@@ -167,7 +167,7 @@ function PostContent(props) {
             >
               <CommentIcon />
             </IconButton>
-            {students.some((item) => currentUser?.uid === item) ? (
+            {interestedStudents?.students.some((item) => currentUser?.uid === item) ? (
               <IconButton
                 color="primary"
                 aria-label="Like"
@@ -188,13 +188,13 @@ function PostContent(props) {
           </div>
         )}
         <div className="ml-3">
-          {interestedStudents} student{interestedStudents === 1 ? "" : "s"}
+          {interestedStudents?.students.length} student{interestedStudents?.students.length === 1 ? "" : "s"}
         </div>
       </div>
       <div className="ml-20 mb-20">
         <p className="font-bold text-l">Interested Students: </p>
-        {students &&
-          students.map((stdent) => (
+        {interestedStudents?.students &&
+          interestedStudents?.students.map((stdent) => (
             <DisplayStudents key={stdent.id} student={stdent} />
           ))}
       </div>
