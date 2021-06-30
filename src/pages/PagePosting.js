@@ -39,7 +39,7 @@ function PagePosting() {
           admin &&
           admin.map((adm) => <PostAdmin key={adm.id} post={adm} />)}
         {user?.Class === "recruiter" && <CreatePost />}
-        <div className="ml-20">
+        <div className="lg:ml-60 md:ml-28 sm:ml-4">
           <TextField
             type="search"
             label="Search"
@@ -49,7 +49,7 @@ function PagePosting() {
             }}
           />
         </div>
-        <div className="block text-sm font-medium text-gray-700 bg-red-300 shadow-md my-4 mx-20 p-6 rounded grid gap-1">
+        <div className="block text-sm font-medium text-gray-700 bg-red-300 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded grid gap-1">
           Opportunities Available
           {posts &&
             posts

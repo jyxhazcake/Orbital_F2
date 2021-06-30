@@ -117,7 +117,7 @@ function PostContent(props) {
         </div>
         <div className="flex items-center justify-end ml-auto">
           {" "}
-          <span className="text-blue-500 bg-blue-100 font-bold m-2 p-2 rounded">
+          <span className="text-blue-500 bg-blue-100 font-bold ml-6 m-2 p-2 rounded">
             {" "}
             {skills}{" "}
           </span>{" "}
