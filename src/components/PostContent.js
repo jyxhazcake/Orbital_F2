@@ -8,8 +8,10 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import CheckIcon from "@material-ui/icons/Check";
-import { useDocumentData, useCollectionData } from "react-firebase-hooks/firestore";
-
+import {
+  useDocumentData,
+  useCollectionData,
+} from "react-firebase-hooks/firestore";
 
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
@@ -73,7 +75,7 @@ function PostContent(props) {
     });
 
     try {
-      console.log(interestedStudents)
+      console.log(interestedStudents);
     } catch {
       setError("Could not retrieve interested students");
       console.log(error);
@@ -88,12 +90,10 @@ function PostContent(props) {
   const [posts] = useCollectionData(query, { idField: "id" });*/
 
   const [interestedStudents] = useDocumentData(interestsRef.doc(postID));
-  console.log(interestedStudents?.students)
-  
-
+  console.log(interestedStudents?.students);
 
   return (
-    <>
+    <div key={props.id}>
       <div
         className={
           "flex bg-white shadow-md my-4 mx-20 p-6 rounded items-center"
@@ -123,7 +123,7 @@ function PostContent(props) {
           </span>{" "}
         </div>{" "}
         {currentUser ? (
-          (currentUser.email === "admin@admin.sg" || currentUser === uid) ? (
+          currentUser.email === "admin@admin.sg" || currentUser === uid ? (
             <Button
               variant="contained"
               color="secondary"
@@ -148,7 +148,9 @@ function PostContent(props) {
             >
               <CommentIcon />
             </IconButton>
-            {interestedStudents?.students.some((item) => currentUser?.uid === item) ? (
+            {interestedStudents?.students.some(
+              (item) => currentUser?.uid === item
+            ) ? (
               <IconButton
                 color="primary"
                 aria-label="Like"
@@ -169,7 +171,8 @@ function PostContent(props) {
           </div>
         )}
         <div className="ml-3">
-          {interestedStudents?.students.length} student{interestedStudents?.students.length === 1 ? "" : "s"}
+          {interestedStudents?.students.length} student
+          {interestedStudents?.students.length === 1 ? "" : "s"}
         </div>
       </div>
       <div className="ml-20 mb-20">
@@ -179,7 +182,7 @@ function PostContent(props) {
             <DisplayStudents key={stdent.id} student={stdent} />
           ))}
       </div>
-    </>
+    </div>
   );
 }
 

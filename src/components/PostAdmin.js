@@ -4,7 +4,6 @@ import Alert from "@material-ui/lab/Alert";
 import firebase from "firebase/app";
 import logo from "./img/NUSlogo.png";
 
-
 export default function PostAdmin(props) {
   const firestore = firebase.firestore();
   const postsRef = firestore.collection("posts");
@@ -48,8 +47,8 @@ export default function PostAdmin(props) {
     //handling of interest creation
     try {
       await interestRef.doc(postID).set({
-        students: []
-      })
+        students: [],
+      });
     } catch {
       setError("Interest could not be created!");
     }
@@ -62,7 +61,7 @@ export default function PostAdmin(props) {
   };
 
   return (
-    <>
+    <div key={props.id}>
       {error && <Alert severity="error">{error}</Alert>}
       <div className="flex bg-green-400 shadow-md my-2 mx-10 p-6 rounded items-center">
         <div>
@@ -92,6 +91,6 @@ export default function PostAdmin(props) {
           Reject Post
         </Button>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import {
@@ -9,10 +10,13 @@ import AppShell from "../components/AppShell";
 import PostContent from "../components/PostContent";
 import PostAdmin from "../components/PostAdmin";
 import { useAuth } from "../contexts/Authcontext";
+import { ListItemAvatar, TextField } from "@material-ui/core";
 
 const firestore = firebase.firestore();
 
 function PagePosting() {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const { currentUser } = useAuth();
 
   const postsRef = firestore.collection("posts");
@@ -35,10 +39,32 @@ function PagePosting() {
           admin &&
           admin.map((adm) => <PostAdmin key={adm.id} post={adm} />)}
         {user?.Class === "recruiter" && <CreatePost />}
+        <div className="ml-20">
+          <TextField
+            type="search"
+            label="Search"
+            variant="standard"
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
+        </div>
         <div className="block text-sm font-medium text-gray-700 bg-red-300 shadow-md my-4 mx-20 p-6 rounded grid gap-1">
           Opportunities Available
           {posts &&
-            posts.map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
+            posts
+              .filter((pst) => {
+                for (const property in pst) {
+                  if (
+                    String(pst[property])
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase())
+                  ) {
+                    return pst;
+                  }
+                }
+              })
+              .map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
         </div>
       </div>
     </>
