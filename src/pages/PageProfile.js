@@ -22,14 +22,12 @@ export default function PageProfile() {
 
   const updatePhoto = async (e) => {
     await imageRef.putString(images[0].data_url, "data_url");
-    imageRef.getDownloadURL().then((url) => {
-      currentUser.updateProfile(
-        {
-          photoURL: url,
-        },
-      );
+    imageRef.getDownloadURL().then(async (url) => {
+      await currentUser.updateProfile({
+        photoURL: url,
+      });
+      window.location.reload();
     });
-    window.location.reload()
   };
 
   return (
