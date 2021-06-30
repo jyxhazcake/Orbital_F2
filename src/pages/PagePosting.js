@@ -25,7 +25,7 @@ function PagePosting() {
   const adminRef = firestore.collection("AdminApproval");
   const adminquery = adminRef.orderBy("createdAt", "desc").limit(25);
 
-  const userRef = firestore.collection("Users").doc(currentUser.uid);
+  const userRef = firestore.collection("Users").doc(currentUser?.uid);
 
   const [posts] = useCollectionData(postquery, { idField: "id" });
   const [admin] = useCollectionData(adminquery, { idField: "id" });

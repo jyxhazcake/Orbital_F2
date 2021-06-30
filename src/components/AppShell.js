@@ -1,16 +1,21 @@
 import React from "react";
-import TopRight from "../TopRight";
+import TopRight from "./TopRight";
 import { AppBar, Toolbar } from "@material-ui/core";
-import BootstrapButton from "../BootstrapButton";
+import BootstrapButton from "./BootstrapButton";
 import { Link } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { useAuth } from "../contexts/Authcontext";
 import firebase from "firebase/app";
-import SignOut from "../SignOut";
-import logo from "../img/NUSlogo.png";
-import logo2 from "../img/NVJBlogo.png";
+import SignOut from "./SignOut";
+import logo from "./img/NUSlogo.png";
+import logo2 from "./img/NVJBlogo.png";
+
+const firestore = firebase.firestore();
 
 function AppShell() {
-  const [user] = useAuthState(firebase.auth());
+  const { currentUser } = useAuth();
+  const userRef = firestore.collection("Users").doc(currentUser?.uid);
+  const [user] = useDocumentData(userRef);
 
   return (
     <>
@@ -22,7 +27,7 @@ function AppShell() {
             alt="NUSlogo"
           />
         </Link>
-        {user ? <SignOut /> : <TopRight />}
+        {currentUser ? <SignOut /> : <TopRight />}
       </div>
       <AppBar elevation={0} position="static" style={{ background: "#EDEDED" }}>
         <Toolbar>
@@ -32,9 +37,15 @@ function AppShell() {
           <Link to="/opportunities">
             <BootstrapButton color="default">Opportunities</BootstrapButton>
           </Link>
-          <Link to="/organisations">
-            <BootstrapButton color="default">Organisations</BootstrapButton>
-          </Link>
+          {(user?.Class === "recruiter")?
+            <Link to="/myposts">
+              <BootstrapButton color="default">My Posts</BootstrapButton>
+            </Link> :
+            <Link to="/organisations">
+              <BootstrapButton color="default">Organisations</BootstrapButton>
+            </Link>
+          }
+          
           <Link to="/about">
             <BootstrapButton color="default">About</BootstrapButton>
           </Link>
