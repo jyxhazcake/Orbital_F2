@@ -50,7 +50,7 @@ function PagePosting() {
           />
         </div>
         <div className="block text-sm font-medium text-gray-700 bg-red-300 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded grid gap-1">
-          Opportunities Available
+          <p className="text-xl"> Opportunities Available </p>
           {posts &&
             posts
               .filter((pst) => {
@@ -61,6 +61,9 @@ function PagePosting() {
                       .includes(searchTerm.toLowerCase())
                   ) {
                     return pst;
+                  }
+                  else {
+                    return null;
                   }
                 }
               })

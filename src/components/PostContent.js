@@ -12,6 +12,7 @@ import {
   useDocumentData,
   useCollectionData,
 } from "react-firebase-hooks/firestore";
+import Popup from "./Popup";
 
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
@@ -19,6 +20,7 @@ import { useAuth } from "../contexts/Authcontext";
 import DisplayStudents from "./DisplayStudents";
 
 function PostContent(props) {
+  const [buttonPopup, setButtonPopup] = useState(false);
   const { currentUser } = useAuth();
   const firestore = firebase.firestore();
   const UsersRef = firestore.collection("Users");
@@ -139,6 +141,9 @@ function PostContent(props) {
         ) : (
           <></>
         )}
+        <Popup trigger={buttonPopup}>
+          <h3> Confirm Delete? </h3>
+        </Popup>
         {user?.Class === "student" && (
           <div>
             <IconButton
