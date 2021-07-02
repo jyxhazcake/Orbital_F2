@@ -53,20 +53,16 @@ export default function PendingPosts(props) {
             {skills}{" "}
           </span>{" "}
         </div>{" "}
-        {currentUser ? (
-          currentUser.email === "admin@admin.sg" || currentUser === uid ? (
-            <Button
-              variant="contained"
-              color="secondary"
-              startIcon={<DeleteIcon />}
-              onClick={deletePost}
-            >
-              {" "}
-              Delete
-            </Button>
-          ) : (
-            <></>
-          )
+        {currentUser && currentUser.uid === uid ? (
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<DeleteIcon />}
+            onClick={deletePost}
+          >
+            {" "}
+            Delete
+          </Button>
         ) : (
           <></>
         )}

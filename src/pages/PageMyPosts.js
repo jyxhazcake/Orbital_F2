@@ -45,7 +45,7 @@ function PagePosting() {
               .filter((pst) => {
                 return pst.uid === currentUser.uid;
               })
-              .map((adm) => <PendingPosts key={adm.id} post={adm} />)}
+              .map((pdg) => <PendingPosts key={pdg.id} post={pdg} />)}
         </div>
         <div className="block text-sm font-medium text-gray-700 bg-red-300 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded grid gap-1">
           <p className="text-xl"> Current Postings </p>

@@ -62,9 +62,6 @@ function PagePosting() {
                   ) {
                     return pst;
                   }
-                  else {
-                    return null;
-                  }
                 }
               })
               .map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
