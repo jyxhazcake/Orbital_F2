@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import {
   TextField,
   Grid,
@@ -21,14 +21,14 @@ const paperStyle = {
 
 const background = {
   backgroundImage: `url(${kids})`,
-  position:'fixed',
+  position: "fixed",
   top: 0,
   left: 0,
   minWidth: "100%",
   minHeight: "100%",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
-  overflowY:'scroll'
+  overflowY: "scroll",
 };
 
 const logoStyle = {
@@ -89,23 +89,22 @@ export default function PageRecruiterSignup() {
       return setError("Passwords have to be greater than 8 characters!");
     }
 
-
     try {
       setError("");
       setLoading(true);
-      await recruiterSignup(emailRef.current.value,
+      await recruiterSignup(
+        emailRef.current.value,
         passwordRef.current.value,
         organisationNameRef.current.value,
         idRef.current.value,
         contactNameRef.current.value,
         contactRef.current.value,
-        mobileRef.current.value,
+        mobileRef.current.value
       );
       history.push("/");
     } catch {
       setError("Failed to create an account");
     }
-    
 
     setLoading(false);
   }
@@ -118,9 +117,7 @@ export default function PageRecruiterSignup() {
             <img src={logo} alt="NVJBlogo" style={logoStyle}></img>
           </RouterLink>
           <p className="text-xl font-bold">Sign up</p>
-          <div>
-           {error && <Alert severity="error">{error}</Alert>}
-          </div>
+          <div>{error && <Alert severity="error">{error}</Alert>}</div>
         </Grid>
         <FormGroup>
           <TextField
@@ -131,7 +128,7 @@ export default function PageRecruiterSignup() {
             inputRef={organisationNameRef}
           />
           <TextField
-            label="UEM/ Society Registration Number"
+            label="UEN/Society Registration Number"
             placeholder="Enter ID here"
             fullWidth
             required

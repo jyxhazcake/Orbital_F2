@@ -91,6 +91,7 @@ const StuLogin = () => {
           variant="contained"
           fullWidth
           style={buttonStyle}
+          disabled={loading}
           onClick={handleSubmit}
         >
           Sign in

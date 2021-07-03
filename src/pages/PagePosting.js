@@ -5,7 +5,6 @@ import {
   useCollectionData,
   useDocumentData,
 } from "react-firebase-hooks/firestore";
-import CreatePost from "../components/CreatePost";
 import AppShell from "../components/AppShell";
 import PostContent from "../components/PostContent";
 import PostAdmin from "../components/PostAdmin";
@@ -35,10 +34,9 @@ function PagePosting() {
     <>
       <AppShell />
       <div className="bg-red-100 p-5">
-        {currentUser.email === "admin@admin.sg" &&
+        {currentUser?.email === "admin@admin.sg" &&
           admin &&
           admin.map((adm) => <PostAdmin key={adm.id} post={adm} />)}
-        {user?.Class === "recruiter" && <CreatePost />}
         <div className="lg:ml-60 md:ml-28 sm:ml-4">
           <TextField
             type="search"

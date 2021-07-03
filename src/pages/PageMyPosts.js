@@ -10,6 +10,7 @@ import PostContent from "../components/PostContent";
 import { useAuth } from "../contexts/Authcontext";
 import { ListItemAvatar, TextField } from "@material-ui/core";
 import PendingPosts from "../components/PendingPosts";
+import CreatePost from "../components/CreatePost";
 
 const firestore = firebase.firestore();
 
@@ -37,6 +38,7 @@ function PagePosting() {
   return (
     <>
       <AppShell />
+      {user?.Class === "recruiter" && <CreatePost />}
       <div className="bg-red-100 p-5">
         <div className="block text-sm font-medium text-gray-700 bg-red-300 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded grid gap-1">
           <p className="text-xl"> Pending Postings </p>

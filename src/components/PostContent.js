@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
 import { Button } from "@material-ui/core";
@@ -8,10 +8,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import CheckIcon from "@material-ui/icons/Check";
-import {
-  useDocumentData,
-  useCollectionData,
-} from "react-firebase-hooks/firestore";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 import Popup from "./Popup";
 
 import firebase from "firebase/app";
@@ -84,15 +81,7 @@ function PostContent(props) {
     }
   }
 
-  // everytime the page renders the interest and number of students interested in a post is set
-
-  /*const postsRef = firestore.collection("posts");
-
-  const query = postsRef.orderBy("createdAt", "desc").limit(1);
-  const [posts] = useCollectionData(query, { idField: "id" });*/
-
   const [interestedStudents] = useDocumentData(interestsRef.doc(postID));
-  console.log(interestedStudents?.students);
 
   return (
     <div key={props.id}>

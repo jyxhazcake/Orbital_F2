@@ -6,7 +6,7 @@ import PageStuLogin from "./pages/PageStuLogin";
 import PageStuSignUp from "./pages/PageStuSignup";
 import PageRecruiterLogin from "./pages/PageRecruiterLogin";
 import PageRecruiterSignup from "./pages/PageRecruiterSignup";
-import PageMyPosts from "./pages/PageMyPosts"
+import PageMyPosts from "./pages/PageMyPosts";
 import TermsOfUse from "./pages/TermsOfUse";
 import ForgotPassword from "./pages/ForgotPassword";
 import PageProfile from "./pages/PageProfile";
@@ -23,8 +23,8 @@ export default function App() {
             <Switch>
               <Route path="/" exact component={PageHome} />
               <Route path="/about" component={PageAbout} />
-              <PrivateRoute path="/opportunities" component={PagePosting} />
-              <PrivateRoute path="/myposts" component={PageMyPosts}/>
+              <Route path="/opportunities" component={PagePosting} />
+              <PrivateRoute path="/myposts" component={PageMyPosts} />
               <Route path="/organisations" component={PageOrg} />
               <Route path="/recruiterlogin" component={PageRecruiterLogin} />
               <Route path="/recruitersignup" component={PageRecruiterSignup} />
