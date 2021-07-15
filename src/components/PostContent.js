@@ -60,6 +60,7 @@ function PostContent(props) {
     durationend,
     timestart,
     timeend,
+    description,
     skills,
     uid,
     target,
@@ -74,7 +75,7 @@ function PostContent(props) {
   //const [students, setStudents] = useState([]);
 
   //const interestedStudents = students.length;
-  const created = createdAt.toDate();
+  const created = createdAt?.toDate();
   const dateStart = durationstart.toDate();
   const dateEnd = durationend.toDate();
 

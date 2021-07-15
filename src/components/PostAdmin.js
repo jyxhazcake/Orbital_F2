@@ -17,6 +17,9 @@ export default function PostAdmin(props) {
     title,
     durationstart,
     durationend,
+    timestart,
+    timeend,
+    description,
     skills,
     uid,
     target,
@@ -37,10 +40,13 @@ export default function PostAdmin(props) {
         title: title,
         durationstart: durationstart,
         durationend: durationend,
+        timestart: timestart,
+        timeend: timeend,
         skills: skills,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         imageURL: imageURL,
         uid: uid,
+        description: description,
       });
       adminRef.doc(postID).delete();
     } catch {
