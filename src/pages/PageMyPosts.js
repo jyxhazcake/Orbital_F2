@@ -39,24 +39,28 @@ function PagePosting() {
     <>
       <AppShell />
       {user?.Class === "recruiter" && <CreatePost />}
-      <div className="bg-red-100 p-5">
-        <div className="block text-sm font-medium text-gray-700 bg-red-300 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded grid gap-1">
+      <div className="bg-indigo-700 p-5">
+        <div className="block text-sm font-medium text-gray-700 bg-indigo-300 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded">
           <p className="text-xl"> Pending Postings </p>
-          {pending &&
-            pending
-              .filter((pst) => {
-                return pst.uid === currentUser.uid;
-              })
-              .map((pdg) => <PendingPosts key={pdg.id} post={pdg} />)}
+          <div className="grid grid-cols-3 gap-2 p-4">
+            {pending &&
+              pending
+                .filter((pst) => {
+                  return pst.uid === currentUser.uid;
+                })
+                .map((pdg) => <PendingPosts key={pdg.id} post={pdg} />)}
+          </div>
         </div>
-        <div className="block text-sm font-medium text-gray-700 bg-red-300 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded grid gap-1">
+        <div className="block text-sm font-medium text-gray-700 bg-indigo-400 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded">
           <p className="text-xl"> Current Postings </p>
-          {posts &&
-            posts
-              .filter((pst) => {
-                return pst.uid === currentUser.uid;
-              })
-              .map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
+          <div className="grid grid-cols-3 gap-2 p-4">
+            {posts &&
+              posts
+                .filter((pst) => {
+                  return pst.uid === currentUser.uid;
+                })
+                .map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
+          </div>
         </div>
       </div>
     </>

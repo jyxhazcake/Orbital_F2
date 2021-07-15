@@ -12,6 +12,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import CheckIcon from "@material-ui/icons/Check";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { makeStyles } from "@material-ui/core/styles";
+import { grey } from "@material-ui/core/colors";
 
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -28,6 +29,7 @@ import DisplayStudents from "./DisplayStudents";
 const useStyles = makeStyles({
   root: {
     maxWidth: 300,
+    backgroundColor: grey[200],
   },
   media: {
     height: 200,

@@ -22,7 +22,7 @@ function PageHome() {
             {" "}
             Latest Posts{" "}
           </span>
-          <div className="pb-20">
+          <div className="flex justify-center pb-20">
             {posts &&
               posts.map((pst) => <PostContent key={pst.id} post={pst} />)}
           </div>

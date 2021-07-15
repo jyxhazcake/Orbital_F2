@@ -49,7 +49,7 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="flex bg-gray-100 shadow-md my-8 mx-32 py-8 px-6 rounded-lg sm:px-10">
+    <div className="flex bg-blue-200 shadow-md my-8 mx-32 py-8 px-6 rounded-lg sm:px-10">
       <div>{error && <Alert severity="error">{error}</Alert>}</div>
       <form
         onSubmit={createPost}
