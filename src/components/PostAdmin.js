@@ -23,6 +23,9 @@ export default function PostAdmin(props) {
     imageURL,
   } = props.post;
 
+  const dateStart = durationstart.toDate();
+  const dateEnd = durationend.toDate();
+
   const approvePost = async (e) => {
     e.preventDefault();
 
@@ -72,7 +75,20 @@ export default function PostAdmin(props) {
           <h2 className="font-bold text-xl"> {title} </h2>
           <p className="text-gray-700">
             {" "}
-            Duration: {durationstart} - {durationend}{" "}
+            Duration:{" "}
+            {Intl.DateTimeFormat("en-US", {
+              weekday: "short",
+              year: "numeric",
+              day: "2-digit",
+              month: "short",
+            }).format(dateStart)}{" "}
+            -{" "}
+            {Intl.DateTimeFormat("en-US", {
+              weekday: "short",
+              year: "numeric",
+              day: "2-digit",
+              month: "short",
+            }).format(dateEnd)}
           </p>
         </div>
         <div className="flex items-center justify-end ml-auto">

@@ -35,7 +35,7 @@ function AppShell() {
           </Link>
           {user?.Class === "recruiter" ? (
             <Link to="/myposts">
-              <BootstrapButton color="default">My Posts</BootstrapButton>
+              <BootstrapButton color="default">My Postings</BootstrapButton>
             </Link>
           ) : (
             <Link to="/organisations">
