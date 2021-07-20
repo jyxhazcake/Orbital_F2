@@ -11,6 +11,7 @@ import { useAuth } from "../contexts/Authcontext";
 import { ListItemAvatar, TextField } from "@material-ui/core";
 import PendingPosts from "../components/PendingPosts";
 import CreatePost from "../components/CreatePost";
+import { Link } from "react-router-dom";
 
 const firestore = firebase.firestore();
 
@@ -39,8 +40,8 @@ function PagePosting() {
     <>
       <AppShell />
       {user?.Class === "recruiter" && <CreatePost />}
-      <div className="bg-indigo-700 p-5">
-        <div className="block text-sm font-medium text-gray-700 bg-indigo-300 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded">
+      <div className="bg-gray-700 p-5">
+        <div className="block text-sm font-medium text-gray-700 bg-gray-300 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded">
           <p className="text-xl"> Pending Postings </p>
           <div className="grid grid-cols-3 gap-2 p-4">
             {pending &&
@@ -51,7 +52,7 @@ function PagePosting() {
                 .map((pdg) => <PendingPosts key={pdg.id} post={pdg} />)}
           </div>
         </div>
-        <div className="block text-sm font-medium text-gray-700 bg-indigo-400 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded">
+        <div className="block text-sm font-medium text-gray-700 bg-gray-400 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded">
           <p className="text-xl"> Current Postings </p>
           <div className="grid grid-cols-3 gap-2 p-4">
             {posts &&
@@ -59,7 +60,11 @@ function PagePosting() {
                 .filter((pst) => {
                   return pst.uid === currentUser.uid;
                 })
-                .map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
+                .map((pst) => (
+                  <Link to={"/opportunities/" + pst.id}>
+                    <PostContent key={pst.id} post={pst} />
+                  </Link>
+                ))}
           </div>
         </div>
       </div>

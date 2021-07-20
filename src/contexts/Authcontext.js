@@ -19,6 +19,7 @@ export function AuthProvider({ children }) {
         Class: "student",
         Name: name,
         ContactMobile: contactMobile,
+        Email: email,
       });
       cred.user.updateProfile({
         displayName: name,
@@ -44,6 +45,7 @@ export function AuthProvider({ children }) {
         OrganisationMobile: organisationMobile,
         ContactMobile: contactMobile,
         Class: "recruiter",
+        Email: email,
       });
       cred.user.updateProfile({
         displayName: organisationName,

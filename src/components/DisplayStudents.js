@@ -8,10 +8,10 @@ export default function DisplayStudents(props) {
 
   const [user] = useDocumentData(UsersRef);
 
-
-    return (
-        <div>
-            {user?.Name}
-        </div>
-    )
+  return (
+    <div>
+      {user?.Name}
+      {user?.Email}
+    </div>
+  );
 }
