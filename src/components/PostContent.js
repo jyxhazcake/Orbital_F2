@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
 import { Button } from "@material-ui/core";
+import FlagIcon from "@material-ui/icons/Flag";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
@@ -60,6 +61,7 @@ function PostContent(props) {
     title,
     durationstart,
     durationend,
+    volunteerNo,
     timestart,
     timeend,
     description,
@@ -111,6 +113,12 @@ function PostContent(props) {
             </p>
             <br></br>
             <Typography variant="body2" color="textSecondary" component="p">
+              <p>
+                <strong>Slots left: </strong>
+                {volunteerNo -
+                  (interestedStudents ? interestedStudents.students.length : 0)}
+                /{volunteerNo}
+              </p>
               <p>
                 <EventIcon />:{" "}
                 {Intl.DateTimeFormat("en-US", {

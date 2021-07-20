@@ -22,6 +22,7 @@ export default function PostAdmin(props) {
     description,
     skills,
     uid,
+    volunteerNo,
     target,
     imageURL,
   } = props.post;
@@ -42,6 +43,7 @@ export default function PostAdmin(props) {
         durationend: durationend,
         timestart: timestart,
         timeend: timeend,
+        volunteerNo: volunteerNo,
         skills: skills,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         imageURL: imageURL,

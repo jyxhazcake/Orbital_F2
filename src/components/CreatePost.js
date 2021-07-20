@@ -22,6 +22,7 @@ export default function CreatePost() {
   const [timeEnd, setTimeEnd] = useState("09:00");
   const [skillsValue, setSkillsValue] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
+  const [volunteerNo, setVolunteerNo] = useState("");
 
   const createPost = async (e) => {
     e.preventDefault();
@@ -38,6 +39,7 @@ export default function CreatePost() {
         timestart: timeStart,
         timeend: timeEnd,
         skills: skillsValue,
+        volunteerNo: volunteerNo,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         imageURL: currentUser.photoURL,
         description: descriptionValue,
@@ -133,6 +135,13 @@ export default function CreatePost() {
             variant="outlined"
           />
         </div>
+        <TextField
+          id="filled-number"
+          label="Volunteers Needed"
+          type="number"
+          onChange={(e) => setVolunteerNo(e.target.value)}
+          variant="outlined"
+        />
         <TextField
           value={skillsValue}
           id="outlined-basic"
