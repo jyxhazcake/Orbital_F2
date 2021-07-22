@@ -6,6 +6,7 @@ import { useAuth } from "../contexts/Authcontext";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import { blue, deepOrange, deepPurple } from "@material-ui/core/colors";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 
 const useStyles = makeStyles((theme) => ({
   blue: {
@@ -15,8 +16,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignOut() {
-  const [error, setError] = useState("");
+  const firestore = firebase.firestore();
   const { currentUser, logout } = useAuth();
+  const [user] = useDocumentData(
+    firestore.collection("Users").doc(currentUser.uid)
+  );
+  const [error, setError] = useState("");
   const history = useHistory();
   const colors = useStyles();
 
@@ -70,10 +75,15 @@ export default function SignOut() {
         onClose={handleClose}
       >
         <MenuItem> Signed in as {currentUser?.displayName}</MenuItem>
-        <Link to="/profile">
-          <MenuItem>Edit Avatar</MenuItem>{" "}
-        </Link>
-        <MenuItem onClick={handleClose}>My account (WIP ⚠️)</MenuItem>
+        {user?.Class === "student" ? (
+          <Link to={"/profile/student/" + currentUser.uid}>
+            <MenuItem>Edit My Info</MenuItem>{" "}
+          </Link>
+        ) : (
+          <Link to={"/profile/org/" + currentUser.uid}>
+            <MenuItem>Edit My Info</MenuItem>
+          </Link>
+        )}
         <Link to="/">
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Link>

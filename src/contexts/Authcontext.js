@@ -9,11 +9,12 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  const db = firebase.firestore();
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
   function signup(email, password, name, contactMobile) {
-    const db = firebase.firestore();
+    //const db = firebase.firestore();
     return auth.createUserWithEmailAndPassword(email, password).then((cred) => {
       db.collection("Users").doc(cred.user.uid).set({
         Class: "student",
@@ -36,7 +37,7 @@ export function AuthProvider({ children }) {
     organisationMobile,
     contactMobile
   ) {
-    const db = firebase.firestore();
+    //const db = firebase.firestore();
     return auth.createUserWithEmailAndPassword(email, password).then((cred) => {
       db.collection("Users").doc(cred.user.uid).set({
         Organisation: organisationName,
@@ -65,8 +66,44 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
-  function updateEmail(email) {
-    return currentUser.updateEmail(email);
+  function updateEmail(eml) {
+    return currentUser.updateEmail(eml).then(() => {
+      db.collection("Users").doc(currentUser.uid).update({
+        Email: eml,
+      });
+    });
+  }
+
+  function updateName(name) {
+    return currentUser.updateProfile({ displayName: name }).then(() => {
+      db.collection("Users").doc(currentUser.uid).update({
+        Name: name,
+      });
+    });
+  }
+
+  function updateOrgName(name) {
+    return currentUser.updateProfile({ displayName: name }).then(() => {
+      db.collection("Users").doc(currentUser.uid).update({
+        Organisation: name,
+      });
+    });
+  }
+
+  async function updateMobile(number) {
+    return await db.collection("Users").doc(currentUser.uid).update({
+      ContactMobile: number,
+    });
+  }
+  async function updateContactName(name) {
+    return await db.collection("Users").doc(currentUser.uid).update({
+      Contact: name,
+    });
+  }
+  async function updateOrgMobile(number) {
+    return await db.collection("Users").doc(currentUser.uid).update({
+      OrganisationMobile: number,
+    });
   }
 
   function updatePassword(password) {
@@ -91,6 +128,11 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    updateName,
+    updateMobile,
+    updateContactName,
+    updateOrgMobile,
+    updateOrgName,
   };
 
   return (

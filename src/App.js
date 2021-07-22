@@ -9,8 +9,10 @@ import PageRecruiterSignup from "./pages/PageRecruiterSignup";
 import PageMyPosts from "./pages/PageMyPosts";
 import TermsOfUse from "./pages/TermsOfUse";
 import ForgotPassword from "./pages/ForgotPassword";
-import PageProfile from "./pages/PageProfile";
+import PageStuProfile from "./pages/PageStuProfile";
+import PageOrgProfile from "./pages/PageOrgProfile";
 import PageSinglePost from "./pages/PageSinglePost";
+import Page404 from "./pages/Page404";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/Authcontext";
 import PrivateRoute from "./components/PrivateRoute";
@@ -33,8 +35,10 @@ export default function App() {
               <Route path="/studentlogin" component={PageStuLogin} />
               <Route path="/studentsignup" component={PageStuSignUp} />
               <Route path="/forgotpassword" component={ForgotPassword} />
-              <Route path="/profile" component={PageProfile} />
+              <Route path="/profile/student/:id" component={PageStuProfile} />
+              <Route path="/profile/org/:id" component={PageOrgProfile} />
               <Route path="/opportunities/:id" component={PageSinglePost} />
+              <Route component={Page404} />
             </Switch>
           </AuthProvider>
         </Router>
