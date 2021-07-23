@@ -49,7 +49,6 @@ function OrgProfile(props) {
       await currentUser.updateProfile({
         photoURL: url,
       });
-      window.location.reload();
     });
   };
 
@@ -100,6 +99,10 @@ function OrgProfile(props) {
         await currentUser.reauthenticateWithCredential(credential);
         await updatePassword(password);
       }
+      if (images !== []) {
+        await updatePhoto();
+      }
+      window.location.reload();
     } catch {
       setError(
         "Failed to update profile! Please check your current information."
@@ -162,13 +165,68 @@ function OrgProfile(props) {
                   </div>
                   <div className="w-full lg:w-4/12 px-0 lg:order-3 lg:text-right lg:self-center">
                     <div className="py-6 px-0 mt-32 sm:mt-0">
-                      <button
-                        className="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-                        type="button"
-                        style={{ transition: "all .15s ease" }}
+                      <ImageUploading
+                        multiple
+                        value={images}
+                        onChange={onChange}
+                        maxNumber={maxNumber}
+                        dataURLKey="data_url"
                       >
-                        Change Avatar
-                      </button>
+                        {({
+                          imageList,
+                          onImageUpload,
+                          onImageRemoveAll,
+                          onImageUpdate,
+                          onImageRemove,
+                          isDragging,
+                          dragProps,
+                        }) => (
+                          // write your building UI
+                          <div className="upload__image-wrapper">
+                            {imageList.map((image, index) => (
+                              <div key={index} className="my-4">
+                                <img
+                                  src={image.data_url}
+                                  alt=""
+                                  width="200"
+                                  height="100"
+                                  className="mb-2 border-2 cursor-pointer"
+                                  onClick={() => onImageUpdate(index)}
+                                />
+                                <div>
+                                  <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className=""
+                                    onClick={() => onImageUpdate(index)}
+                                  >
+                                    Change
+                                  </Button>
+                                  &nbsp; &nbsp; &nbsp; &nbsp;
+                                  <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => onImageRemove(index)}
+                                  >
+                                    Remove
+                                  </Button>
+                                </div>
+                              </div>
+                            ))}
+                            <div className="space-x-4">
+                              <button
+                                className="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                                type="button"
+                                style={{ transition: "all .15s ease" }}
+                                onClick={onImageUpload}
+                                {...dragProps}
+                              >
+                                Change Avatar
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </ImageUploading>
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1"></div>
@@ -358,84 +416,6 @@ function OrgProfile(props) {
           </div>
         </section>
       </main>
-      <div className="p-4 space-y-4">
-        <span className="font-bold text-l">Current Photo:</span>
-        <img
-          src={currentUser.photoURL}
-          alt="no display"
-          width="200"
-          height="100"
-          className="p-2"
-        />
-        <span className="font-bold text-l">Upload Logo/ Profile Image</span>
-        <ImageUploading
-          multiple
-          value={images}
-          onChange={onChange}
-          maxNumber={maxNumber}
-          dataURLKey="data_url"
-        >
-          {({
-            imageList,
-            onImageUpload,
-            onImageRemoveAll,
-            onImageUpdate,
-            onImageRemove,
-            isDragging,
-            dragProps,
-          }) => (
-            // write your building UI
-            <div className="upload__image-wrapper">
-              {imageList.map((image, index) => (
-                <div key={index} className="my-4">
-                  <img
-                    src={image.data_url}
-                    alt=""
-                    width="200"
-                    height="100"
-                    className="mb-2 border-2 cursor-pointer"
-                    onClick={() => onImageUpdate(index)}
-                  />
-                  <div>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className=""
-                      onClick={() => onImageUpdate(index)}
-                    >
-                      Change
-                    </Button>
-                    &nbsp; &nbsp; &nbsp; &nbsp;
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => onImageRemove(index)}
-                    >
-                      Remove
-                    </Button>
-                  </div>
-                </div>
-              ))}
-              <div className="space-x-4">
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  style={isDragging ? { color: "red" } : null}
-                  startIcon={<CloudUploadIcon />}
-                  onClick={onImageUpload}
-                  {...dragProps}
-                >
-                  Click or Drop here
-                </Button>
-              </div>
-            </div>
-          )}
-        </ImageUploading>{" "}
-        <Button variant="contained" color="primary" onClick={updatePhoto}>
-          {" "}
-          Confirm{" "}
-        </Button>
-      </div>
     </div>
   );
 }
