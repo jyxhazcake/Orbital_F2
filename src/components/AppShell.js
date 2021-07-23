@@ -37,12 +37,15 @@ function AppShell() {
             <Link to="/myposts">
               <BootstrapButton color="default">My Postings</BootstrapButton>
             </Link>
+          ) : user?.Class === "admin" ? (
+            <Link to="/approvals">
+              <BootstrapButton color="default">Approvals</BootstrapButton>
+            </Link>
           ) : (
             <Link to="/organisations">
               <BootstrapButton color="default">Organisations</BootstrapButton>
             </Link>
           )}
-
           <Link to="/about">
             <BootstrapButton color="default">About</BootstrapButton>
           </Link>

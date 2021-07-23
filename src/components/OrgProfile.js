@@ -5,7 +5,7 @@ import ImageUploading from "react-images-uploading";
 import firebase from "firebase/app";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { useDocumentData } from "react-firebase-hooks/firestore";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 function OrgProfile(props) {
   const firestore = firebase.firestore();

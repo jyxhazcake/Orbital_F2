@@ -75,12 +75,12 @@ export default function SignOut() {
         onClose={handleClose}
       >
         <MenuItem> Signed in as {currentUser?.displayName}</MenuItem>
-        {user?.Class === "student" ? (
-          <Link to={"/profile/student/" + currentUser.uid}>
+        {user?.Class === "recruiter" ? (
+          <Link to={"/profile/org/" + currentUser.uid}>
             <MenuItem>Edit My Info</MenuItem>{" "}
           </Link>
         ) : (
-          <Link to={"/profile/org/" + currentUser.uid}>
+          <Link to={"/profile/student/" + currentUser.uid}>
             <MenuItem>Edit My Info</MenuItem>
           </Link>
         )}

@@ -35,19 +35,27 @@ function PagePosting() {
     <>
       <AppShell />
       <div className="bg-gray-100 p-5">
-        {currentUser?.email === "admin@admin.sg" &&
-          admin &&
-          admin.map((adm) => <PostAdmin key={adm.id} post={adm} />)}
-        <div className="lg:ml-60 md:ml-28 sm:ml-4">
-          <TextField
-            type="search"
-            label="Search"
-            variant="standard"
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-          />
+        <div class="p-8">
+          <div class="bg-white flex items-center rounded-full shadow-xl">
+            <input
+              class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
+              id="search"
+              type="text"
+              placeholder="Search for opportunities here"
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
+            />
+
+            <div class="p-4">
+              <button class="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
+                {" "}
+                icon{" "}
+              </button>
+            </div>
+          </div>
         </div>
+
         <div className="block text-sm font-medium text-gray-700 bg-gray-400 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded">
           <p className="text-xl"> Opportunities Available </p>
           <div className="grid grid-cols-3 gap-2 p-4">
