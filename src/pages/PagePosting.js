@@ -10,7 +10,6 @@ import PostContent from "../components/PostContent";
 import PostAdmin from "../components/PostAdmin";
 import { useAuth } from "../contexts/Authcontext";
 import { ListItemAvatar, TextField } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 const firestore = firebase.firestore();
 
@@ -55,10 +54,9 @@ function PagePosting() {
             </div>
           </div>
         </div>
-
         <div className="block text-sm font-medium text-gray-700 bg-gray-400 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded">
           <p className="text-xl"> Opportunities Available </p>
-          <div className="grid grid-cols-3 gap-2 p-4">
+          <div className="flex flex-wrap gap-x-6 p-4">
             {posts &&
               posts
                 .filter((pst) => {
@@ -72,12 +70,7 @@ function PagePosting() {
                     }
                   }
                 })
-                .map((pst) => (
-                  <Link to={"/opportunities/" + pst.id}>
-                    {" "}
-                    <PostContent key={pst.id} post={pst} />{" "}
-                  </Link>
-                ))}{" "}
+                .map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
           </div>
         </div>
       </div>

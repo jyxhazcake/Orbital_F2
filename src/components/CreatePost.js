@@ -16,13 +16,16 @@ export default function CreatePost() {
   const adminRef = firestore.collection("AdminApproval");
   const [error, setError] = useState("");
   const [titleValue, setTitleValue] = useState("");
-  const [durstartValue, setDurstartValue] = useState("");
+  const [durstartValue, setDurstartValue] = useState(new Date());
   const [durendValue, setDurendValue] = useState("");
   const [timeStart, setTimeStart] = useState("08:00");
   const [timeEnd, setTimeEnd] = useState("09:00");
   const [skillsValue, setSkillsValue] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
   const [volunteerNo, setVolunteerNo] = useState("");
+  const [addressValue, setAddressValue] = useState("");
+  const [postalCodeValue, setPostalCodeValue] = useState("");
+  const [regionValue, setRegionValue] = useState("");
 
   const createPost = async (e) => {
     e.preventDefault();
@@ -43,6 +46,9 @@ export default function CreatePost() {
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         imageURL: currentUser.photoURL,
         description: descriptionValue,
+        address: addressValue,
+        postalCode: postalCodeValue,
+        region: regionValue,
         uid,
       });
     } catch {
@@ -52,11 +58,12 @@ export default function CreatePost() {
 
   return (
     <div className="flex bg-blue-200 shadow-md my-8 mx-32 py-8 px-6 rounded-lg sm:px-10">
-      <div>{error && <Alert severity="error">{error}</Alert>}</div>
       <form
+        id="createPost"
         onSubmit={createPost}
         className="flex flex-col mb-0 space-y-8 p-4 space-x-2"
       >
+        {error && <Alert severity="error">{error}</Alert>}
         <label className="block text-sm font-medium text-gray-700">
           {" "}
           Create a New Posting{" "}
@@ -82,6 +89,7 @@ export default function CreatePost() {
             <DatePicker
               dateFormat="dd/MM/yyyy"
               selected={durstartValue}
+              minDate={new Date()}
               onChange={(date) => setDurstartValue(date)}
               customInput={<TextField variant="outlined" label="Start Date" />}
             />
@@ -137,13 +145,42 @@ export default function CreatePost() {
         </div>
         <TextField
           id="filled-number"
-          label="Volunteers Needed"
+          required
+          label="Number of Volunteers Needed"
           type="number"
           onChange={(e) => setVolunteerNo(e.target.value)}
           variant="outlined"
         />
         <TextField
+          value={addressValue}
+          required
+          id="outlined-basic"
+          placeholder="e.g. 21 Lower Kent Ridge Rd"
+          onChange={(e) => setAddressValue(e.target.value)}
+          label="Address"
+          variant="outlined"
+        />
+        <TextField
+          value={postalCodeValue}
+          required
+          id="outlined-basic"
+          placeholder="e.g. S119077"
+          onChange={(e) => setPostalCodeValue(e.target.value)}
+          label="Postal Code"
+          variant="outlined"
+        />
+        <TextField
+          value={regionValue}
+          required
+          id="outlined-basic"
+          placeholder="e.g. Clementi"
+          onChange={(e) => setRegionValue(e.target.value)}
+          label="Region"
+          variant="outlined"
+        />
+        <TextField
           value={skillsValue}
+          required
           id="outlined-basic"
           placeholder="Skills required"
           onChange={(e) => setSkillsValue(e.target.value)}
@@ -152,7 +189,10 @@ export default function CreatePost() {
         />{" "}
         <TextField
           id="outlined-multiline-static"
+          required
           label="Description"
+          placeholder="Please include at least
+          2-3 lines to explain what volunteers may expect."
           multiline
           rows={8}
           variant="outlined"
