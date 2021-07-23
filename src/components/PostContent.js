@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
 import { Button } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 import FlagIcon from "@material-ui/icons/Flag";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,8 +15,7 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import EventIcon from "@material-ui/icons/Event";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import CheckIcon from "@material-ui/icons/Check";
+
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { makeStyles } from "@material-ui/core/styles";
 import { grey } from "@material-ui/core/colors";
@@ -24,20 +29,25 @@ import Typography from "@material-ui/core/Typography";
 
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
+import { Link } from "react-router-dom";
 
 import DisplayStudents from "./DisplayStudents";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 300,
+    minWidth: 220,
+    maxWidth: 250,
     backgroundColor: grey[200],
+    hover: {
+      elevate: 50,
+    },
   },
   media: {
     height: 200,
     width: "100%",
     objectFit: "cover",
   },
-});
+}));
 
 //from: https://www.tutorialspoint.com/how-to-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
 function capitalizeTheFirstLetterOfEachWord(words) {
@@ -64,7 +74,7 @@ function PostContent(props) {
     volunteerNo,
     timestart,
     timeend,
-    description,
+    region,
     skills,
     uid,
     target,
@@ -87,74 +97,163 @@ function PostContent(props) {
 
   const classes = useStyles();
 
+  //modal
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  function tConvert(time) {
+    // Check correct time format and split into components
+    time = time
+      .toString()
+      .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+    if (time.length > 1) {
+      // If time format correct
+      time = time.slice(1); // Remove full string match value
+      time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
+      time[0] = +time[0] % 12 || 12; // Adjust hours
+    }
+    return time.join(""); // return adjusted time or original string
+  }
+
+  const deletePost = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      await postsRef.doc(postID).delete();
+      await interestsRef.doc(postID).delete();
+    } catch {
+      setError("Failed to delete post.");
+    }
+  };
+
   return (
     <div key={props.id}>
       <Card className={classes.root}>
-        <CardActionArea className="focus:outline-none">
-          <CardMedia
-            className={classes.media}
-            image={imageURL ? imageURL : logo}
-            title="posting"
-          />
-          <CardContent>
-            <div>
-              {Intl.DateTimeFormat("en-US", {
-                weekday: "short",
-                year: "numeric",
-                day: "2-digit",
-                month: "short",
-              }).format(created)}
-            </div>
-            <Typography variant="h5" component="h2">
-              <strong>{capitalizeTheFirstLetterOfEachWord(title)}</strong>
-            </Typography>
-            <p>
-              by <strong>{name}</strong>
-            </p>
-            <br></br>
-            <Typography variant="body2" color="textSecondary" component="p">
-              <p>
-                <strong>Slots left: </strong>
-                {volunteerNo -
-                  (interestedStudents ? interestedStudents.students.length : 0)}
-                /{volunteerNo}
-              </p>
-              <p>
-                <EventIcon />:{" "}
+        <Link to={"/opportunities/" + postID}>
+          <CardActionArea className="focus:outline-none">
+            <CardMedia
+              className={classes.media}
+              image={imageURL ? imageURL : logo}
+              title="posting"
+            />
+            <CardContent>
+              <div>
                 {Intl.DateTimeFormat("en-US", {
                   weekday: "short",
                   year: "numeric",
                   day: "2-digit",
                   month: "short",
-                }).format(dateStart)}{" "}
-                -{" "}
-                {Intl.DateTimeFormat("en-US", {
-                  weekday: "short",
-                  year: "numeric",
-                  day: "2-digit",
-                  month: "short",
-                }).format(dateEnd)}
+                }).format(created)}
+              </div>
+              <Typography variant="h5" component="h2">
+                <strong>{capitalizeTheFirstLetterOfEachWord(title)}</strong>
+              </Typography>
+              <p>
+                by <strong>{name}</strong>
               </p>
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
+              <br></br>
+              <Typography variant="body2" color="textSecondary" component="p">
+                <p className="pb-2">
+                  <strong>Slots left: </strong>
+                  {volunteerNo -
+                    (interestedStudents
+                      ? interestedStudents.students.length
+                      : 0)}
+                  /{volunteerNo}
+                </p>
+                <p className="pb-2">
+                  <EventIcon />{" "}
+                  {Intl.DateTimeFormat("en-US", {
+                    weekday: "short",
+                    year: "numeric",
+                    day: "2-digit",
+                    month: "short",
+                  }).format(dateStart)}{" "}
+                  -{" "}
+                  {Intl.DateTimeFormat("en-US", {
+                    weekday: "short",
+                    year: "numeric",
+                    day: "2-digit",
+                    month: "short",
+                  }).format(dateEnd)}
+                </p>
+                <p>
+                  <AccessTimeIcon /> {timestart ? tConvert(timestart) : "-"} to{" "}
+                  {timeend ? tConvert(timeend) : "-"}
+                </p>
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
+        <CardActions style={{ justifyContent: "center" }}>
+          <Link to={"/opportunities/" + postID}>
+            <Button size="small" color="primary" style={{ outline: "none" }}>
+              Learn More
+            </Button>
+          </Link>
+          {currentUser ? (
+            currentUser.email === "admin@admin.sg" ||
+            currentUser.uid === uid ? (
+              <div>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  startIcon={<DeleteIcon />}
+                  onClick={handleOpen}
+                  style={{ outline: "none" }}
+                >
+                  {" "}
+                  Delete
+                </Button>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {"Confirm Post deletion?"}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      Deleted posts can <strong>no longer be recovered.</strong>
+                      <br></br>
+                      Please confirm that you wish to delete the post before
+                      proceeding.
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button
+                      onClick={deletePost}
+                      variant="contained"
+                      color="secondary"
+                    >
+                      Confirm Delete
+                    </Button>
+                    <Button onClick={handleClose} color="primary" autoFocus>
+                      Cancel
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
+            ) : (
+              <></>
+            )
+          ) : (
+            <></>
+          )}
         </CardActions>
       </Card>
       <br></br>
-      <div className="ml-20 mb-20">
-        <p className="font-bold text-l">Interested Students: </p>
-        {interestedStudents?.students &&
-          interestedStudents?.students.map((stdent) => (
-            <DisplayStudents key={stdent.id} student={stdent} />
-          ))}
-      </div>
     </div>
   );
 }

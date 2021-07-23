@@ -110,6 +110,7 @@ export default function PostAdmin(props) {
           {" "}
           Approve Post
         </Button>
+        &nbsp;
         <Button variant="contained" onClick={deletePost}>
           {" "}
           Reject Post
