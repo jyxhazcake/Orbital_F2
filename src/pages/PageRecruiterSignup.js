@@ -6,6 +6,7 @@ import {
   Button,
   Link,
   FormGroup,
+  Checkbox,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { Link as RouterLink, useHistory } from "react-router-dom";
@@ -73,10 +74,45 @@ export default function PageRecruiterSignup() {
   const contactNameRef = useRef();
   const mobileRef = useRef();
   const passwordConfirmRef = useRef();
-  const { recruiterSignup } = useAuth();
+  const { recruiterSignup, adminAssistSignUp } = useAuth();
+  const [checked, setChecked] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+
+  const handleChange = (e) => {
+    setChecked(e.target.checked);
+  };
+
+  async function handleSubmitNoUEM(e) {
+    e.preventDefault();
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError("Passwords do not match");
+    }
+
+    if (passwordRef.current.value.length < 8) {
+      return setError("Passwords have to be greater than 8 characters!");
+    }
+
+    try {
+      setError("");
+      setLoading(true);
+      await adminAssistSignUp(
+        emailRef.current.value,
+        passwordRef.current.value,
+        organisationNameRef.current.value,
+        contactNameRef.current.value,
+        contactRef.current.value,
+        mobileRef.current.value
+      );
+      history.push("/submitted");
+    } catch {
+      setError("Failed to submit account request!");
+    }
+
+    setLoading(false);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -134,6 +170,16 @@ export default function PageRecruiterSignup() {
             required
             inputRef={idRef}
           />
+          <div className="flex items-center justify-start pt-1">
+            <Checkbox
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
+            <div className="italic text-xs font-bold">
+              No UEM/ Registration no.
+            </div>
+          </div>
           <TextField
             label="Name of Contact Person"
             placeholder="Enter Name of contact"
@@ -187,7 +233,7 @@ export default function PageRecruiterSignup() {
             fullWidth
             style={buttonStyle}
             disabled={loading}
-            onClick={handleSubmit}
+            onClick={checked ? handleSubmitNoUEM : handleSubmit}
           >
             Sign up
           </Button>

@@ -54,6 +54,25 @@ export function AuthProvider({ children }) {
     });
   }
 
+  function adminAssistSignUp(
+    email,
+    password,
+    organisationName,
+    contactName,
+    organisationMobile,
+    contactMobile
+  ) {
+    //const db = firebase.firestore();
+    return db.collection("AccountRequest").add({
+      Organisation: organisationName,
+      Contact: contactName,
+      OrganisationMobile: organisationMobile,
+      ContactMobile: contactMobile,
+      Class: "recruiter",
+      Email: email,
+    });
+  }
+
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
   }
@@ -124,6 +143,7 @@ export function AuthProvider({ children }) {
     login,
     signup,
     recruiterSignup,
+    adminAssistSignUp,
     logout,
     resetPassword,
     updateEmail,

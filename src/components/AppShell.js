@@ -9,11 +9,11 @@ import firebase from "firebase/app";
 import SignOut from "./SignOut";
 import logo from "./img/NUSlogo.png";
 import logo2 from "./img/CCSGP.png";
-
-const firestore = firebase.firestore();
+import { useAuth } from "../contexts/Authcontext";
 
 function AppShell() {
-  const [currentUser] = useAuthState(firebase.auth());
+  const firestore = firebase.firestore();
+  const { currentUser } = useAuth();
   const userRef = firestore.collection("Users").doc(currentUser?.uid);
   const [user] = useDocumentData(userRef);
 
