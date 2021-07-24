@@ -19,7 +19,7 @@ export default function SignOut() {
   const firestore = firebase.firestore();
   const { currentUser, logout } = useAuth();
   const [user] = useDocumentData(
-    firestore.collection("Users").doc(currentUser.uid)
+    firestore.collection("Users").doc(currentUser?.uid)
   );
   const [error, setError] = useState("");
   const history = useHistory();

@@ -11,6 +11,7 @@ import TermsOfUse from "./pages/TermsOfUse";
 import ForgotPassword from "./pages/ForgotPassword";
 import PageStuProfile from "./pages/PageStuProfile";
 import PageOrgProfile from "./pages/PageOrgProfile";
+import PagePreview from "./pages/PagePreview";
 import PageSinglePost from "./pages/PageSinglePost";
 import PageApprovals from "./pages/PageApprovals";
 import PageUnAuth from "./pages/PageUnAuth";
@@ -40,6 +41,7 @@ export default function App() {
               <Route path="/forgotpassword" component={ForgotPassword} />
               <Route path="/profile/student/:id" component={PageStuProfile} />
               <Route path="/profile/org/:id" component={PageOrgProfile} />
+              <Route path="/preview/:id" component={PagePreview} />
               <Route path="/opportunities/:id" component={PageSinglePost} />
               <Route path="/approvals" component={PageApprovals} />
               <Route path="/unauthorized" component={PageUnAuth} />

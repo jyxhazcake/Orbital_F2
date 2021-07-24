@@ -67,7 +67,7 @@ const RecruiterLogin = () => {
           <RouterLink to="/">
             <img src={logo} alt="NVJBlogo" style={logoStyle}></img>
           </RouterLink>
-          <p class="text-xl font-bold">Sign in</p>
+          <p className="text-xl font-bold">Sign in</p>
           {error && <Alert severity="error">{error}</Alert>}
         </Grid>
         <TextField
@@ -111,7 +111,7 @@ const RecruiterLogin = () => {
         <Link component={RouterLink} to="/forgotpassword">
           Forgot Password?
         </Link>
-        <p class="text-center mt-6">
+        <p className="text-center mt-6">
           {" "}
           Do not have an account?
           <Link component={RouterLink} to="/recruitersignup">
@@ -119,7 +119,7 @@ const RecruiterLogin = () => {
             Sign Up.
           </Link>
         </p>
-        <p class="text-center mt-2">
+        <p className="text-center mt-2">
           {" "}
           Not an Organisation?
           <Link component={RouterLink} to="/studentlogin">

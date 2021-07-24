@@ -10,10 +10,32 @@ import PostContent from "../components/PostContent";
 import PostAdmin from "../components/PostAdmin";
 import { useAuth } from "../contexts/Authcontext";
 import { ListItemAvatar, TextField } from "@material-ui/core";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
 
-const firestore = firebase.firestore();
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
+    width: "full",
+    height: 50,
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    marginLeft: 10,
+  },
+}));
 
 function PagePosting() {
+  const firestore = firebase.firestore();
+  const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState("");
 
   const { currentUser } = useAuth();
@@ -35,9 +57,10 @@ function PagePosting() {
       <AppShell />
       <div className="bg-gray-100 p-5">
         <div class="p-8">
-          <div class="bg-white flex items-center rounded-full shadow-xl">
+          <div class="bg-white flex items-center rounded-full">
+            <SearchIcon className="ml-4" />
             <input
-              class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
+              class="rounded-full w-full py-4 px-2 text-gray-700 leading-tight focus:outline-none"
               id="search"
               type="text"
               placeholder="Search for opportunities here"
@@ -45,18 +68,11 @@ function PagePosting() {
                 setSearchTerm(e.target.value);
               }}
             />
-
-            <div class="p-4">
-              <button class="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
-                {" "}
-                icon{" "}
-              </button>
-            </div>
           </div>
         </div>
-        <div className="block text-sm font-medium text-gray-700 bg-gray-400 shadow-md my-4 p-6 lg:mx-56 md:mx-24 sm:mx-0 rounded">
+        <div className="block text-sm font-medium text-gray-700 bg-gray-400 shadow-md my-4 p-6 lg:mx-40 md:mx-24 sm:mx-0 rounded">
           <p className="text-xl"> Opportunities Available </p>
-          <div className="flex flex-wrap gap-x-6 p-4">
+          <div className="flex flex-wrap gap-x-6 p-6">
             {posts &&
               posts
                 .filter((pst) => {
