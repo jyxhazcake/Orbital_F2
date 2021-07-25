@@ -123,7 +123,7 @@ function SinglePost(props) {
       <div className="flex flex-wrap rounded overflow-hidden shadow-sm mx-4 my-10 gap-x-28">
         <div className="flex-shrink lg:w-7/12 md: w-full sm:min-w-max">
           <img
-            className="object-contain w-full"
+            className="object-contain w-full max-h-screen"
             src={imageURL}
             alt="imagelol"
           />
