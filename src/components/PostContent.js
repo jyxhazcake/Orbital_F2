@@ -122,6 +122,16 @@ function PostContent(props) {
     return time.join(""); // return adjusted time or original string
   }
 
+  function join(date, a, s) {
+    function format(m) {
+      let f = new Intl.DateTimeFormat("en", m);
+      return f.format(date);
+    }
+    return a.map(format).join(s);
+  }
+
+  let a = [{ day: "numeric" }, { month: "short" }, { year: "numeric" }];
+
   const deletePost = async (e) => {
     e.preventDefault();
     setError("");
@@ -190,7 +200,7 @@ function PostContent(props) {
                   {timeend ? tConvert(timeend) : "-"}
                 </p>
                 <p className="pb-2">
-                  <RoomIcon /> {region}
+                  <RoomIcon /> {capitalizeTheFirstLetterOfEachWord(region)}
                 </p>
               </Typography>
             </CardContent>
@@ -273,3 +283,17 @@ temporarily removes liked function
   <FavoriteBorderIcon />
 </IconButton>
 <p className="text-sm"> 3 Likes </p> */
+
+/*
+failed date format
+{dateStart.toLocaleDateString("en-US", {
+                    weekday: "short",
+                  })}{" "}
+                  {", "}
+                  {join(dateStart, a, " ")} {" — "}
+                  {dateEnd.toLocaleDateString("en-US", {
+                    weekday: "short",
+                  })}{" "}
+                  {", "}
+                  {join(dateEnd, a, " ")}
+*/

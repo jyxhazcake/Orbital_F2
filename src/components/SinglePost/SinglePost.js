@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import firebase from "firebase/app";
 import { useDocumentData } from "react-firebase-hooks/firestore";
-import { useAuth } from "../contexts/Authcontext";
+import { useAuth } from "../../contexts/Authcontext";
 import { TextField, Button, Link } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import Dialog from "@material-ui/core/Dialog";
@@ -16,7 +16,7 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import RoomIcon from "@material-ui/icons/Room";
 import FlagIcon from "@material-ui/icons/Flag";
 
-import DisplayStudents from "./DisplayStudents";
+import DisplayStudents from "../DisplayStudents";
 
 function SinglePost(props) {
   const firestore = firebase.firestore();
@@ -120,15 +120,15 @@ function SinglePost(props) {
 
   return (
     <div>
-      <div className="flex flex-wrap rounded overflow-hidden shadow-sm mx-4 my-10 gap-40">
-        <div className="flex-shrink lg:w-1/2 md: w-full sm:min-w-max">
+      <div className="flex flex-wrap rounded overflow-hidden shadow-sm mx-4 my-10 gap-x-28">
+        <div className="flex-shrink lg:w-7/12 md: w-full sm:min-w-max">
           <img
             className="object-contain w-full"
             src={imageURL}
             alt="imagelol"
           />
         </div>
-        <div className="px-6 py-4">
+        <div className="flex-1 py-6 p-4">
           <div className="font-bold text-4xl pb-4">
             {capitalizeTheFirstLetterOfEachWord(title)}
           </div>
@@ -161,7 +161,7 @@ function SinglePost(props) {
           <div className="flex pb-10 gap-1">
             <RoomIcon />
             <div>
-              {region}
+              {capitalizeTheFirstLetterOfEachWord(region)}
               <br></br>
               <p className="text-gray-400">
                 {address}
@@ -170,14 +170,31 @@ function SinglePost(props) {
               </p>
             </div>
           </div>
+          <Divider></Divider>
+          <div className="py-10">
+            <p className="font-bold text-xl"> Description</p>
+            <p> {description} </p>
+          </div>
           <div className="pb-10">
-            <Button
-              className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ..."
-              style={{ outline: "none" }}
-              onClick={handleOpen}
-            >
-              Volunteer
-            </Button>
+            {interestedStudents?.students.some(
+              (item) => currentUser?.uid === item
+            ) ? (
+              <Button
+                variant="outlined"
+                style={{ outline: "none", borderRadius: 16 }}
+                fullWidth
+              >
+                Application Pending
+              </Button>
+            ) : (
+              <Button
+                className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ..."
+                style={{ outline: "none" }}
+                onClick={handleOpen}
+              >
+                Volunteer
+              </Button>
+            )}
             <Dialog
               open={open}
               onClose={handleClose}
@@ -259,7 +276,10 @@ function SinglePost(props) {
           <div className="flex justify-center p-2">
             <FlagIcon />
             <div>
-              <Link className="text-base" onClick={handleFormOpen}>
+              <Link
+                className="text-base cursor-pointer"
+                onClick={handleFormOpen}
+              >
                 {" "}
                 Report Post
               </Link>
@@ -278,6 +298,7 @@ function SinglePost(props) {
                   </DialogContentText>
                   <TextField
                     autoFocus
+                    required
                     margin="dense"
                     id="name"
                     label="Email Address"
@@ -285,13 +306,25 @@ function SinglePost(props) {
                     variant="outlined"
                     fullWidth
                   />
+                  <br></br>
+                  <br></br>
+                  <TextField
+                    id="outlined-multiline-static"
+                    required
+                    label="Description"
+                    placeholder="Your Feedback"
+                    multiline
+                    fullWidth
+                    rows={8}
+                    variant="outlined"
+                  />
                 </DialogContent>
                 <DialogActions style={{ justifyContent: "center" }}>
                   <Button
                     style={{ outline: "none" }}
                     onClick={handleFormClose}
                     color="primary"
-                    variant="outlined"
+                    variant="contained"
                   >
                     Submit
                   </Button>
