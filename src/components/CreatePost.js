@@ -61,7 +61,7 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="flex bg-blue-200 shadow-md my-8 mx-32 py-8 px-6 rounded-lg sm:px-10">
+    <div className="p-5 bg-gray-200">
       <form
         id="createPost"
         onSubmit={createPost}

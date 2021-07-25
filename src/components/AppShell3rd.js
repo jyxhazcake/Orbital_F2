@@ -72,8 +72,8 @@ function AppShell3rd() {
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex sm:space-x-2 lg:space-x-6">
-                      {user?.Class === "student"
-                        ? navigationStu.map((item) => (
+                      {user?.Class === "admin"
+                        ? navigationAdm.map((item) => (
                             <Link to={item.link}>
                               <div
                                 key={item.name}
@@ -106,7 +106,7 @@ function AppShell3rd() {
                               </div>
                             </Link>
                           ))
-                        : navigationAdm.map((item) => (
+                        : navigationStu.map((item) => (
                             <Link to={item.link}>
                               <div
                                 key={item.name}
