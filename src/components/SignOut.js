@@ -52,7 +52,7 @@ export default function SignOut() {
   }
 
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end items-center">
       <button className="rounded-full text-yellow-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
         <span className="sr-only">View notifications</span>
         <BellIcon className="h-6 w-6" aria-hidden="true" />
