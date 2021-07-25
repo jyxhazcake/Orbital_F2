@@ -34,6 +34,7 @@ const BootstrapButton = withStyles({
       boxShadow: "none",
       backgroundColor: "#C4C4C4",
       borderColor: "#C4C4C4",
+      outline: "none",
     },
   },
 })(Button);

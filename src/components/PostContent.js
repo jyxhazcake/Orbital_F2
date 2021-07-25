@@ -8,9 +8,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import FlagIcon from "@material-ui/icons/Flag";
+import RoomIcon from "@material-ui/icons/Room";
 import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import EventIcon from "@material-ui/icons/Event";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -123,6 +122,16 @@ function PostContent(props) {
     return time.join(""); // return adjusted time or original string
   }
 
+  function join(date, a, s) {
+    function format(m) {
+      let f = new Intl.DateTimeFormat("en", m);
+      return f.format(date);
+    }
+    return a.map(format).join(s);
+  }
+
+  let a = [{ day: "numeric" }, { month: "short" }, { year: "numeric" }];
+
   const deletePost = async (e) => {
     e.preventDefault();
     setError("");
@@ -186,9 +195,12 @@ function PostContent(props) {
                     month: "short",
                   }).format(dateEnd)}
                 </p>
-                <p>
+                <p className="pb-3">
                   <AccessTimeIcon /> {timestart ? tConvert(timestart) : "-"} to{" "}
                   {timeend ? tConvert(timeend) : "-"}
+                </p>
+                <p className="pb-2">
+                  <RoomIcon /> {capitalizeTheFirstLetterOfEachWord(region)}
                 </p>
               </Typography>
             </CardContent>
@@ -271,3 +283,17 @@ temporarily removes liked function
   <FavoriteBorderIcon />
 </IconButton>
 <p className="text-sm"> 3 Likes </p> */
+
+/*
+failed date format
+{dateStart.toLocaleDateString("en-US", {
+                    weekday: "short",
+                  })}{" "}
+                  {", "}
+                  {join(dateStart, a, " ")} {" — "}
+                  {dateEnd.toLocaleDateString("en-US", {
+                    weekday: "short",
+                  })}{" "}
+                  {", "}
+                  {join(dateEnd, a, " ")}
+*/

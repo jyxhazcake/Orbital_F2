@@ -26,6 +26,7 @@ export default function CreatePost() {
   const [addressValue, setAddressValue] = useState("");
   const [postalCodeValue, setPostalCodeValue] = useState("");
   const [regionValue, setRegionValue] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const createPost = async (e) => {
     e.preventDefault();
@@ -34,6 +35,7 @@ export default function CreatePost() {
     setError("");
 
     try {
+      setLoading(true);
       await adminRef.add({
         name: currentUser.displayName,
         title: titleValue,
@@ -54,6 +56,8 @@ export default function CreatePost() {
     } catch {
       setError("Failed to submit post! Please contact admin");
     }
+
+    setLoading(false);
   };
 
   return (
@@ -186,7 +190,7 @@ export default function CreatePost() {
           onChange={(e) => setSkillsValue(e.target.value)}
           label="Skills required"
           variant="outlined"
-        />{" "}
+        />
         <TextField
           id="outlined-multiline-static"
           required
@@ -203,6 +207,7 @@ export default function CreatePost() {
           variant="outlined"
           color="primary"
           className={"focus:outline-none"}
+          disabled={loading}
         >
           Submit
         </Button>
