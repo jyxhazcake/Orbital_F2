@@ -23,8 +23,8 @@ const navigationStu = [
 
 const navigationOrg = [
   { name: "Home", link: "/", current: false },
-  { name: "Opportunities", link: "/organisations", current: true },
-  { name: "My Postings", link: "/myposting", current: false },
+  { name: "Opportunities", link: "/opportunities", current: true },
+  { name: "My Postings", link: "/myposts", current: false },
   { name: "About", link: "/about", current: false },
 ];
 
@@ -80,7 +80,7 @@ function AppShellOpp() {
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-900 text-white"
-                                    : "text-gray-300 hover:text-white",
+                                    : "text-gray-200 hover:text-white",
                                   "px-3 py-2 rounded-md text-sm font-medium"
                                 )}
                                 aria-current={item.current ? "page" : undefined}
@@ -97,7 +97,7 @@ function AppShellOpp() {
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-900 text-white"
-                                    : "text-gray-300 hover:text-white",
+                                    : "text-gray-200 hover:text-white",
                                   "px-3 py-2 rounded-md text-sm font-medium"
                                 )}
                                 aria-current={item.current ? "page" : undefined}
@@ -113,7 +113,7 @@ function AppShellOpp() {
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-900 text-white"
-                                    : "text-gray-300 hover:text-white",
+                                    : "text-gray-200 hover:text-white",
                                   "px-3 py-2 rounded-md text-sm font-medium"
                                 )}
                                 aria-current={item.current ? "page" : undefined}
