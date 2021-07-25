@@ -23,8 +23,8 @@ const navigationStu = [
 
 const navigationOrg = [
   { name: "Home", link: "/", current: true },
-  { name: "Opportunities", link: "/organisations", current: false },
-  { name: "My Postings", link: "/myposting", current: false },
+  { name: "Opportunities", link: "/opportunities", current: false },
+  { name: "My Postings", link: "/myposts", current: false },
   { name: "About", link: "/about", current: false },
 ];
 
