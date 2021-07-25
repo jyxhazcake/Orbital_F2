@@ -37,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 220,
     maxWidth: 250,
     backgroundColor: grey[200],
-    hover: {
-      elevate: 50,
-    },
   },
   media: {
     height: 200,
@@ -121,16 +118,6 @@ function PostContent(props) {
     }
     return time.join(""); // return adjusted time or original string
   }
-
-  function join(date, a, s) {
-    function format(m) {
-      let f = new Intl.DateTimeFormat("en", m);
-      return f.format(date);
-    }
-    return a.map(format).join(s);
-  }
-
-  let a = [{ day: "numeric" }, { month: "short" }, { year: "numeric" }];
 
   const deletePost = async (e) => {
     e.preventDefault();
@@ -286,6 +273,18 @@ temporarily removes liked function
 
 /*
 failed date format
+
+function join(date, a, s) {
+    function format(m) {
+      let f = new Intl.DateTimeFormat("en", m);
+      return f.format(date);
+    }
+    return a.map(format).join(s);
+  }
+
+  let a = [{ day: "numeric" }, { month: "short" }, { year: "numeric" }];
+
+
 {dateStart.toLocaleDateString("en-US", {
                     weekday: "short",
                   })}{" "}

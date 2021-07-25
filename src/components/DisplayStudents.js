@@ -11,6 +11,7 @@ export default function DisplayStudents(props) {
   return (
     <div>
       {user?.Name}
+      {" - "}
       {user?.Email}
     </div>
   );

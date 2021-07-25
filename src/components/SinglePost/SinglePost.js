@@ -10,6 +10,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Alert from "@material-ui/lab/Alert";
 
 import EventIcon from "@material-ui/icons/Event";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
@@ -22,12 +23,16 @@ function SinglePost(props) {
   const firestore = firebase.firestore();
   const { currentUser } = useAuth();
   const UsersRef = firestore.collection("Users");
+  const flagRef = firestore.collection("Flagged");
   const interestsRef = firestore.collection("interests");
   const postID = props.post.id;
   const [interestedStudents] = useDocumentData(
     firestore.collection("interests").doc(props.post.id)
   );
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [flagEmail, setFlagEmail] = useState("");
+  const [feedback, setFeedback] = useState("");
 
   const {
     createdAt,
@@ -116,6 +121,28 @@ function SinglePost(props) {
     }
 
     handleClose();
+  }
+
+  async function flagPost(e) {
+    e.preventDefault();
+
+    setError("");
+
+    const userUID = currentUser.uid;
+
+    try {
+      setLoading(true);
+      await flagRef.add({
+        flagEmail: flagEmail,
+        feedback: feedback,
+        postID: postID,
+        uid,
+      });
+    } catch {
+      setError("Failed to submit feedback! Please contact admin");
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -288,6 +315,7 @@ function SinglePost(props) {
                 onClose={handleFormClose}
                 aria-labelledby="form-dialog-title"
               >
+                {error && <Alert severity="error">{error}</Alert>}
                 <DialogTitle id="form-dialog-title">
                   Report Inappropriate Posting
                 </DialogTitle>
@@ -305,6 +333,7 @@ function SinglePost(props) {
                     type="email"
                     variant="outlined"
                     fullWidth
+                    onChange={(e) => setFlagEmail(e.target.value)}
                   />
                   <br></br>
                   <br></br>
@@ -317,11 +346,13 @@ function SinglePost(props) {
                     fullWidth
                     rows={8}
                     variant="outlined"
+                    onChange={(e) => setFeedback(e.target.value)}
                   />
                 </DialogContent>
                 <DialogActions style={{ justifyContent: "center" }}>
                   <Button
                     style={{ outline: "none" }}
+                    disabled={loading}
                     onClick={handleFormClose}
                     color="primary"
                     variant="contained"
