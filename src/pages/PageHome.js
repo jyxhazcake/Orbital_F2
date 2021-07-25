@@ -1,12 +1,17 @@
 import handhold from "../components/img/handhold.png";
 import pic1 from "../components/img/pic1.jpg";
 import pic2 from "../components/img/pic2.jpg";
+import pic3 from "../components/img/pic3.jpg";
+import pic4 from "../components/img/pic4.jpg";
+import pic5 from "../components/img/pic5.jpg";
+import pic6 from "../components/img/pic6.jpg";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import AppShell from "../components/AppShell";
 import firebase from "firebase/app";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import PostContent from "../components/PostContent";
 import { useAuth } from "../contexts/Authcontext";
-import ImageGallery from "react-image-gallery";
+import { Carousel } from "react-responsive-carousel";
 
 function PageHome() {
   const firestore = firebase.firestore();
@@ -24,9 +29,31 @@ function PageHome() {
   return (
     <div>
       <AppShell />
+      <Carousel
+        showArrows={true}
+        showStatus={false}
+        showThumbs={false}
+        infiniteLoop={true}
+        autoPlay={true}
+        swipeable={true}
+      >
+        <div>
+          <img src={pic4} alt="" />
+        </div>
+        <div>
+          <img src={pic2} alt="" />
+        </div>
+        <div>
+          <img src={pic3} alt="" />
+        </div>
+        <div>
+          <img src={pic1} alt="" />
+        </div>
+        <div>
+          <img src={pic6} alt="" />
+        </div>
+      </Carousel>
       <div className="bg-gray-200">
-        {/*<img src={pic1} className="w-screen w-full flex" alt="handhold" />*/}
-        <ImageGallery items={images} />
         <div className="flex grid gap-5 m-5">
           <span className="flex justify-center font-bold text-xl ">
             {" "}
