@@ -4,9 +4,14 @@ import { Link, useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
 import { makeStyles } from "@material-ui/core/styles";
-import { Avatar, Menu, MenuItem } from "@material-ui/core";
+import { Avatar, MenuItem, Menu as MaterialMenu } from "@material-ui/core";
 import { blue, deepOrange, deepPurple } from "@material-ui/core/colors";
 import { useDocumentData } from "react-firebase-hooks/firestore";
+import { BellIcon } from "@heroicons/react/outline";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const useStyles = makeStyles((theme) => ({
   blue: {
@@ -47,7 +52,12 @@ export default function SignOut() {
   }
 
   return (
-    <div>
+    <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <button className="rounded-full text-yellow-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+        <span className="sr-only">View notifications</span>
+        <BellIcon className="h-6 w-6" aria-hidden="true" />
+      </button>
+
       {currentUser?.photoURL ? (
         <Avatar
           className={colors.blue + " m-5 cursor-pointer"}
@@ -67,7 +77,7 @@ export default function SignOut() {
           {currentUser?.displayName?.charAt(0)}
         </Avatar>
       )}
-      <Menu
+      <MaterialMenu
         id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
@@ -87,7 +97,7 @@ export default function SignOut() {
         <Link to="/">
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Link>
-      </Menu>
+      </MaterialMenu>
     </div>
   );
 }

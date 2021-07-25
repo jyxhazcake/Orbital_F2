@@ -5,7 +5,7 @@ import {
   useCollectionData,
   useDocumentData,
 } from "react-firebase-hooks/firestore";
-import AppShell from "../components/AppShell";
+import AppShellOpp from "../components/AppShellOpp";
 import PostContent from "../components/PostContent";
 import PostAdmin from "../components/PostAdmin";
 import { useAuth } from "../contexts/Authcontext";
@@ -54,7 +54,7 @@ function PagePosting() {
 
   return (
     <>
-      <AppShell />
+      <AppShellOpp />
       <div className="bg-gray-100 p-5">
         <div class="p-8">
           <div class="bg-white flex items-center rounded-full">

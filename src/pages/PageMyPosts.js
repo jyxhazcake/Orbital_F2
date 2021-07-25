@@ -5,7 +5,7 @@ import {
   useCollectionData,
   useDocumentData,
 } from "react-firebase-hooks/firestore";
-import AppShell from "../components/AppShell";
+import AppShell from "../components/AppShell3rd";
 import PostContent from "../components/PostContent";
 import { useAuth } from "../contexts/Authcontext";
 import { ListItemAvatar, TextField } from "@material-ui/core";

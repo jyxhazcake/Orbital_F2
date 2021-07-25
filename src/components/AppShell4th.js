@@ -15,31 +15,31 @@ import logo2 from "./img/CCSGP.png";
 import { useAuth } from "../contexts/Authcontext";
 
 const navigationStu = [
-  { name: "Home", link: "/", current: true },
+  { name: "Home", link: "/", current: false },
   { name: "Opportunities", link: "/opportunities", current: false },
   { name: "Organisations", link: "organisations", current: false },
-  { name: "About", link: "/about", current: false },
+  { name: "About", link: "/about", current: true },
 ];
 
 const navigationOrg = [
-  { name: "Home", link: "/", current: true },
+  { name: "Home", link: "/", current: false },
   { name: "Opportunities", link: "/organisations", current: false },
   { name: "My Postings", link: "/myposting", current: false },
-  { name: "About", link: "/about", current: false },
+  { name: "About", link: "/about", current: true },
 ];
 
 const navigationAdm = [
-  { name: "Home", link: "/", current: true },
+  { name: "Home", link: "/", current: false },
   { name: "Opportunities", link: "/opportunities", current: false },
   { name: "Approvals", link: "/approvals", current: false },
-  { name: "About", link: "/about", current: false },
+  { name: "About", link: "/about", current: true },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function AppShell() {
+function AppShell4th() {
   const firestore = firebase.firestore();
   const { currentUser } = useAuth();
   const userRef = firestore.collection("Users").doc(currentUser?.uid);
@@ -53,7 +53,7 @@ function AppShell() {
         </Link>
         {currentUser ? <SignOut /> : <TopRight />}
       </div>
-      <Disclosure as="nav" className="bg-yellow-600 shadow-md">
+      <Disclosure as="nav" className="bg-yellow-600">
         {({ open }) => (
           <>
             <div className=" mx-auto px-2 sm:px-4 lg:px-4">
@@ -154,4 +154,4 @@ function AppShell() {
   );
 }
 
-export default AppShell;
+export default AppShell4th;
