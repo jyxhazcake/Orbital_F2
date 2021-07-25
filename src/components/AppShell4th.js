@@ -80,7 +80,7 @@ function AppShell4th() {
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-900 text-white"
-                                    : "text-gray-300 hover:text-white",
+                                    : "text-gray-200 hover:text-white",
                                   "px-3 py-2 rounded-md text-sm font-medium"
                                 )}
                                 aria-current={item.current ? "page" : undefined}
@@ -97,7 +97,7 @@ function AppShell4th() {
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-900 text-white"
-                                    : "text-gray-300 hover:text-white",
+                                    : "text-gray-200 hover:text-white",
                                   "px-3 py-2 rounded-md text-sm font-medium"
                                 )}
                                 aria-current={item.current ? "page" : undefined}
@@ -113,7 +113,7 @@ function AppShell4th() {
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-900 text-white"
-                                    : "text-gray-300 hover:text-white",
+                                    : "text-gray-200 hover:text-white",
                                   "px-3 py-2 rounded-md text-sm font-medium"
                                 )}
                                 aria-current={item.current ? "page" : undefined}

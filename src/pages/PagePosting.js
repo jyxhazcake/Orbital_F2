@@ -33,7 +33,7 @@ function PagePosting() {
   return (
     <>
       <AppShellOpp />
-      <div className="bg-gray-100 p-5">
+      <div className="bg-gray-1 00 p-5">
         <div class="p-8">
           <div class="bg-white flex items-center rounded-full shadow-xl">
             <input
