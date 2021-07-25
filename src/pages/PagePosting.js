@@ -55,39 +55,40 @@ function PagePosting() {
   return (
     <>
       <AppShellOpp />
-      <div className="bg-gray-1 00 p-5">
+      <div className="bg-white h-screen">
         <div class="p-8">
-          <div class="bg-white flex items-center rounded-full">
+          <div class="bg-gray-200 flex items-center rounded-full">
             <SearchIcon className="ml-4" />
             <input
-              class="rounded-full w-full py-4 px-2 text-gray-700 leading-tight focus:outline-none"
+              class="bg-gray-200 rounded-full w-full py-4 px-2 text-gray-800 leading-tight focus:outline-none"
               id="search"
               type="text"
-              placeholder="Search for opportunities here"
+              placeholder="Filter posts (e.g. 'Jurong East', 'Singapore Children's Society')"
               onChange={(e) => {
                 setSearchTerm(e.target.value);
               }}
             />
           </div>
         </div>
-        <div className="block text-sm font-medium text-gray-700 bg-gray-400 shadow-md my-4 p-6 lg:mx-40 md:mx-24 sm:mx-0 rounded">
-          <p className="text-xl"> Opportunities Available </p>
-          <div className="flex flex-wrap gap-x-6 p-6">
-            {posts &&
-              posts
-                .filter((pst) => {
-                  for (const property in pst) {
-                    if (
-                      String(pst[property])
-                        .toLowerCase()
-                        .includes(searchTerm.toLowerCase())
-                    ) {
-                      return pst;
-                    }
+
+        <p className="pl-10 font-bold text-base text-gray-900">
+          Opportunities Available
+        </p>
+        <div className="flex flex-wrap gap-x-10 pt-5 pl-10 items-center">
+          {posts &&
+            posts
+              .filter((pst) => {
+                for (const property in pst) {
+                  if (
+                    String(pst[property])
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase())
+                  ) {
+                    return pst;
                   }
-                })
-                .map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
-          </div>
+                }
+              })
+              .map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
         </div>
       </div>
     </>

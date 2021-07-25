@@ -35,8 +35,11 @@ import DisplayStudents from "./DisplayStudents";
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 220,
-    maxWidth: 250,
-    backgroundColor: grey[200],
+    maxWidth: 300,
+    backgroundColor: grey[100],
+    hover: {
+      elevate: 50,
+    },
   },
   media: {
     height: 200,
