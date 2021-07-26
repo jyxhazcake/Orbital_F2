@@ -211,8 +211,7 @@ function PostContent(props) {
             </Button>
           </Link>
           {currentUser ? (
-            currentUser.email === "admin@admin.sg" ||
-            currentUser.uid === uid ? (
+            user?.Class === "admin" || currentUser.uid === uid ? (
               <div>
                 <Button
                   variant="contained"

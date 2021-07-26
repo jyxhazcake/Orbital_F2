@@ -128,21 +128,57 @@ function AppShell4th() {
 
             <Disclosure.Panel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
-                {navigationStu.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:text-white",
-                      "block px-3 py-2 rounded-md text-base font-medium"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    {item.name}
-                  </a>
-                ))}
+                {user?.Class === "admin"
+                  ? navigationAdm.map((item) => (
+                      <Link to={item.link}>
+                        <div
+                          key={item.name}
+                          href={item.href}
+                          className={classNames(
+                            item.current
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:text-white",
+                            "block px-3 py-2 rounded-md text-base font-medium"
+                          )}
+                          aria-current={item.current ? "page" : undefined}
+                        >
+                          {item.name}
+                        </div>
+                      </Link>
+                    ))
+                  : user?.Class === "recruiter"
+                  ? navigationOrg.map((item) => (
+                      <Link to={item.link}>
+                        <div
+                          key={item.name}
+                          className={classNames(
+                            item.current
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:text-white",
+                            "block px-3 py-2 rounded-md text-base font-medium"
+                          )}
+                          aria-current={item.current ? "page" : undefined}
+                        >
+                          {item.name}
+                        </div>
+                      </Link>
+                    ))
+                  : navigationStu.map((item) => (
+                      <Link to={item.link}>
+                        <div
+                          key={item.name}
+                          className={classNames(
+                            item.current
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:text-white",
+                            "block px-3 py-2 rounded-md text-base font-medium"
+                          )}
+                          aria-current={item.current ? "page" : undefined}
+                        >
+                          {item.name}
+                        </div>
+                      </Link>
+                    ))}
               </div>
             </Disclosure.Panel>
           </>
