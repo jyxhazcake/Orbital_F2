@@ -20,6 +20,7 @@ import Page404 from "./pages/Page404";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/Authcontext";
 import PrivateRoute from "./components/PrivateRoute";
+import PageStudent from "./pages/PageStudent";
 
 export default function App() {
   return (
@@ -46,6 +47,7 @@ export default function App() {
               <Route path="/approvals" component={PageApprovals} />
               <Route path="/unauthorized" component={PageUnAuth} />
               <Route path="/submitted" component={PageSubmitted} />
+              <Route path="/studentportal" component={PageStudent} />
               <Route component={Page404} />
             </Switch>
           </AuthProvider>
