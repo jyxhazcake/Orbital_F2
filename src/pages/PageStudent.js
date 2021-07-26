@@ -116,7 +116,7 @@ export default function PageStudent() {
             {posts &&
               posts
                 .filter((pst) => {
-                  return user?.interestedPosts.includes(pst.id);
+                  return user?.interestedPosts?.includes(pst.id);
                 })
                 .map((pdg) => <PostContent key={pdg.id} post={pdg} />)}
           </div>
