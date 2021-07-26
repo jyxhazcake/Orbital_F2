@@ -13,7 +13,7 @@ import { useAuth } from "../contexts/Authcontext";
 const navigationStu = [
   { name: "Home", link: "/", current: false },
   { name: "Opportunities", link: "/opportunities", current: false },
-  { name: "Organisations", link: "organisations", current: false },
+  { name: "My Portal", link: "/studentportal", current: false },
   { name: "About", link: "/about", current: false },
 ];
 
