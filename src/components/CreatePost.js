@@ -74,6 +74,7 @@ export default function CreatePost() {
         </label>{" "}
         <TextField
           value={titleValue}
+          required
           placeholder="Title of Opportunity"
           onChange={(e) => setTitleValue(e.target.value)}
           label="Title"
@@ -92,6 +93,7 @@ export default function CreatePost() {
             />
             <DatePicker
               dateFormat="dd/MM/yyyy"
+              required
               selected={durstartValue}
               minDate={new Date()}
               onChange={(date) => setDurstartValue(date)}
@@ -110,6 +112,7 @@ export default function CreatePost() {
             />
             <DatePicker
               dateFormat="dd/MM/yyyy"
+              required
               selected={durendValue}
               onChange={(date) => setDurendValue(date)}
               minDate={durstartValue}
