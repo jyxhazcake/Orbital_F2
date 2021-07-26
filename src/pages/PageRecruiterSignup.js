@@ -125,6 +125,14 @@ export default function PageRecruiterSignup() {
       return setError("Passwords have to be greater than 8 characters!");
     }
 
+    if (contactRef.current.value.length < 8) {
+      return setError("Invalid contact phone number!");
+    }
+
+    if (mobileRef.current.value.length < 8) {
+      return setError("Invalid organisation phone number!");
+    }
+
     try {
       setError("");
       setLoading(true);
@@ -166,6 +174,7 @@ export default function PageRecruiterSignup() {
           <TextField
             label="UEN/Society Registration Number"
             placeholder="Enter ID here"
+            disabled={checked}
             fullWidth
             required
             inputRef={idRef}

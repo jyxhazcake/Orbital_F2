@@ -156,19 +156,17 @@ function PostContent(props) {
               <Typography variant="h5" component="h2">
                 <strong>{capitalizeTheFirstLetterOfEachWord(title)}</strong>
               </Typography>
-              <p>
+              <p className="pb-2">
                 by <strong>{name}</strong>
+              </p>
+              <p className="text-base">
+                <strong>Slots left: </strong>
+                {volunteerNo -
+                  (interestedStudents ? interestedStudents.students.length : 0)}
+                /{volunteerNo}
               </p>
               <br></br>
               <Typography variant="body2" color="textSecondary" component="p">
-                <p className="pb-2">
-                  <strong>Slots left: </strong>
-                  {volunteerNo -
-                    (interestedStudents
-                      ? interestedStudents.students.length
-                      : 0)}
-                  /{volunteerNo}
-                </p>
                 <p className="pb-2">
                   <EventIcon />{" "}
                   {Intl.DateTimeFormat("en-US", {
