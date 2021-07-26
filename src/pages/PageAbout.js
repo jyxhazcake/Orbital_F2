@@ -4,7 +4,9 @@ function PageAbout() {
   return (
     <>
       <AppShell />
-      <div>⚠️This is the About page!!⚠️</div>
+      <div className="text-xl font-bold flex justify-center">
+        Volunteering Job Board for CCSGP done by Jia Yixuan and Yap Wei Xuan.
+      </div>
     </>
   );
 }

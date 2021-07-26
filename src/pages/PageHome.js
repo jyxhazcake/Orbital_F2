@@ -17,7 +17,7 @@ function PageHome() {
   const firestore = firebase.firestore();
   const postsRef = firestore.collection("posts");
 
-  const query = postsRef.orderBy("createdAt", "desc").limit(1);
+  const query = postsRef.orderBy("createdAt", "desc").limit(3);
   const [posts] = useCollectionData(query, { idField: "id" });
 
   const images = [
@@ -39,32 +39,32 @@ function PageHome() {
       >
         <div>
           <img src={pic4} alt="" />
+          <p className="legend font-bold">
+            Students discussing plans before engaging in activity
+          </p>
         </div>
+
         <div>
           <img src={pic2} alt="" />
+          <p className="legend font-bold">
+            Students enjoying themselves at an NUS Computing volunteering event
+          </p>
         </div>
         <div>
           <img src={pic3} alt="" />
+          <p className="legend font-bold">This boy enjoying himself</p>
         </div>
         <div>
           <img src={pic1} alt="" />
+          <p className="legend font-bold">
+            Wait are these even volunteer photos I'm confused
+          </p>
         </div>
         <div>
           <img src={pic6} alt="" />
+          <p className="legend font-bold">Meeting</p>
         </div>
       </Carousel>
-      <div className="bg-gray-200">
-        <div className="flex grid gap-5 m-5">
-          <span className="flex justify-center font-bold text-xl ">
-            {" "}
-            Latest Posts{" "}
-          </span>
-          <div className="flex justify-center pb-20">
-            {posts &&
-              posts.map((pst) => <PostContent key={pst.id} post={pst} />)}
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

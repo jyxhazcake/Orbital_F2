@@ -53,9 +53,9 @@ export default function PageApprovals() {
   };
 
   const navigation = [
-    { name: "Post Requests", click: clickPost, current: true },
-    { name: "Account Requests", click: clickAcc, current: false },
-    { name: "Flag Requests", click: clickFlag, current: false },
+    { name: "Post Requests", click: clickPost, current: currPost },
+    { name: "Account Requests", click: clickAcc, current: currAcc },
+    { name: "Flag Requests", click: clickFlag, current: currFlag },
   ];
 
   const firestore = firebase.firestore();
