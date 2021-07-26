@@ -11,6 +11,7 @@ import { useAuth } from "../contexts/Authcontext";
 import { Redirect } from "react-router";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import PostContent from "../components/PostContent";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -67,6 +68,9 @@ export default function PageApprovals() {
     idField: "id",
   });
   const [accreq] = useCollectionData(firestore.collection("AccountRequest"), {
+    idField: "id",
+  });
+  const [flag] = useCollectionData(firestore.collection("Flagged"), {
     idField: "id",
   });
 
@@ -147,7 +151,12 @@ export default function PageApprovals() {
       {showAcc &&
         accreq &&
         accreq.map((req) => <AccApproval key={req.id} post={req} />)}
-      {showFlag && <div className="p-6 text-l font-bold">Flag Requests:</div>}
+
+      <div className="flex flex-wrap gap-x-10 pt-5 pl-10 items-center">
+        {showFlag &&
+          flag &&
+          flag.map((flg) => <PostContent key={flg.id} post={flg} />)}
+      </div>
     </>
   );
 }

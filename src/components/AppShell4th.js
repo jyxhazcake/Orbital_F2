@@ -43,7 +43,7 @@ function AppShell4th() {
   const firestore = firebase.firestore();
   const { currentUser } = useAuth();
   const userRef = firestore.collection("Users").doc(currentUser?.uid);
-  const [user] = useDocumentData(userRef);
+  const [user, loading] = useDocumentData(userRef);
 
   return (
     <>
@@ -155,3 +155,25 @@ function AppShell4th() {
 }
 
 export default AppShell4th;
+
+/*
+failed loading:
+loading
+  ? navigationStu.map((item) => (
+      <Link to={item.link}>
+        <div
+          key={item.name}
+          className={classNames(
+            item.current
+              ? "bg-gray-900 text-white"
+              : "text-gray-200 hover:text-white",
+            "px-3 py-2 rounded-md text-sm font-medium"
+          )}
+          aria-current={item.current ? "page" : undefined}
+        >
+          {item.name}
+        </div>
+      </Link>
+    ))
+  : 
+*/

@@ -122,16 +122,6 @@ function PostContent(props) {
     return time.join(""); // return adjusted time or original string
   }
 
-  function join(date, a, s) {
-    function format(m) {
-      let f = new Intl.DateTimeFormat("en", m);
-      return f.format(date);
-    }
-    return a.map(format).join(s);
-  }
-
-  let a = [{ day: "numeric" }, { month: "short" }, { year: "numeric" }];
-
   const deletePost = async (e) => {
     e.preventDefault();
     setError("");
@@ -166,19 +156,17 @@ function PostContent(props) {
               <Typography variant="h5" component="h2">
                 <strong>{capitalizeTheFirstLetterOfEachWord(title)}</strong>
               </Typography>
-              <p>
+              <p className="pb-2">
                 by <strong>{name}</strong>
+              </p>
+              <p className="text-base">
+                <strong>Slots left: </strong>
+                {volunteerNo -
+                  (interestedStudents ? interestedStudents.students.length : 0)}
+                /{volunteerNo}
               </p>
               <br></br>
               <Typography variant="body2" color="textSecondary" component="p">
-                <p className="pb-2">
-                  <strong>Slots left: </strong>
-                  {volunteerNo -
-                    (interestedStudents
-                      ? interestedStudents.students.length
-                      : 0)}
-                  /{volunteerNo}
-                </p>
                 <p className="pb-2">
                   <EventIcon />{" "}
                   {Intl.DateTimeFormat("en-US", {
@@ -286,6 +274,18 @@ temporarily removes liked function
 
 /*
 failed date format
+
+function join(date, a, s) {
+    function format(m) {
+      let f = new Intl.DateTimeFormat("en", m);
+      return f.format(date);
+    }
+    return a.map(format).join(s);
+  }
+
+  let a = [{ day: "numeric" }, { month: "short" }, { year: "numeric" }];
+
+
 {dateStart.toLocaleDateString("en-US", {
                     weekday: "short",
                   })}{" "}

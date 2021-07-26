@@ -29,42 +29,46 @@ function PageHome() {
   return (
     <div>
       <AppShell />
-      <Carousel
-        showArrows={true}
-        showStatus={false}
-        showThumbs={false}
-        infiniteLoop={true}
-        autoPlay={true}
-        swipeable={true}
-      >
-        <div>
-          <img src={pic4} alt="" />
-          <p className="legend font-bold">
-            Students discussing plans before engaging in activity
-          </p>
+      <div>
+        <Carousel
+          showArrows={true}
+          showStatus={false}
+          showThumbs={false}
+          infiniteLoop={true}
+          autoPlay={true}
+          swipeable={true}
+          width="60%"
+          className="flex justify-center py-2"
+        >
+          <div>
+            <img src={pic4} alt="" />
+          </div>
+          <div>
+            <img src={pic2} alt="" />
+          </div>
+          <div>
+            <img src={pic3} alt="" />
+          </div>
+          <div>
+            <img src={pic1} alt="" />
+          </div>
+          <div>
+            <img src={pic6} alt="" />
+          </div>
+        </Carousel>
+      </div>
+      <div className="py-4 bg-gray-200">
+        <div className="flex grid gap-5 m-5">
+          <span className="flex justify-center font-bold text-xl ">
+            {" "}
+            Latest Posts{" "}
+          </span>
+          <div className="flex justify-center pb-20">
+            {posts &&
+              posts.map((pst) => <PostContent key={pst.id} post={pst} />)}
+          </div>
         </div>
-
-        <div>
-          <img src={pic2} alt="" />
-          <p className="legend font-bold">
-            Students enjoying themselves at an NUS Computing volunteering event
-          </p>
-        </div>
-        <div>
-          <img src={pic3} alt="" />
-          <p className="legend font-bold">This boy enjoying himself</p>
-        </div>
-        <div>
-          <img src={pic1} alt="" />
-          <p className="legend font-bold">
-            Wait are these even volunteer photos I'm confused
-          </p>
-        </div>
-        <div>
-          <img src={pic6} alt="" />
-          <p className="legend font-bold">Meeting</p>
-        </div>
-      </Carousel>
+      </div>
     </div>
   );
 }

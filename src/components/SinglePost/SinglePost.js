@@ -10,6 +10,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Alert from "@material-ui/lab/Alert";
 
 import EventIcon from "@material-ui/icons/Event";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
@@ -22,12 +23,18 @@ function SinglePost(props) {
   const firestore = firebase.firestore();
   const { currentUser } = useAuth();
   const UsersRef = firestore.collection("Users");
+  const flagRef = firestore.collection("Flagged");
   const interestsRef = firestore.collection("interests");
   const postID = props.post.id;
   const [interestedStudents] = useDocumentData(
     firestore.collection("interests").doc(props.post.id)
   );
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState("");
+
+  const userRef = firestore.collection("Users").doc(currentUser?.uid);
+  const [user] = useDocumentData(userRef);
 
   const {
     createdAt,
@@ -42,6 +49,7 @@ function SinglePost(props) {
     postalCode,
     description,
     skills,
+    volunteerNo,
     uid,
     target,
     imageURL,
@@ -118,12 +126,45 @@ function SinglePost(props) {
     handleClose();
   }
 
+  async function flagPost(e) {
+    e.preventDefault();
+
+    setError("");
+
+    try {
+      setLoading(true);
+      await flagRef.doc(postID).set({
+        name: name,
+        title: title,
+        durationstart: durationstart,
+        durationend: durationend,
+        timestart: timestart,
+        timeend: timeend,
+        region: region,
+        address: address,
+        postalCode: postalCode,
+        volunteerNo: volunteerNo,
+        skills: skills,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        imageURL: imageURL,
+        description: description,
+        feedback: feedback,
+        uid,
+      });
+    } catch {
+      setError("Failed to submit feedback! Please contact admin");
+    }
+
+    setLoading(false);
+    handleFormClose();
+  }
+
   return (
     <div>
       <div className="flex flex-wrap rounded overflow-hidden shadow-sm mx-4 my-10 gap-x-28">
         <div className="flex-shrink lg:w-7/12 md: w-full sm:min-w-max">
           <img
-            className="object-contain w-full"
+            className="object-contain w-full max-h-screen"
             src={imageURL}
             alt="imagelol"
           />
@@ -175,103 +216,107 @@ function SinglePost(props) {
             <p className="font-bold text-xl"> Description</p>
             <p> {description} </p>
           </div>
-          <div className="pb-10">
-            {interestedStudents?.students.some(
-              (item) => currentUser?.uid === item
-            ) ? (
-              <Button
-                variant="outlined"
-                style={{ outline: "none", borderRadius: 16 }}
+          {user?.Class === "student" ? (
+            <div className="pb-10">
+              {interestedStudents?.students.some(
+                (item) => currentUser?.uid === item
+              ) ? (
+                <Button
+                  variant="outlined"
+                  style={{ outline: "none", borderRadius: 16 }}
+                  fullWidth
+                >
+                  Confirmed Application
+                </Button>
+              ) : (
+                <Button
+                  className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ..."
+                  style={{ outline: "none" }}
+                  onClick={handleOpen}
+                >
+                  Volunteer
+                </Button>
+              )}
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
                 fullWidth
               >
-                Application Pending
-              </Button>
-            ) : (
-              <Button
-                className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ..."
-                style={{ outline: "none" }}
-                onClick={handleOpen}
-              >
-                Volunteer
-              </Button>
-            )}
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-              fullWidth
-            >
-              <DialogTitle id="alert-dialog-title">
-                {"Volunteer Confirmation"}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  You are currently signing up for
-                  <br></br>
-                  <br></br>
-                  <div className="flex flex-col gap-8">
-                    <strong className="flex justify-center text-xl">
-                      {capitalizeTheFirstLetterOfEachWord(title)}
-                    </strong>
-                    <p className="flex justify-center">by</p>
-                    <p className="flex justify-center gap-1">
-                      <strong className="text-xl">
-                        {" "}
-                        {capitalizeTheFirstLetterOfEachWord(name)}
-                      </strong>
-                    </p>
-                    <p className="flex justify-center">on</p>
-                    <p>
+                <DialogTitle id="alert-dialog-title">
+                  {"Volunteer Confirmation"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    You are currently signing up for
+                    <br></br>
+                    <br></br>
+                    <div className="flex flex-col gap-8">
                       <strong className="flex justify-center text-xl">
-                        {Intl.DateTimeFormat("en-US", {
-                          weekday: "short",
-                          year: "numeric",
-                          day: "2-digit",
-                          month: "short",
-                        }).format(dateStart)}{" "}
-                        -{" "}
-                        {Intl.DateTimeFormat("en-US", {
-                          weekday: "short",
-                          year: "numeric",
-                          day: "2-digit",
-                          month: "short",
-                        }).format(dateEnd)}
+                        {capitalizeTheFirstLetterOfEachWord(title)}
                       </strong>
-                      <strong className="flex justify-center text-l">
-                        {timestart ? tConvert(timestart) : "-"} to{" "}
-                        {timeend ? tConvert(timeend) : "-"}
-                      </strong>
-                    </p>
-                    <p className="flex justify-center">at</p>
-                    <p>
-                      <strong className="flex justify-center text-xl">
-                        {address}
-                      </strong>
-                    </p>
-                  </div>
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  onClick={indicateInterest}
-                  variant="contained"
-                  color="Primary"
-                  style={{ outline: "none" }}
-                >
-                  Confirm
-                </Button>
-                <Button
-                  onClick={handleClose}
-                  color="primary"
-                  style={{ outline: "none" }}
-                  autoFocus
-                >
-                  Cancel
-                </Button>
-              </DialogActions>
-            </Dialog>
-          </div>
+                      <p className="flex justify-center">by</p>
+                      <p className="flex justify-center gap-1">
+                        <strong className="text-xl">
+                          {" "}
+                          {capitalizeTheFirstLetterOfEachWord(name)}
+                        </strong>
+                      </p>
+                      <p className="flex justify-center">on</p>
+                      <p>
+                        <strong className="flex justify-center text-xl">
+                          {Intl.DateTimeFormat("en-US", {
+                            weekday: "short",
+                            year: "numeric",
+                            day: "2-digit",
+                            month: "short",
+                          }).format(dateStart)}{" "}
+                          -{" "}
+                          {Intl.DateTimeFormat("en-US", {
+                            weekday: "short",
+                            year: "numeric",
+                            day: "2-digit",
+                            month: "short",
+                          }).format(dateEnd)}
+                        </strong>
+                        <strong className="flex justify-center text-l">
+                          {timestart ? tConvert(timestart) : "-"} to{" "}
+                          {timeend ? tConvert(timeend) : "-"}
+                        </strong>
+                      </p>
+                      <p className="flex justify-center">at</p>
+                      <p>
+                        <strong className="flex justify-center text-xl">
+                          {address}
+                        </strong>
+                      </p>
+                    </div>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={indicateInterest}
+                    variant="contained"
+                    color="Primary"
+                    style={{ outline: "none" }}
+                  >
+                    Confirm
+                  </Button>
+                  <Button
+                    onClick={handleClose}
+                    color="primary"
+                    style={{ outline: "none" }}
+                    autoFocus
+                  >
+                    Cancel
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+          ) : (
+            <></>
+          )}
           <Divider></Divider>
           <div className="flex justify-center p-2">
             <FlagIcon />
@@ -288,6 +333,7 @@ function SinglePost(props) {
                 onClose={handleFormClose}
                 aria-labelledby="form-dialog-title"
               >
+                {error && <Alert severity="error">{error}</Alert>}
                 <DialogTitle id="form-dialog-title">
                   Report Inappropriate Posting
                 </DialogTitle>
@@ -297,32 +343,22 @@ function SinglePost(props) {
                     with the investigation.
                   </DialogContentText>
                   <TextField
-                    autoFocus
-                    required
-                    margin="dense"
-                    id="name"
-                    label="Email Address"
-                    type="email"
-                    variant="outlined"
-                    fullWidth
-                  />
-                  <br></br>
-                  <br></br>
-                  <TextField
                     id="outlined-multiline-static"
                     required
-                    label="Description"
-                    placeholder="Your Feedback"
+                    label="Feedback"
+                    placeholder="Please provide details of how this post is inappropriate/your negative experience"
                     multiline
                     fullWidth
                     rows={8}
                     variant="outlined"
+                    onChange={(e) => setFeedback(e.target.value)}
                   />
                 </DialogContent>
                 <DialogActions style={{ justifyContent: "center" }}>
                   <Button
                     style={{ outline: "none" }}
-                    onClick={handleFormClose}
+                    disabled={loading}
+                    onClick={flagPost}
                     color="primary"
                     variant="contained"
                   >

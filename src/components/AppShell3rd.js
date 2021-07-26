@@ -43,7 +43,7 @@ function AppShell3rd() {
   const firestore = firebase.firestore();
   const { currentUser } = useAuth();
   const userRef = firestore.collection("Users").doc(currentUser?.uid);
-  const [user] = useDocumentData(userRef);
+  const [user, loading] = useDocumentData(userRef);
 
   return (
     <>
