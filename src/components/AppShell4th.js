@@ -1,16 +1,14 @@
 import React from "react";
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { Disclosure } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import TopRight from "./TopRight";
-import { AppBar, Toolbar } from "@material-ui/core";
-import BootstrapButton from "./BootstrapButton";
+
 import { Link } from "react-router-dom";
 import { useDocumentData } from "react-firebase-hooks/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
+
 import firebase from "firebase/app";
 import SignOut from "./SignOut";
-import logo from "./img/NUSlogo.png";
+
 import logo2 from "./img/CCSGP.png";
 import { useAuth } from "../contexts/Authcontext";
 

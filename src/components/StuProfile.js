@@ -36,8 +36,8 @@ function StuProfile(props) {
 
   const updatePhoto = async (e) => {
     await imageRef.putString(images[0].data_url, "data_url");
-    imageRef.getDownloadURL().then(async (url) => {
-      await currentUser.updateProfile({
+    await imageRef.getDownloadURL().then(async (url) => {
+      currentUser.updateProfile({
         photoURL: url,
       });
     });
