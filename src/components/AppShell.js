@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
@@ -44,7 +44,6 @@ function AppShell() {
   const { currentUser } = useAuth();
   const userRef = firestore.collection("Users").doc(currentUser?.uid);
   const [user, loading] = useDocumentData(userRef);
-  const Class = user?.Class;
 
   return (
     <>
@@ -70,72 +69,62 @@ function AppShell() {
                     )}
                   </Disclosure.Button>
                 </div>
-                {loading ? (
-                  <div />
-                ) : (
-                  <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                    <div className="hidden sm:block sm:ml-6">
-                      <div className="flex sm:space-x-2 lg:space-x-6">
-                        {Class === "student"
-                          ? navigationStu.map((item) => (
-                              <Link to={item.link}>
-                                <div
-                                  key={item.name}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-gray-900 text-white"
-                                      : "text-gray-200 hover:text-white",
-                                    "px-3 py-2 rounded-md text-sm font-medium"
-                                  )}
-                                  aria-current={
-                                    item.current ? "page" : undefined
-                                  }
-                                >
-                                  {item.name}
-                                </div>
-                              </Link>
-                            ))
-                          : Class === "recruiter"
-                          ? navigationOrg.map((item) => (
-                              <Link to={item.link}>
-                                <div
-                                  key={item.name}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-gray-900 text-white"
-                                      : "text-gray-200 hover:text-white",
-                                    "px-3 py-2 rounded-md text-sm font-medium"
-                                  )}
-                                  aria-current={
-                                    item.current ? "page" : undefined
-                                  }
-                                >
-                                  {item.name}
-                                </div>
-                              </Link>
-                            ))
-                          : navigationAdm.map((item) => (
-                              <Link to={item.link}>
-                                <div
-                                  key={item.name}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-gray-900 text-white"
-                                      : "text-gray-200 hover:text-white",
-                                    "px-3 py-2 rounded-md text-sm font-medium"
-                                  )}
-                                  aria-current={
-                                    item.current ? "page" : undefined
-                                  }
-                                >
-                                  {item.name}
-                                </div>
-                              </Link>
-                            ))}
-                      </div>
+                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                  <div className="hidden sm:block sm:ml-6">
+                    <div className="flex sm:space-x-2 lg:space-x-6">
+                      {user?.Class === "admin"
+                        ? navigationAdm.map((item) => (
+                            <Link to={item.link}>
+                              <div
+                                key={item.name}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-gray-900 text-white"
+                                    : "text-gray-200 hover:text-white",
+                                  "px-3 py-2 rounded-md text-sm font-medium"
+                                )}
+                                aria-current={item.current ? "page" : undefined}
+                              >
+                                {item.name}
+                              </div>
+                            </Link>
+                          ))
+                        : user?.Class === "recruiter"
+                        ? navigationOrg.map((item) => (
+                            <Link to={item.link}>
+                              <div
+                                key={item.name}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-gray-900 text-white"
+                                    : "text-gray-200 hover:text-white",
+                                  "px-3 py-2 rounded-md text-sm font-medium"
+                                )}
+                                aria-current={item.current ? "page" : undefined}
+                              >
+                                {item.name}
+                              </div>
+                            </Link>
+                          ))
+                        : navigationStu.map((item) => (
+                            <Link to={item.link}>
+                              <div
+                                key={item.name}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-gray-900 text-white"
+                                    : "text-gray-200 hover:text-white",
+                                  "px-3 py-2 rounded-md text-sm font-medium"
+                                )}
+                                aria-current={item.current ? "page" : undefined}
+                              >
+                                {item.name}
+                              </div>
+                            </Link>
+                          ))}
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             </div>
 

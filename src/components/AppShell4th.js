@@ -13,7 +13,6 @@ import SignOut from "./SignOut";
 import logo from "./img/NUSlogo.png";
 import logo2 from "./img/CCSGP.png";
 import { useAuth } from "../contexts/Authcontext";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 const navigationStu = [
   { name: "Home", link: "/", current: false },
@@ -70,72 +69,62 @@ function AppShell4th() {
                     )}
                   </Disclosure.Button>
                 </div>
-                {loading ? (
-                  <CircularProgress />
-                ) : (
-                  <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                    <div className="hidden sm:block sm:ml-6">
-                      <div className="flex sm:space-x-2 lg:space-x-6">
-                        {user?.Class === "student"
-                          ? navigationStu.map((item) => (
-                              <Link to={item.link}>
-                                <div
-                                  key={item.name}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-gray-900 text-white"
-                                      : "text-gray-200 hover:text-white",
-                                    "px-3 py-2 rounded-md text-sm font-medium"
-                                  )}
-                                  aria-current={
-                                    item.current ? "page" : undefined
-                                  }
-                                >
-                                  {item.name}
-                                </div>
-                              </Link>
-                            ))
-                          : user?.Class === "recruiter"
-                          ? navigationOrg.map((item) => (
-                              <Link to={item.link}>
-                                <div
-                                  key={item.name}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-gray-900 text-white"
-                                      : "text-gray-200 hover:text-white",
-                                    "px-3 py-2 rounded-md text-sm font-medium"
-                                  )}
-                                  aria-current={
-                                    item.current ? "page" : undefined
-                                  }
-                                >
-                                  {item.name}
-                                </div>
-                              </Link>
-                            ))
-                          : navigationAdm.map((item) => (
-                              <Link to={item.link}>
-                                <div
-                                  key={item.name}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-gray-900 text-white"
-                                      : "text-gray-200 hover:text-white",
-                                    "px-3 py-2 rounded-md text-sm font-medium"
-                                  )}
-                                  aria-current={
-                                    item.current ? "page" : undefined
-                                  }
-                                >
-                                  {item.name}
-                                </div>
-                              </Link>
-                            ))}
-                      </div>
+                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                  <div className="hidden sm:block sm:ml-6">
+                    <div className="flex sm:space-x-2 lg:space-x-6">
+                      {user?.Class === "admin"
+                        ? navigationAdm.map((item) => (
+                            <Link to={item.link}>
+                              <div
+                                key={item.name}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-gray-900 text-white"
+                                    : "text-gray-200 hover:text-white",
+                                  "px-3 py-2 rounded-md text-sm font-medium"
+                                )}
+                                aria-current={item.current ? "page" : undefined}
+                              >
+                                {item.name}
+                              </div>
+                            </Link>
+                          ))
+                        : user?.Class === "recruiter"
+                        ? navigationOrg.map((item) => (
+                            <Link to={item.link}>
+                              <div
+                                key={item.name}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-gray-900 text-white"
+                                    : "text-gray-200 hover:text-white",
+                                  "px-3 py-2 rounded-md text-sm font-medium"
+                                )}
+                                aria-current={item.current ? "page" : undefined}
+                              >
+                                {item.name}
+                              </div>
+                            </Link>
+                          ))
+                        : navigationStu.map((item) => (
+                            <Link to={item.link}>
+                              <div
+                                key={item.name}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-gray-900 text-white"
+                                    : "text-gray-200 hover:text-white",
+                                  "px-3 py-2 rounded-md text-sm font-medium"
+                                )}
+                                aria-current={item.current ? "page" : undefined}
+                              >
+                                {item.name}
+                              </div>
+                            </Link>
+                          ))}
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             </div>
 
@@ -166,3 +155,25 @@ function AppShell4th() {
 }
 
 export default AppShell4th;
+
+/*
+failed loading:
+loading
+  ? navigationStu.map((item) => (
+      <Link to={item.link}>
+        <div
+          key={item.name}
+          className={classNames(
+            item.current
+              ? "bg-gray-900 text-white"
+              : "text-gray-200 hover:text-white",
+            "px-3 py-2 rounded-md text-sm font-medium"
+          )}
+          aria-current={item.current ? "page" : undefined}
+        >
+          {item.name}
+        </div>
+      </Link>
+    ))
+  : 
+*/

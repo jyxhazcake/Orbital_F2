@@ -70,9 +70,6 @@ export default function PageApprovals() {
   const [accreq] = useCollectionData(firestore.collection("AccountRequest"), {
     idField: "id",
   });
-  const [posts] = useCollectionData(firestore.collection("posts"), {
-    idField: "id",
-  });
   const [flag] = useCollectionData(firestore.collection("Flagged"), {
     idField: "id",
   });
@@ -155,17 +152,11 @@ export default function PageApprovals() {
         accreq &&
         accreq.map((req) => <AccApproval key={req.id} post={req} />)}
 
-      {showFlag &&
-        flag &&
-        flag.map((flg) =>
-          firestore
-            .collection("posts")
-            .doc(flg.id)
-            .get()
-            .then((pst) => {
-              <PostContent key={pst.id} post={pst.data()} />;
-            })
-        )}
+      <div className="flex flex-wrap gap-x-10 pt-5 pl-10 items-center">
+        {showFlag &&
+          flag &&
+          flag.map((flg) => <PostContent key={flg.id} post={flg} />)}
+      </div>
     </>
   );
 }
