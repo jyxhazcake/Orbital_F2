@@ -132,10 +132,8 @@ function SinglePost(props) {
 
     try {
       setLoading(true);
-      await flagRef.add({
-        flagEmail: flagEmail,
+      await flagRef.doc(postID).set({
         feedback: feedback,
-        postID: postID,
         uid,
       });
     } catch {
@@ -143,6 +141,7 @@ function SinglePost(props) {
     }
 
     setLoading(false);
+    handleFormClose();
   }
 
   return (
@@ -325,23 +324,10 @@ function SinglePost(props) {
                     with the investigation.
                   </DialogContentText>
                   <TextField
-                    autoFocus
-                    required
-                    margin="dense"
-                    id="name"
-                    label="Email Address"
-                    type="email"
-                    variant="outlined"
-                    fullWidth
-                    onChange={(e) => setFlagEmail(e.target.value)}
-                  />
-                  <br></br>
-                  <br></br>
-                  <TextField
                     id="outlined-multiline-static"
                     required
-                    label="Description"
-                    placeholder="Your Feedback"
+                    label="Feedback"
+                    placeholder="Please provide details of how this post is inappropriate/your negative experience"
                     multiline
                     fullWidth
                     rows={8}
@@ -353,7 +339,7 @@ function SinglePost(props) {
                   <Button
                     style={{ outline: "none" }}
                     disabled={loading}
-                    onClick={handleFormClose}
+                    onClick={flagPost}
                     color="primary"
                     variant="contained"
                   >
