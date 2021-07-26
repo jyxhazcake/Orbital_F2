@@ -173,11 +173,7 @@ function PagePosting() {
                 .filter((pst) => {
                   return pst.uid === currentUser.uid;
                 })
-                .map((pst) => (
-                  <Link to={"/opportunities/" + pst.id}>
-                    <PostContent key={pst.id} post={pst} />
-                  </Link>
-                ))}
+                .map((pst) => <PostContent key={pst.id} post={pst} />)}
           </div>
         </>
       )}
