@@ -88,7 +88,7 @@ export default function PageApprovals() {
         {({ open }) => (
           <>
             <div className=" mx-auto px-2 sm:px-4 lg:px-4">
-              <div className="relative flex items-center justify-between h-16">
+              <div className="relative flex items-center justify-between h-10">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -110,7 +110,7 @@ export default function PageApprovals() {
                           className={classNames(
                             item.current
                               ? "text-white"
-                              : "text-gray-200 hover:text-white",
+                              : "text-gray-500 hover:text-white",
                             "px-3 py-2 rounded-md text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
