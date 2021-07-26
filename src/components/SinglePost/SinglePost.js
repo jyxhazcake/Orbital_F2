@@ -228,13 +228,25 @@ function SinglePost(props) {
                 >
                   Confirmed Application
                 </Button>
-              ) : (
+              ) : volunteerNo -
+                  (interestedStudents
+                    ? interestedStudents.students.length
+                    : 0) !==
+                0 ? (
                 <Button
                   className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ..."
                   style={{ outline: "none" }}
                   onClick={handleOpen}
                 >
                   Volunteer
+                </Button>
+              ) : (
+                <Button
+                  variant="outlined"
+                  style={{ outline: "none", borderRadius: 16 }}
+                  fullWidth
+                >
+                  All slots filled
                 </Button>
               )}
               <Dialog

@@ -153,18 +153,28 @@ function PostContent(props) {
                   month: "short",
                 }).format(created)}
               </div>
-              <Typography variant="h5" component="h2">
+              <Typography variant="h5" component="h2" className="truncate">
                 <strong>{capitalizeTheFirstLetterOfEachWord(title)}</strong>
               </Typography>
               <p className="pb-2">
                 by <strong>{name}</strong>
               </p>
-              <p className="text-base">
-                <strong>Slots left: </strong>
-                {volunteerNo -
-                  (interestedStudents ? interestedStudents.students.length : 0)}
-                /{volunteerNo}
-              </p>
+              {volunteerNo -
+                (interestedStudents
+                  ? interestedStudents.students.length
+                  : 0) ===
+              0 ? (
+                <p className="text-base font-bold"> - All slots filled -</p>
+              ) : (
+                <p className="text-base">
+                  <strong>Slots left: </strong>
+                  {volunteerNo -
+                    (interestedStudents
+                      ? interestedStudents.students.length
+                      : 0)}
+                  /{volunteerNo}
+                </p>
+              )}
               <br></br>
               <Typography variant="body2" color="textSecondary" component="p">
                 <p className="pb-2">
