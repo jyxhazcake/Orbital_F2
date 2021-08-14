@@ -1,16 +1,12 @@
 import { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
-import {
-  useCollectionData,
-  useDocumentData,
-} from "react-firebase-hooks/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 import AppShell from "../components/AppShell3rd";
 import PostContent from "../components/PostContent";
 import { useAuth } from "../contexts/Authcontext";
 import PendingPosts from "../components/PendingPosts";
 import CreatePost from "../components/CreatePost";
-import { Link } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
@@ -67,17 +63,9 @@ function PagePosting() {
   const postquery = postsRef.orderBy("createdAt", "desc").limit(25);
   const adminRef = firestore.collection("AdminApproval");
   const adminquery = adminRef.orderBy("createdAt", "desc").limit(25);
-  const userRef = firestore.collection("Users").doc(currentUser?.uid);
 
   const [posts] = useCollectionData(postquery, { idField: "id" });
   const [pending] = useCollectionData(adminquery, { idField: "id" });
-  const [user] = useDocumentData(userRef);
-
-  const [myposts] = useCollectionData(adminquery, { idField: "id" })?.filter(
-    (pst) => {
-      return currentUser.uid === pst?.uid;
-    }
-  );
 
   return (
     <>

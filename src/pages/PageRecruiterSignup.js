@@ -11,25 +11,12 @@ import {
 import Alert from "@material-ui/lab/Alert";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import logo from "../components/img/NVJBlogo.png";
-import kids from "../components/img/kids.png";
 import { useAuth } from "../contexts/Authcontext";
 
 const paperStyle = {
   padding: "20px",
   width: 310,
   margin: "30px auto",
-};
-
-const background = {
-  backgroundImage: `url(${kids})`,
-  position: "fixed",
-  top: 0,
-  left: 0,
-  minWidth: "100%",
-  minHeight: "100%",
-  backgroundRepeat: "no-repeat",
-  backgroundSize: "cover",
-  overflowY: "scroll",
 };
 
 const logoStyle = {
@@ -46,24 +33,6 @@ const bottomStyle = {
   margin: "30px auto",
   width: 310,
 };
-
-/*const useStyles = makeStyles({
-    label: {
-      fontSize: '14px',
-    },
-});
-
-useEffect(() => {
-    const uid = firebase.auth().currentUser?.uid;
-    const db = firebase.firestore();
-    db.collection('Users').doc(uid).set({
-      Organisation: organisationNameRef.current.value,
-      UEM_SRN: idRef.current.value,
-      Contact: contactNameRef.current.value,
-      OrganisationMobile: contactRef.current.value,
-      ContactMobile: mobileRef.current.value,
-    });
-  });*/
 
 export default function PageRecruiterSignup() {
   const organisationNameRef = useRef();

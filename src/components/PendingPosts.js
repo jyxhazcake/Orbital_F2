@@ -7,23 +7,13 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 export default function PendingPosts(props) {
   const firestore = firebase.firestore();
-  const postsRef = firestore.collection("posts");
-  const interestRef = firestore.collection("interests");
   const adminRef = firestore.collection("AdminApproval");
   const [error, setError] = useState("");
   const postID = props.post.id;
   const { currentUser } = useAuth();
 
-  const {
-    name,
-    title,
-    durationstart,
-    durationend,
-    skills,
-    uid,
-    target,
-    imageURL,
-  } = props.post;
+  const { name, title, durationstart, durationend, skills, uid, imageURL } =
+    props.post;
 
   const dateStart = durationstart.toDate();
   const dateEnd = durationend.toDate();
@@ -31,7 +21,11 @@ export default function PendingPosts(props) {
   const deletePost = async (e) => {
     e.preventDefault();
 
-    await adminRef.doc(postID).delete();
+    try {
+      await adminRef.doc(postID).delete();
+    } catch {
+      setError("Failed to delete post. Please contact admin for assistance.");
+    }
   };
 
   return (

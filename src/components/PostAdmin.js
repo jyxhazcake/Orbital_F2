@@ -2,7 +2,6 @@ import { useState, React } from "react";
 import { Button } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import firebase from "firebase/app";
-import logo from "./img/NUSlogo.png";
 
 import { Link } from "react-router-dom";
 
@@ -28,7 +27,6 @@ export default function PostAdmin(props) {
     skills,
     uid,
     volunteerNo,
-    target,
     imageURL,
   } = props.post;
 

@@ -15,6 +15,7 @@ export default function CreatePost() {
   const auth = firebase.auth();
   const adminRef = firestore.collection("AdminApproval");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [titleValue, setTitleValue] = useState("");
   const [durstartValue, setDurstartValue] = useState(new Date());
   const [durendValue, setDurendValue] = useState("");
@@ -33,6 +34,7 @@ export default function CreatePost() {
 
     const { uid } = auth.currentUser;
     setError("");
+    setSuccess("");
 
     try {
       setLoading(true);
@@ -53,6 +55,20 @@ export default function CreatePost() {
         region: regionValue,
         uid,
       });
+      setSuccess(
+        "Successfully submitted post! Currently under review by admin."
+      );
+      setTitleValue("");
+      setDurstartValue(new Date());
+      setDurendValue("");
+      setTimeStart("08:00");
+      setTimeEnd("09:00");
+      setSkillsValue("");
+      setDescriptionValue("");
+      setVolunteerNo("");
+      setAddressValue("");
+      setPostalCodeValue("");
+      setRegionValue("");
     } catch {
       setError("Failed to submit post! Please contact admin");
     }
@@ -68,6 +84,7 @@ export default function CreatePost() {
         className="flex flex-col mb-0 space-y-8 p-4 space-x-2"
       >
         {error && <Alert severity="error">{error}</Alert>}
+        {success && <Alert severity="success">{success}</Alert>}
         <label className="block text-sm font-medium text-gray-700">
           {" "}
           Create a New Posting{" "}

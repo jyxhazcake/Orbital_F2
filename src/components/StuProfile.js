@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/Authcontext";
 import { Button } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import ImageUploading from "react-images-uploading";
 import firebase from "firebase/app";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
@@ -22,6 +25,17 @@ function StuProfile(props) {
   const [mobile, setMobile] = useState("");
   const [name, setName] = useState(currentUser.displayName);
   const [error, setError] = useState("");
+
+  //controls if dialog is opened for profile photo change
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const maxNumber = 1;
   const onChange = (imageList, addUpdateIndex) => {
@@ -134,6 +148,95 @@ function StuProfile(props) {
             </svg>
           </div>
         </section>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Change Avatar Picture"}
+          </DialogTitle>
+          <DialogContent>
+            <ImageUploading
+              multiple
+              value={images}
+              onChange={onChange}
+              maxNumber={maxNumber}
+              dataURLKey="data_url"
+            >
+              {({
+                imageList,
+                onImageUpload,
+                onImageRemoveAll,
+                onImageUpdate,
+                onImageRemove,
+                isDragging,
+                dragProps,
+              }) => (
+                // write your building UI
+                <div className="upload__image-wrapper">
+                  {imageList.map((image, index) => (
+                    <div key={index} className="my-4">
+                      <img
+                        src={image.data_url}
+                        alt=""
+                        width="200"
+                        height="100"
+                        className="mb-2 border-2 cursor-pointer"
+                        onClick={() => onImageUpdate(index)}
+                        {...dragProps}
+                      />
+                      <div>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className=""
+                          onClick={() => onImageUpdate(index)}
+                        >
+                          Change
+                        </Button>
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={() => onImageRemove(index)}
+                        >
+                          Remove
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                  {images.length === 0 ? (
+                    <div className="flex justify-center space-x-4">
+                      <button
+                        className="bg-yellow-600 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                        type="button"
+                        style={{ transition: "all .15s ease" }}
+                        onClick={onImageUpload}
+                        {...dragProps}
+                      >
+                        <CloudUploadIcon /> Select
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex justify-center space-x-4">
+                      <button
+                        className="bg-green-600 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                        type="button"
+                        style={{ transition: "all .15s ease" }}
+                        onClick={handleClose}
+                      >
+                        {" "}
+                        Confirm{" "}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </ImageUploading>
+          </DialogContent>
+        </Dialog>
         <section className="relative py-16 bg-gray-300">
           <div className="container mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
@@ -151,68 +254,16 @@ function StuProfile(props) {
                   </div>
                   <div className="w-full lg:w-4/12 px-0 lg:order-3 lg:text-right lg:self-center">
                     <div className="py-6 px-0 mt-32 sm:mt-0">
-                      <ImageUploading
-                        multiple
-                        value={images}
-                        onChange={onChange}
-                        maxNumber={maxNumber}
-                        dataURLKey="data_url"
-                      >
-                        {({
-                          imageList,
-                          onImageUpload,
-                          onImageRemoveAll,
-                          onImageUpdate,
-                          onImageRemove,
-                          isDragging,
-                          dragProps,
-                        }) => (
-                          // write your building UI
-                          <div className="upload__image-wrapper">
-                            {imageList.map((image, index) => (
-                              <div key={index} className="my-4">
-                                <img
-                                  src={image.data_url}
-                                  alt=""
-                                  width="200"
-                                  height="100"
-                                  className="mb-2 border-2 cursor-pointer"
-                                  onClick={() => onImageUpdate(index)}
-                                />
-                                <div>
-                                  <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className=""
-                                    onClick={() => onImageUpdate(index)}
-                                  >
-                                    Change
-                                  </Button>
-                                  &nbsp; &nbsp; &nbsp; &nbsp;
-                                  <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => onImageRemove(index)}
-                                  >
-                                    Remove
-                                  </Button>
-                                </div>
-                              </div>
-                            ))}
-                            <div className="space-x-4">
-                              <button
-                                className="bg-yellow-600 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-                                type="button"
-                                style={{ transition: "all .15s ease" }}
-                                onClick={onImageUpload}
-                                {...dragProps}
-                              >
-                                Change Avatar
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                      </ImageUploading>
+                      <div className="space-x-4">
+                        <button
+                          className="bg-yellow-600 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                          type="button"
+                          style={{ transition: "all .15s ease" }}
+                          onClick={handleClickOpen}
+                        >
+                          Change Avatar
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1"></div>

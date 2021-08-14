@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from "react";
-import BootstrapButton from "./BootstrapButton";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, MenuItem, Menu as MaterialMenu } from "@material-ui/core";
-import { blue, deepOrange, deepPurple } from "@material-ui/core/colors";
+import { blue } from "@material-ui/core/colors";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { BellIcon } from "@heroicons/react/outline";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   blue: {
@@ -53,6 +49,7 @@ export default function SignOut() {
 
   return (
     <div className="flex justify-end items-center">
+      {error && <Alert severity="error">{error}</Alert>}
       <button className="rounded-full text-yellow-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
         <span className="sr-only">View notifications</span>
         <BellIcon className="h-6 w-6" aria-hidden="true" />

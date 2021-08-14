@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from "./img/NUSlogo.png";
 import "firebase/firestore";
 import { Button } from "@material-ui/core";
@@ -12,8 +12,6 @@ import RoomIcon from "@material-ui/icons/Room";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import EventIcon from "@material-ui/icons/Event";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import CommentIcon from "@material-ui/icons/Comment";
 
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { makeStyles } from "@material-ui/core/styles";
@@ -29,8 +27,7 @@ import Typography from "@material-ui/core/Typography";
 import firebase from "firebase/app";
 import { useAuth } from "../contexts/Authcontext";
 import { Link } from "react-router-dom";
-
-import DisplayStudents from "./DisplayStudents";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,9 +71,7 @@ function PostContent(props) {
     timestart,
     timeend,
     region,
-    skills,
     uid,
-    target,
     imageURL,
   } = props.post;
 
@@ -136,6 +131,7 @@ function PostContent(props) {
 
   return (
     <div key={props.id}>
+      {error && <Alert severity="error">{error}</Alert>}
       <Card className={classes.root}>
         <Link to={"/opportunities/" + postID}>
           <CardActionArea className="focus:outline-none">

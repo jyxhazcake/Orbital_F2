@@ -14,7 +14,6 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   function signup(email, password, name, contactMobile) {
-    //const db = firebase.firestore();
     return auth.createUserWithEmailAndPassword(email, password).then((cred) => {
       db.collection("Users").doc(cred.user.uid).set({
         Class: "student",

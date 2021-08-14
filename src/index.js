@@ -4,7 +4,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
-import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
 

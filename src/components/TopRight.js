@@ -1,7 +1,5 @@
 import React from "react";
-import logo from "./img/NUSlogo.png";
 import Divider from "@material-ui/core/Divider";
-import BootstrapButton from "./BootstrapButton";
 import LoginButton from "./LoginButton";
 import RecruiterButton from "./RecruiterButton";
 import { Link } from "react-router-dom";

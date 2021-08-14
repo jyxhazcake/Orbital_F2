@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import firebase from "firebase/app";
 import { useDocumentData } from "react-firebase-hooks/firestore";
-import { useAuth } from "../../contexts/Authcontext";
+import { useAuth } from "../contexts/Authcontext";
 import { TextField, Button, Link } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import Dialog from "@material-ui/core/Dialog";
@@ -17,7 +17,7 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import RoomIcon from "@material-ui/icons/Room";
 import FlagIcon from "@material-ui/icons/Flag";
 
-import DisplayStudents from "../DisplayStudents";
+import DisplayStudents from "./DisplayStudents";
 
 function SinglePost(props) {
   const firestore = firebase.firestore();
@@ -30,6 +30,7 @@ function SinglePost(props) {
     firestore.collection("interests").doc(props.post.id)
   );
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
 
@@ -37,7 +38,6 @@ function SinglePost(props) {
   const [user] = useDocumentData(userRef);
 
   const {
-    createdAt,
     name,
     title,
     durationstart,
@@ -51,7 +51,6 @@ function SinglePost(props) {
     skills,
     volunteerNo,
     uid,
-    target,
     imageURL,
   } = props.post;
 
@@ -151,6 +150,7 @@ function SinglePost(props) {
         feedback: feedback,
         uid,
       });
+      setSuccess("Feedback submitted! Admin will review this post.");
     } catch {
       setError("Failed to submit feedback! Please contact admin");
     }
@@ -161,6 +161,7 @@ function SinglePost(props) {
 
   return (
     <div>
+      {success && <Alert severity="success">{success}</Alert>}
       <div className="flex flex-wrap rounded overflow-hidden shadow-sm mx-4 my-10 gap-x-28">
         <div className="flex-shrink lg:w-7/12 md: w-full sm:min-w-max">
           <img

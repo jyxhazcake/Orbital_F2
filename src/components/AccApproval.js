@@ -33,6 +33,9 @@ export default function AccApproval(props) {
             <p className="text-gray-700">
               Contact Person's Mobile:{ContactMobile}
             </p>
+            <p className="text-gray-700">
+              Organisation's Contact Number:{OrganisationMobile}
+            </p>
           </div>
           <Button variant="contained" onClick={deletePost}>
             {" "}

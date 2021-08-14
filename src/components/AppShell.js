@@ -1,5 +1,4 @@
 import React from "react";
-import { Fragment } from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import TopRight from "./TopRight";
@@ -39,7 +38,7 @@ function AppShell() {
   const firestore = firebase.firestore();
   const { currentUser } = useAuth();
   const userRef = firestore.collection("Users").doc(currentUser?.uid);
-  const [user, loading] = useDocumentData(userRef);
+  const [user] = useDocumentData(userRef);
 
   return (
     <>

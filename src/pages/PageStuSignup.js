@@ -6,17 +6,12 @@ import {
   Button,
   Link,
   FormGroup,
-  Checkbox,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-import { makeStyles } from "@material-ui/core/styles";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import logo from "../components/img/NVJBlogo.png";
 import utown from "../components/img/utown.png";
 import { useAuth } from "../contexts/Authcontext";
-import FirebaseAuthException from "firebase";
 
 const paperStyle = {
   padding: "20px",
@@ -49,12 +44,6 @@ const bottomStyle = {
   margin: "30px auto",
   width: 300,
 };
-
-/*const useStyles = makeStyles({
-    label: {
-      fontSize: '14px',
-    },
-});*/
 
 export default function PageStuSignUp() {
   const emailRef = useRef();

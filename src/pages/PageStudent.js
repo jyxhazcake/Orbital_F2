@@ -8,9 +8,7 @@ import {
 import AppShell from "../components/AppShell3rd";
 import PostContent from "../components/PostContent";
 import { useAuth } from "../contexts/Authcontext";
-import PendingPosts from "../components/PendingPosts";
-import CreatePost from "../components/CreatePost";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
