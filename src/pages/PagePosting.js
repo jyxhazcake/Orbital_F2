@@ -42,11 +42,15 @@ function PagePosting() {
           {posts &&
             posts
               .filter((pst) => {
-                return pst.map((property) =>
-                  String(pst[property])
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase())
-                );
+                for (const property in pst) {
+                  if (
+                    String(pst[property])
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase())
+                  ) {
+                    return pst;
+                  }
+                }
               })
               .map((pst) => <PostContent key={pst.id} post={pst} />)}{" "}
         </div>
