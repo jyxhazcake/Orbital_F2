@@ -3,7 +3,7 @@ import { useState } from "react";
 import firebase from "firebase/app";
 import { TextField, Button } from "@material-ui/core";
 import EventIcon from "@material-ui/icons/Event";
-import { useAuth } from "../contexts/Authcontext";
+import { useAuth } from "../../contexts/Authcontext";
 import Alert from "@material-ui/lab/Alert";
 
 import DatePicker from "react-datepicker";

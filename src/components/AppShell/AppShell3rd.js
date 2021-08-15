@@ -1,13 +1,13 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import TopRight from "./TopRight";
+import TopRight from "../LoginSignup/TopRight";
 import { Link } from "react-router-dom";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import firebase from "firebase/app";
-import SignOut from "./SignOut";
-import logo2 from "./img/CCSGP.png";
-import { useAuth } from "../contexts/Authcontext";
+import SignOut from "../LoginSignup/SignOut";
+import logo2 from "../img/CCSGP.png";
+import { useAuth } from "../../contexts/Authcontext";
 
 const navigationStu = [
   { name: "Home", link: "/", current: false },

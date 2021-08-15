@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useAuth } from "../contexts/Authcontext";
+import { useAuth } from "../../contexts/Authcontext";
 import { TextField, Grid, Paper, Button, Link } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -7,7 +7,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import { Link as RouterLink, useHistory } from "react-router-dom";
-import logo from "../components/img/NVJBlogo.png";
+import logo from "../img/NVJBlogo.png";
 
 const paperStyle = {
   padding: 20,

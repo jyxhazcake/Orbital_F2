@@ -4,7 +4,7 @@ import pic3 from "../components/img/pic3.jpg";
 import pic4 from "../components/img/pic4.jpg";
 import pic6 from "../components/img/pic6.jpg";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import AppShell from "../components/AppShell";
+import AppShell from "../components/AppShell/AppShell";
 import { Carousel } from "react-responsive-carousel";
 
 function PageHome() {

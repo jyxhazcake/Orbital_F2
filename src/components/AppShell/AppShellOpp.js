@@ -1,31 +1,31 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import TopRight from "./TopRight";
+import TopRight from "../LoginSignup/TopRight";
 import { Link } from "react-router-dom";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import firebase from "firebase/app";
-import SignOut from "./SignOut";
-import logo2 from "./img/CCSGP.png";
-import { useAuth } from "../contexts/Authcontext";
+import SignOut from "../LoginSignup/SignOut";
+import logo2 from "../img/CCSGP.png";
+import { useAuth } from "../../contexts/Authcontext";
 
 const navigationStu = [
-  { name: "Home", link: "/", current: true },
-  { name: "Opportunities", link: "/opportunities", current: false },
+  { name: "Home", link: "/", current: false },
+  { name: "Opportunities", link: "/opportunities", current: true },
   { name: "My Portal", link: "/studentportal", current: false },
   { name: "About", link: "/about", current: false },
 ];
 
 const navigationOrg = [
-  { name: "Home", link: "/", current: true },
-  { name: "Opportunities", link: "/opportunities", current: false },
+  { name: "Home", link: "/", current: false },
+  { name: "Opportunities", link: "/opportunities", current: true },
   { name: "My Postings", link: "/myposts", current: false },
   { name: "About", link: "/about", current: false },
 ];
 
 const navigationAdm = [
-  { name: "Home", link: "/", current: true },
-  { name: "Opportunities", link: "/opportunities", current: false },
+  { name: "Home", link: "/", current: false },
+  { name: "Opportunities", link: "/opportunities", current: true },
   { name: "Approvals", link: "/approvals", current: false },
   { name: "About", link: "/about", current: false },
 ];
@@ -34,11 +34,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function AppShell() {
+function AppShellOpp() {
   const firestore = firebase.firestore();
   const { currentUser } = useAuth();
   const userRef = firestore.collection("Users").doc(currentUser?.uid);
-  const [user] = useDocumentData(userRef);
+  const [user, loading] = useDocumentData(userRef);
 
   return (
     <>
@@ -48,7 +48,7 @@ function AppShell() {
         </Link>
         {currentUser ? <SignOut /> : <TopRight />}
       </div>
-      <Disclosure as="nav" className="bg-yellow-600 shadow-md">
+      <Disclosure as="nav" className="bg-yellow-600">
         {({ open }) => (
           <>
             <div className=" mx-auto px-2 sm:px-4 lg:px-4">
@@ -185,4 +185,4 @@ function AppShell() {
   );
 }
 
-export default AppShell;
+export default AppShellOpp;

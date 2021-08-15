@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "./img/NUSlogo.png";
+import logo from "../img/NUSlogo.png";
 import "firebase/firestore";
 import { Button } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
@@ -25,7 +25,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
 import firebase from "firebase/app";
-import { useAuth } from "../contexts/Authcontext";
+import { useAuth } from "../../contexts/Authcontext";
 import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 

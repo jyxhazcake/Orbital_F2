@@ -1,6 +1,6 @@
 import React from "react";
-import AppShell from "../components/AppShell";
-import SinglePost from "../components/SinglePost";
+import AppShell from "../components/AppShell/AppShell";
+import SinglePost from "../components/Post/SinglePost";
 import firebase from "firebase/app";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 

@@ -1,4 +1,4 @@
-import AppShell from "../components/AppShell4th";
+import AppShell from "../components/AppShell/AppShell4th";
 
 function PageAbout() {
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import firebase from "firebase/app";
-import { useAuth } from "../contexts/Authcontext";
+import { useAuth } from "../../contexts/Authcontext";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, MenuItem, Menu as MaterialMenu } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";

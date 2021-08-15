@@ -4,14 +4,14 @@ import {
   useCollectionData,
   useDocumentData,
 } from "react-firebase-hooks/firestore";
-import AppShell from "../components/AppShell3rd";
-import PostAdmin from "../components/PostAdmin";
-import AccApproval from "../components/AccApproval";
+import AppShell from "../components/AppShell/AppShell3rd";
+import PostAdmin from "../components/Post/PostAdmin";
+import AccApproval from "../components/Post/AccApproval";
 import { useAuth } from "../contexts/Authcontext";
 import { Redirect } from "react-router";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import PostContent from "../components/PostContent";
+import PostContent from "../components/Post/PostContent";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

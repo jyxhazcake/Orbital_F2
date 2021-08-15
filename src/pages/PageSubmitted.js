@@ -1,5 +1,5 @@
 import React from "react";
-import AppShell from "../components/AppShellNo";
+import AppShell from "../components/AppShell/AppShellNo";
 
 export default function PageSubmitted() {
   return (

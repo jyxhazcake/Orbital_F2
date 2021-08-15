@@ -1,8 +1,8 @@
 import React from "react";
-import AppShell from "../components/AppShellNo";
+import AppShell from "../components/AppShell/AppShellNo";
 import firebase from "firebase/app";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import StuProfile from "../components/StuProfile";
+import StuProfile from "../components/Profile/StuProfile";
 
 function PageStuProfile(props) {
   const firestore = firebase.firestore();

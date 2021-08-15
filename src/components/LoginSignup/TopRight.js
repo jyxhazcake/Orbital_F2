@@ -1,7 +1,7 @@
 import React from "react";
 import Divider from "@material-ui/core/Divider";
-import LoginButton from "./LoginButton";
-import RecruiterButton from "./RecruiterButton";
+import LoginButton from "../Button/LoginButton";
+import RecruiterButton from "../Button/RecruiterButton";
 import { Link } from "react-router-dom";
 
 const buttonStyle = {

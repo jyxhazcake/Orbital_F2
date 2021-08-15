@@ -2,8 +2,8 @@ import { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import AppShellOpp from "../components/AppShellOpp";
-import PostContent from "../components/PostContent";
+import AppShellOpp from "../components/AppShell/AppShellOpp";
+import PostContent from "../components/Post/PostContent";
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 

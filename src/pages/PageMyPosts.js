@@ -2,11 +2,11 @@ import { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import AppShell from "../components/AppShell3rd";
-import PostContent from "../components/PostContent";
+import AppShell from "../components/AppShell/AppShell3rd";
+import PostContent from "../components/Post/PostContent";
 import { useAuth } from "../contexts/Authcontext";
-import PendingPosts from "../components/PendingPosts";
-import CreatePost from "../components/CreatePost";
+import PendingPosts from "../components/Post/PendingPosts";
+import CreatePost from "../components/Post/CreatePost";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 

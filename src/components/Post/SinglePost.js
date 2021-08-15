@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import firebase from "firebase/app";
 import { useDocumentData } from "react-firebase-hooks/firestore";
-import { useAuth } from "../contexts/Authcontext";
+import { useAuth } from "../../contexts/Authcontext";
 import { TextField, Button, Link } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import Dialog from "@material-ui/core/Dialog";

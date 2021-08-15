@@ -5,8 +5,8 @@ import {
   useCollectionData,
   useDocumentData,
 } from "react-firebase-hooks/firestore";
-import AppShell from "../components/AppShell3rd";
-import PostContent from "../components/PostContent";
+import AppShell from "../components/AppShell/AppShell3rd";
+import PostContent from "../components/Post/PostContent";
 import { useAuth } from "../contexts/Authcontext";
 import { Redirect } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
