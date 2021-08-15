@@ -1,7 +1,6 @@
 import PagePosting from "./pages/PagePosting";
 import PageHome from "./pages/PageHome";
 import PageAbout from "./pages/PageAbout";
-import PageOrg from "./pages/PageOrg";
 import PageStuLogin from "./pages/PageStuLogin";
 import PageStuSignUp from "./pages/PageStuSignup";
 import PageRecruiterLogin from "./pages/PageRecruiterLogin";
@@ -33,7 +32,6 @@ export default function App() {
               <Route path="/about" component={PageAbout} />
               <Route path="/opportunities" exact component={PagePosting} />
               <PrivateRoute path="/myposts" component={PageMyPosts} />
-              <Route path="/organisations" component={PageOrg} />
               <Route path="/recruiterlogin" component={PageRecruiterLogin} />
               <Route path="/recruitersignup" component={PageRecruiterSignup} />
               <Route path="/termsofuse" component={TermsOfUse} />
